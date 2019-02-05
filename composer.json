@@ -1,0 +1,18 @@
+{
+  "name": "aternos/codex",
+  "description": "Log parser and interpreter for problem detection and solving",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthias Neid",
+      "email": "matthias@aternos.org"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Aternos\\Codex\\": "src/"
+    }
+  }
+}
