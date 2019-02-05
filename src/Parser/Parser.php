@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Parser;
 
+use Aternos\Codex\Log\Log;
+
 /**
  * Class Parser
  *
@@ -25,5 +27,15 @@ abstract class Parser implements ParserInterface
     public function __construct($fileResource)
     {
         $this->fileResource = $fileResource;
+    }
+
+    /**
+     * Parse a log from resource to Log object
+     *
+     * @return Log
+     */
+    public function parse(): Log
+    {
+
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Parser;
 
+use Aternos\Codex\Log\Log;
+
 /**
  * Interface ParserInterface
  *
@@ -18,4 +20,11 @@ interface ParserInterface
      * @param resource $fileResource
      */
     public function __construct($fileResource);
+
+    /**
+     * Parse a log from resource to Log object
+     *
+     * @return Log
+     */
+    public function parse(): Log;
 }

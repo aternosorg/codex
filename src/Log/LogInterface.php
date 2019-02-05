@@ -7,7 +7,33 @@ namespace Aternos\Codex\Log;
  *
  * @package Aternos\Codex\Log
  */
-interface LogInterface
+interface LogInterface extends \Iterator, \Countable, \ArrayAccess
 {
+    /**
+     * Set all entries of the log at once replacing the current entries
+     *
+     * @param array $entries
+     * @return static
+     */
+    public function setEntries(array $entries = []);
 
+    /**
+     * Add an entry to the log
+     *
+     * @param EntryInterface $entry
+     * @return static
+     */
+    public function addEntry(EntryInterface $entry);
+
+    /**
+     * Get all entries of the log
+     *
+     * @return array
+     */
+    public function getEntries(): array;
+
+    /**
+     * @return string
+     */
+    public function __toString();
 }
