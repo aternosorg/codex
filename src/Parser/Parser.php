@@ -2,8 +2,6 @@
 
 namespace Aternos\Codex\Parser;
 
-use Aternos\Codex\Log\Log;
-
 /**
  * Class Parser
  *
@@ -14,28 +12,62 @@ abstract class Parser implements ParserInterface
     /**
      * @var resource
      */
-    protected $fileResource;
+    protected $fileResource = null;
 
     /**
-     * Parser constructor.
-     *
-     * $fileResource must be a resource
-     * e.g. created with fopen()
-     *
-     * @param resource $fileResource
+     * @var string
      */
-    public function __construct($fileResource)
+    protected $string = null;
+
+    /**
+     * Set the log content as a string
+     *
+     * @param string $string
+     * @return $this
+     */
+    public function setString(string $string)
     {
-        $this->fileResource = $fileResource;
+        $this->string = $string;
+        return $this;
     }
 
     /**
-     * Parse a log from resource to Log object
+     * Set the log file as file resource e.g. created with fopen()
      *
-     * @return Log
+     * @param resource $fileResource
+     * @return $this
      */
-    public function parse(): Log
+    public function setFile($fileResource)
     {
+        $this->fileResource = $fileResource;
+        return $this;
+    }
 
+    /**
+     * Get the log content as string, either directly from string or from file
+     *
+     * @return string
+     */
+    protected function getContent(): string
+    {
+        if ($this->string !== null) {
+            return $this->string;
+        }
+
+        if ($this->fileResource !== null) {
+            if ($this->fileResource === false) {
+                throw new \InvalidArgumentException("File resource must not be false.");
+            }
+
+            $contents = '';
+            while (!feof($this->fileResource)) {
+                $contents .= fread($this->fileResource, 8192);
+            }
+            fclose($this->fileResource);
+
+            return $contents;
+        }
+
+        throw new \InvalidArgumentException("A string or a file resource has to be set before calling this function.");
     }
 }

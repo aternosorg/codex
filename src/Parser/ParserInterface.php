@@ -2,7 +2,7 @@
 
 namespace Aternos\Codex\Parser;
 
-use Aternos\Codex\Log\Log;
+use Aternos\Codex\Log\LogInterface;
 
 /**
  * Interface ParserInterface
@@ -12,19 +12,25 @@ use Aternos\Codex\Log\Log;
 interface ParserInterface
 {
     /**
-     * ParserInterface constructor.
+     * Set the log content as a string
      *
-     * $fileResource must be a resource
-     * e.g. created with fopen()
+     * @param string $string
+     * @return $this
+     */
+    public function setString(string $string);
+
+    /**
+     * Set the log file as file resource e.g. created with fopen()
      *
      * @param resource $fileResource
+     * @return $this
      */
-    public function __construct($fileResource);
+    public function setFile($fileResource);
 
     /**
      * Parse a log from resource to Log object
      *
-     * @return Log
+     * @return LogInterface
      */
-    public function parse(): Log;
+    public function parse(): LogInterface;
 }
