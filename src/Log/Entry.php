@@ -20,6 +20,11 @@ class Entry implements EntryInterface
     protected $level;
 
     /**
+     * @var int
+     */
+    protected $time;
+
+    /**
      * Set all lines at once in an array replacing the current lines
      *
      * @param array $lines
@@ -73,6 +78,28 @@ class Entry implements EntryInterface
     public function getLevel()
     {
         return $this->level;
+    }
+
+    /**
+     * Set the timestamp of the entry
+     *
+     * @param int $time
+     * @return Entry
+     */
+    public function setTime(int $time)
+    {
+        $this->time = $time;
+        return $this;
+    }
+
+    /**
+     * Get the timestamp of the entry
+     *
+     * @return int
+     */
+    public function getTime()
+    {
+        return $this->time;
     }
 
     /**

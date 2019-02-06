@@ -30,4 +30,12 @@ class EntryTest extends TestCase
         $this->assertSame($entry, $entry->setLevel($level));
         $this->assertEquals($level, $entry->getLevel());
     }
+
+    public function testSetGetTime()
+    {
+        $entry = new Entry();
+        $time = time();
+        $this->assertSame($entry, $entry->setTime($time));
+        $this->assertEquals($time, $entry->getTime());
+    }
 }
