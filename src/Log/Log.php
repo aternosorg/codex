@@ -161,6 +161,6 @@ class Log implements LogInterface
      */
     public function __toString()
     {
-        return implode("", $this->getEntries());
+        return implode("\n", $this->getEntries());
     }
 }
