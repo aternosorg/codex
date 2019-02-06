@@ -33,21 +33,6 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
     public function getLines(): array;
 
     /**
-     * Set the log level of the entry
-     *
-     * @param $level
-     * @return static
-     */
-    public function setLevel($level);
-
-    /**
-     * Get the log level of the entry
-     *
-     * @return mixed
-     */
-    public function getLevel();
-
-    /**
      * @return string
      */
     public function __toString();
