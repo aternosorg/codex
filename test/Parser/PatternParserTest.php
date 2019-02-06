@@ -46,7 +46,7 @@ class PatternParserTest extends TestCase
     public function testParseFromFile()
     {
         $parser = (new PatternParser())
-            ->setFile(fopen('../data/simple.log', 'r'));
+            ->setFile(fopen(__DIR__ . '/../data/simple.log', 'r'));
 
         $this->runSimpleLogParseTest($parser);
     }
@@ -54,7 +54,7 @@ class PatternParserTest extends TestCase
     public function testParseFromString()
     {
         $parser = (new PatternParser())
-            ->setString(file_get_contents('../data/simple.log'));
+            ->setString(file_get_contents(__DIR__ . '/../data/simple.log'));
 
         $this->runSimpleLogParseTest($parser);
     }
