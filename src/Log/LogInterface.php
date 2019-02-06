@@ -13,7 +13,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * Set all entries of the log at once replacing the current entries
      *
      * @param array $entries
-     * @return static
+     * @return $this
      */
     public function setEntries(array $entries = []);
 
@@ -21,7 +21,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * Add an entry to the log
      *
      * @param EntryInterface $entry
-     * @return static
+     * @return $this
      */
     public function addEntry(EntryInterface $entry);
 

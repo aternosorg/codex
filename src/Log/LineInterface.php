@@ -13,7 +13,7 @@ interface LineInterface
      * Set the text of the line
      *
      * @param string $text
-     * @return static
+     * @return $this
      */
     public function setText(string $text);
 
@@ -28,7 +28,7 @@ interface LineInterface
      * Set the line number
      *
      * @param int $number
-     * @return static
+     * @return $this
      */
     public function setNumber(int $number);
 

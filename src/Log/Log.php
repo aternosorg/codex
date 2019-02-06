@@ -23,7 +23,7 @@ class Log implements LogInterface
      * Set all entries of the log at once replacing the current entries
      *
      * @param array $entries
-     * @return Log
+     * @return $this
      */
     public function setEntries(array $entries = [])
     {
@@ -35,7 +35,7 @@ class Log implements LogInterface
      * Add an entry to the log
      *
      * @param EntryInterface $entry
-     * @return Log
+     * @return $this
      */
     public function addEntry(EntryInterface $entry)
     {

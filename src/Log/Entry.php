@@ -28,7 +28,7 @@ class Entry implements EntryInterface
      * Set all lines at once in an array replacing the current lines
      *
      * @param array $lines
-     * @return Entry
+     * @return $this
      */
     public function setLines(array $lines = [])
     {
@@ -40,7 +40,7 @@ class Entry implements EntryInterface
      * Add a line
      *
      * @param LineInterface $line
-     * @return Entry
+     * @return $this
      */
     public function addLine(LineInterface $line)
     {
@@ -62,7 +62,7 @@ class Entry implements EntryInterface
      * Set the log level of the entry
      *
      * @param $level
-     * @return Entry
+     * @return $this
      */
     public function setLevel($level)
     {
@@ -84,7 +84,7 @@ class Entry implements EntryInterface
      * Set the timestamp of the entry
      *
      * @param int $time
-     * @return Entry
+     * @return $this
      */
     public function setTime(int $time)
     {

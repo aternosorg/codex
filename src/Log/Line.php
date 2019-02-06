@@ -23,7 +23,7 @@ class Line implements LineInterface
      * Set the text of the line
      *
      * @param string $text
-     * @return Line
+     * @return $this
      */
     public function setText(string $text)
     {
@@ -45,7 +45,7 @@ class Line implements LineInterface
      * Set the line number
      *
      * @param int $number
-     * @return Line
+     * @return $this
      */
     public function setNumber(int $number)
     {
