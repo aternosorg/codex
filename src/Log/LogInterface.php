@@ -36,4 +36,27 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @return string
      */
     public function __toString();
+
+    /**
+     * Return the current element
+     *
+     * @return EntryInterface
+     */
+    public function current();
+
+    /**
+     * Offset to set
+     *
+     * @param $offset
+     * @param EntryInterface $value
+     */
+    public function offsetSet($offset, $value);
+
+    /**
+     * Offset to retrieve
+     *
+     * @param mixed $offset
+     * @return EntryInterface
+     */
+    public function offsetGet($offset);
 }

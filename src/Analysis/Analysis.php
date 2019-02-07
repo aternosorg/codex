@@ -1,18 +1,18 @@
 <?php
 
-namespace Aternos\Codex\Log;
+namespace Aternos\Codex\Analysis;
 
 /**
- * Class Log
+ * Class Analysis
  *
- * @package Aternos\Codex\Log
+ * @package Aternos\Codex\Analysis
  */
-class Log implements LogInterface
+class Analysis implements AnalysisInterface
 {
     /**
      * @var array
      */
-    protected $entries;
+    protected $problems = [];
 
     /**
      * @var int
@@ -20,47 +20,53 @@ class Log implements LogInterface
     protected $iterator = 0;
 
     /**
-     * Set all entries of the log at once replacing the current entries
+     * Set all problems at once in an array replacing the current problems
      *
-     * @param array $entries
+     * @param array $problems
      * @return $this
      */
-    public function setEntries(array $entries = [])
+    public function setProblems(array $problems = [])
     {
-        $this->entries = $entries;
+        $this->problems = $problems;
         return $this;
     }
 
     /**
-     * Add an entry to the log
+     * Add a problem
      *
-     * @param EntryInterface $entry
+     * @param ProblemInterface $problem
      * @return $this
      */
-    public function addEntry(EntryInterface $entry)
+    public function addProblem(ProblemInterface $problem)
     {
-        $this->entries[] = $entry;
+        foreach ($this as $existingProblem) {
+            if (get_class($problem) === get_class($existingProblem) && $existingProblem->isEqual($problem)) {
+                return $this;
+            }
+        }
+
+        $this->problems[] = $problem;
         return $this;
     }
 
     /**
-     * Get all entries of the log
+     * Get all problems
      *
      * @return array
      */
-    public function getEntries(): array
+    public function getProblems(): array
     {
-        return $this->entries;
+        return $this->problems;
     }
 
     /**
      * Return the current element
      *
-     * @return Entry
+     * @return ProblemInterface
      */
     public function current()
     {
-        return $this->entries[$this->iterator];
+        return $this->problems[$this->iterator];
     }
 
     /**
@@ -90,7 +96,7 @@ class Log implements LogInterface
      */
     public function valid()
     {
-        return array_key_exists($this->iterator, $this->entries);
+        return array_key_exists($this->iterator, $this->problems);
     }
 
     /**
@@ -110,7 +116,7 @@ class Log implements LogInterface
      */
     public function count()
     {
-        return count($this->entries);
+        return count($this->problems);
     }
 
     /**
@@ -128,22 +134,22 @@ class Log implements LogInterface
      * Offset to retrieve
      *
      * @param mixed $offset
-     * @return Log
+     * @return ProblemInterface
      */
     public function offsetGet($offset)
     {
-        return $this->entries[$offset];
+        return $this->problems[$offset];
     }
 
     /**
      * Offset to set
      *
      * @param $offset
-     * @param Log $value
+     * @param ProblemInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        $this->entries[$offset] = $value;
+        $this->problems[$offset] = $value;
     }
 
     /**
@@ -153,14 +159,6 @@ class Log implements LogInterface
      */
     public function offsetUnset($offset)
     {
-        unset($this->entries[$offset]);
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return implode("\n", $this->getEntries());
+        unset($this->problems[$offset]);
     }
 }

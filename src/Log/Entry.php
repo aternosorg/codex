@@ -182,7 +182,7 @@ class Entry implements EntryInterface
      * Offset to retrieve
      *
      * @param mixed $offset
-     * @return mixed
+     * @return Line
      */
     public function offsetGet($offset)
     {
@@ -193,7 +193,7 @@ class Entry implements EntryInterface
      * Offset to set
      *
      * @param $offset
-     * @param $value
+     * @param Line $value
      */
     public function offsetSet($offset, $value)
     {

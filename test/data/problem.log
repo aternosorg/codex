@@ -1,0 +1,5 @@
+[01.01.1970 00:00:01] [Log/INFO] This is the first message containing no problem
+[01.01.1970 00:00:02] [Log/ERROR] I have a problem with ABC
+[01.01.1970 00:00:03] [Log/INFO] This is a message without any problem
+[01.01.1970 00:00:04] [Log/ERROR] I have a problem with XYZ
+[01.01.1970 00:00:05] [Log/ERROR] I have a problem with ABC

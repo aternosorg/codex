@@ -36,4 +36,27 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
      * @return string
      */
     public function __toString();
+
+    /**
+     * Return the current element
+     *
+     * @return LineInterface
+     */
+    public function current();
+
+    /**
+     * Offset to set
+     *
+     * @param $offset
+     * @param LineInterface $value
+     */
+    public function offsetSet($offset, $value);
+
+    /**
+     * Offset to retrieve
+     *
+     * @param mixed $offset
+     * @return LineInterface
+     */
+    public function offsetGet($offset);
 }
