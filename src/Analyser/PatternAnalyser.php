@@ -101,6 +101,7 @@ class PatternAnalyser extends Analyser
         /** @var PatternProblemInterface $problem */
         $problem = new $possibleProblemClass();
         $problem->setMatches($matches, $patternKey);
+        $problem->setEntry($entry);
 
         return $problem;
     }

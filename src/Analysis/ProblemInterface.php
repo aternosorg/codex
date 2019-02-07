@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Analysis;
 
+use Aternos\Codex\Log\EntryInterface;
+
 /**
  * Interface ProblemInterface
  *
@@ -39,6 +41,21 @@ interface ProblemInterface extends \Iterator, \Countable, \ArrayAccess
      * @return array
      */
     public function getSolutions(): array;
+
+    /**
+     * Set the related entry
+     *
+     * @param EntryInterface $entry
+     * @return $this
+     */
+    public function setEntry(EntryInterface $entry);
+
+    /**
+     * Get the related entry
+     *
+     * @return EntryInterface
+     */
+    public function getEntry(): EntryInterface;
 
     /**
      * Check if the $problem object is equal with the current object

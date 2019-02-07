@@ -4,6 +4,8 @@ require_once __DIR__ . '/../Analysis/TestPatternProblem.php';
 
 use Aternos\Codex\Analysis\Analysis;
 use Aternos\Codex\Analyser\PatternAnalyser;
+use Aternos\Codex\Log\Entry;
+use Aternos\Codex\Log\Line;
 use Aternos\Codex\Parser\PatternParser;
 use PHPUnit\Framework\TestCase;
 
@@ -15,8 +17,18 @@ class PatternAnalyserTest extends TestCase
     protected function getExpectedAnalysis()
     {
         $analysis = (new Analysis())
-            ->addProblem((new TestPatternProblem())->setCause("ABC"))
-            ->addProblem((new TestPatternProblem())->setCause("XYZ"));
+            ->addProblem((new TestPatternProblem())
+                ->setCause("ABC")
+                ->setEntry((new Entry())->setTime(2)->setLevel("ERROR")
+                    ->addLine((new Line())->setNumber(2)->setText("[01.01.1970 00:00:02] [Log/ERROR] I have a problem with ABC"))
+                )
+            )
+            ->addProblem((new TestPatternProblem())
+                ->setCause("XYZ")
+                ->setEntry((new Entry())->setTime(4)->setLevel("ERROR")
+                    ->addLine((new Line())->setNumber(4)->setText("[01.01.1970 00:00:04] [Log/ERROR] I have a problem with XYZ"))
+                )
+            );
 
         return $analysis;
     }

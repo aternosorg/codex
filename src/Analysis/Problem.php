@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Analysis;
 
+use Aternos\Codex\Log\EntryInterface;
+
 /**
  * Class Problem
  *
@@ -13,6 +15,16 @@ abstract class Problem implements ProblemInterface
      * @var array
      */
     protected $solutions;
+
+    /**
+     * @var int
+     */
+    protected $iterator = 0;
+
+    /**
+     * @var EntryInterface
+     */
+    protected $entry;
 
     /**
      * Set all solutions at once in an array replacing the current solutions
@@ -49,9 +61,26 @@ abstract class Problem implements ProblemInterface
     }
 
     /**
-     * @var int
+     * Set the related entry
+     *
+     * @param EntryInterface $entry
+     * @return $this
      */
-    protected $iterator = 0;
+    public function setEntry(EntryInterface $entry)
+    {
+        $this->entry = $entry;
+        return $this;
+    }
+
+    /**
+     * Get the related entry
+     *
+     * @return EntryInterface
+     */
+    public function getEntry(): EntryInterface
+    {
+        return $this->entry;
+    }
 
     /**
      * Return the current element
