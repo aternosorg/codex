@@ -1,6 +1,7 @@
 <?php
 
 use Aternos\Codex\Log\Log;
+use Aternos\Codex\Parser\DefaultParser;
 
 /**
  * Class TestLog
@@ -9,10 +10,12 @@ class TestLog extends Log
 {
     /**
      * Get the default parser
+     *
+     * @return DefaultParser
      */
     public static function getDefaultParser()
     {
-        throw new BadMethodCallException();
+        return new DefaultParser();
     }
 
     /**

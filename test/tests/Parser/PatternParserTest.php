@@ -6,7 +6,6 @@ use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
-use Aternos\Codex\Parser\PatternParser;
 use PHPUnit\Framework\TestCase;
 
 class PatternParserTest extends TestCase
