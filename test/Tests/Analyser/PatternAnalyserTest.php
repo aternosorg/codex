@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../Analysis/TestPatternProblem.php';
+require_once __DIR__ . '/../../src/Analysis/TestPatternProblem.php';
+require_once __DIR__ . '/../../src/Log/PatternLog.php';
 
 use Aternos\Codex\Analysis\Analysis;
-use Aternos\Codex\Analyser\PatternAnalyser;
 use Aternos\Codex\Log\Entry;
+use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
-use Aternos\Codex\Parser\PatternParser;
 use PHPUnit\Framework\TestCase;
 
 class PatternAnalyserTest extends TestCase
@@ -35,15 +35,11 @@ class PatternAnalyserTest extends TestCase
 
     public function testAnalyse()
     {
-        $parser = (new PatternParser())
-            ->setString(file_get_contents(__DIR__ . '/../data/problem.log'))
-            ->setPattern('/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/')
-            ->setMatches([PatternParser::TIME, PatternParser::LEVEL])
-            ->setTimeFormat('d.m.Y H:i:s');
-        $log = $parser->parse();
+        $logFile = new PathLogFile(__DIR__ . '/../../data/problem.log');
+        $log = (new PatternLog())->setLogFile($logFile);
+        $log->parse();
 
-        $analyser = (new PatternAnalyser())->addPossibleProblemClass(TestPatternProblem::class);
-        $analysis = $analyser->analyse($log);
+        $analysis = $log->analyse();
         $this->assertEquals($this->getExpectedAnalysis()->getProblems(), $analysis->getProblems());
     }
 }

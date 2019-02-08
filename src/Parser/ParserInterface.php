@@ -12,25 +12,15 @@ use Aternos\Codex\Log\LogInterface;
 interface ParserInterface
 {
     /**
-     * Set the log content as a string
+     * Set the output log object
      *
-     * @param string $string
+     * @param LogInterface $log
      * @return $this
      */
-    public function setString(string $string);
-
-    /**
-     * Set the log file as file resource e.g. created with fopen()
-     *
-     * @param resource $fileResource
-     * @return $this
-     */
-    public function setFile($fileResource);
+    public function setLog(LogInterface $log);
 
     /**
      * Parse a log from resource to Log object
-     *
-     * @return LogInterface
      */
-    public function parse(): LogInterface;
+    public function parse();
 }

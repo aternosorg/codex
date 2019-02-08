@@ -4,8 +4,6 @@ namespace Aternos\Codex\Parser;
 
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\Line;
-use Aternos\Codex\Log\Log;
-use Aternos\Codex\Log\LogInterface;
 
 /**
  * Class PatternParser
@@ -105,16 +103,10 @@ class PatternParser extends Parser
 
     /**
      * Parse a log from resource to Log object
-     *
-     * @return LogInterface
      */
-    public function parse(): LogInterface
+    public function parse()
     {
-        $content = $this->getContent();
-        $lines = explode(PHP_EOL, $content);
-
-        $log = new Log();
-        foreach ($lines as $number => $lineString) {
+        foreach ($this->getLogContentAsArray() as $number => $lineString) {
             $line = (new Line())
                 ->setNumber($number + 1)
                 ->setText($lineString);
@@ -123,14 +115,14 @@ class PatternParser extends Parser
             if (!$result) {
                 if (!isset($entry)) {
                     $entry = new Entry();
-                    $log->addEntry($entry);
+                    $this->log->addEntry($entry);
                 }
                 $entry->addLine($line);
                 continue;
             }
 
             $entry = new Entry();
-            $log->addEntry($entry);
+            $this->log->addEntry($entry);
             foreach ($matches as $key => $match) {
                 if ($key === 0) {
                     continue;
@@ -144,8 +136,6 @@ class PatternParser extends Parser
             }
             $entry->addLine($line);
         }
-
-        return $log;
     }
 
     /**

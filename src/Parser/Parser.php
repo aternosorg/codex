@@ -2,6 +2,9 @@
 
 namespace Aternos\Codex\Parser;
 
+use Aternos\Codex\Log\File\LogFileInterface;
+use Aternos\Codex\Log\LogInterface;
+
 /**
  * Class Parser
  *
@@ -10,64 +13,39 @@ namespace Aternos\Codex\Parser;
 abstract class Parser implements ParserInterface
 {
     /**
-     * @var resource
+     * @var LogInterface $log
      */
-    protected $fileResource = null;
+    protected $log;
 
     /**
-     * @var string
-     */
-    protected $string = null;
-
-    /**
-     * Set the log content as a string
+     * Set the output log object
      *
-     * @param string $string
+     * @param LogInterface $log
      * @return $this
      */
-    public function setString(string $string)
+    public function setLog(LogInterface $log)
     {
-        $this->string = $string;
+        $this->log = $log;
         return $this;
     }
 
     /**
-     * Set the log file as file resource e.g. created with fopen()
-     *
-     * @param resource $fileResource
-     * @return $this
-     */
-    public function setFile($fileResource)
-    {
-        $this->fileResource = $fileResource;
-        return $this;
-    }
-
-    /**
-     * Get the log content as string, either directly from string or from file
+     * Get the log content as string
      *
      * @return string
      */
-    protected function getContent(): string
+    protected function getLogContent(): string
     {
-        if ($this->string !== null) {
-            return $this->string;
-        }
+        return $this->log->getLogFile()->getContent();
+    }
 
-        if ($this->fileResource !== null) {
-            if ($this->fileResource === false) {
-                throw new \InvalidArgumentException("File resource must not be false.");
-            }
-
-            $contents = '';
-            while (!feof($this->fileResource)) {
-                $contents .= fread($this->fileResource, 8192);
-            }
-            fclose($this->fileResource);
-
-            return $contents;
-        }
-
-        throw new \InvalidArgumentException("A string or a file resource has to be set before calling this function.");
+    /**
+     * Get the log content as array split by line
+     *
+     * @return array
+     */
+    protected function getLogContentAsArray(): array
+    {
+        return explode(PHP_EOL, $this->getLogContent());
     }
 }

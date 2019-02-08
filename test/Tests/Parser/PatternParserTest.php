@@ -1,7 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../../src/Log/PatternLog.php';
 
 use Aternos\Codex\Log\Entry;
+use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Parser\PatternParser;
@@ -16,7 +18,8 @@ class PatternParserTest extends TestCase
      */
     protected function getSimpleExpectedLog()
     {
-        return (new Log())
+        return (new PatternLog())
+            ->setLogFile(new PathLogFile(__DIR__ . '/../../data/simple.log'))
             ->addEntry((new Entry())->setLevel("INFO")->setTime(1)
                 ->addLine((new Line())->setNumber(1)->setText("[01.01.1970 00:00:01] [Log/INFO] This is the first message containing information.")))
             ->addEntry((new Entry())->setLevel("DEBUG")->setTime(2)
@@ -31,31 +34,13 @@ class PatternParserTest extends TestCase
                 ->addLine((new Line())->setNumber(7)->setText("[01.01.1970 00:00:05] [Log/INFO] This is the last message of the log.")));
     }
 
-    protected function runSimpleLogParseTest(PatternParser $parser)
-    {
-        $parser
-            ->setPattern('/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/')
-            ->setMatches([PatternParser::TIME, PatternParser::LEVEL])
-            ->setTimeFormat('d.m.Y H:i:s');
 
-        $log = $parser->parse();
+    public function testParse()
+    {
+        $logFile = new PathLogFile(__DIR__ . '/../../data/simple.log');
+        $log = (new PatternLog())->setLogFile($logFile);
+        $log->parse();
 
         $this->assertEquals($this->getSimpleExpectedLog(), $log);
-    }
-
-    public function testParseFromFile()
-    {
-        $parser = (new PatternParser())
-            ->setFile(fopen(__DIR__ . '/../data/simple.log', 'r'));
-
-        $this->runSimpleLogParseTest($parser);
-    }
-
-    public function testParseFromString()
-    {
-        $parser = (new PatternParser())
-            ->setString(file_get_contents(__DIR__ . '/../data/simple.log'));
-
-        $this->runSimpleLogParseTest($parser);
     }
 }

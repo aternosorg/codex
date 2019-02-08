@@ -2,12 +2,17 @@
 
 namespace Aternos\Codex\Log;
 
+use Aternos\Codex\Analyser\AnalyserInterface;
+use Aternos\Codex\Analysis\AnalysisInterface;
+use Aternos\Codex\Log\File\LogFileInterface;
+use Aternos\Codex\Parser\ParserInterface;
+
 /**
  * Class Log
  *
  * @package Aternos\Codex\Log
  */
-class Log implements LogInterface
+abstract class Log implements LogInterface
 {
     /**
      * @var array
@@ -18,6 +23,73 @@ class Log implements LogInterface
      * @var int
      */
     protected $iterator = 0;
+
+    /**
+     * @var LogFileInterface $logFile
+     */
+    protected $logFile;
+
+    /**
+     * Set the log file
+     *
+     * @param LogFileInterface $logFile
+     * @return $this
+     */
+    public function setLogFile(LogFileInterface $logFile)
+    {
+        $this->logFile = $logFile;
+        return $this;
+    }
+
+    /**
+     * Get the log file
+     *
+     * @return LogFileInterface
+     */
+    public function getLogfile(): LogFileInterface
+    {
+        return $this->logFile;
+    }
+
+    /**
+     * Parse a log file with a parser
+     *
+     * Every log type should have a default parser,
+     * but the $parser argument can be used to override
+     * the default parser
+     *
+     * @param ParserInterface|null $parser
+     * @return $this
+     */
+    public function parse(ParserInterface $parser = null)
+    {
+        if ($parser === null) {
+            $parser = static::getDefaultParser();
+        }
+
+        $parser->setLog($this)->parse();
+
+        return $this;
+    }
+
+    /**
+     * Analyse a  log file with an analyser
+     *
+     * Every log type should have a default analyser,
+     * but the $analyser argument can be used to override
+     * the default analyser
+     *
+     * @param AnalyserInterface|null $analyser
+     * @return AnalysisInterface
+     */
+    public function analyse(AnalyserInterface $analyser = null)
+    {
+        if ($analyser === null) {
+            $analyser = static::getDefaultAnalyser();
+        }
+
+        return $analyser->analyse($this);
+    }
 
     /**
      * Set all entries of the log at once replacing the current entries
