@@ -36,7 +36,7 @@ interface DetectiveInterface
      * Set the log file
      *
      * @param LogFileInterface $logFile
-     * @return mixed
+     * @return $this
      */
     public function setLogFile(LogFileInterface $logFile);
 

@@ -30,8 +30,8 @@ class PatternAnalyser extends Analyser
     public function setPossibleInsightClasses(array $insightClasses)
     {
         $this->possibleInsightClasses = [];
-        foreach ($insightClasses as $problemClass) {
-            $this->addPossibleInsightClass($problemClass);
+        foreach ($insightClasses as $insightClass) {
+            $this->addPossibleInsightClass($insightClass);
         }
 
         return $this;
@@ -92,7 +92,7 @@ class PatternAnalyser extends Analyser
     protected function analyseEntry(EntryInterface $entry, string $possibleInsightClass, $patternKey, string $pattern)
     {
         $result = preg_match($pattern, $entry, $matches);
-        if (!$result) {
+        if ($result !== 1) {
             return false;
         }
 

@@ -2,8 +2,6 @@
 
 namespace Aternos\Codex\Log;
 
-use Aternos\Codex\Detective\DetectorInterface;
-
 /**
  * Interface DetectableLogInterface
  *
@@ -12,9 +10,9 @@ use Aternos\Codex\Detective\DetectorInterface;
 interface DetectableLogInterface extends LogInterface
 {
     /**
-     * Get the default analyser
+     * Get an array of detectors matching DetectorInterface
      *
-     * @return DetectorInterface
+     * @return array
      */
-    public static function getDetector();
+    public static function getDetectors();
 }

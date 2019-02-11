@@ -112,7 +112,7 @@ class PatternParser extends Parser
                 ->setText($lineString);
 
             $result = preg_match($this->pattern, $lineString, $matches);
-            if (!$result) {
+            if ($result !== 1) {
                 if (!isset($entry)) {
                     $entry = new Entry();
                     $this->log->addEntry($entry);
