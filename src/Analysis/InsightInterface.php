@@ -17,6 +17,7 @@ interface InsightInterface
      * @return string
      */
     public function getMessage(): string;
+
     public function __toString();
 
     /**
@@ -41,4 +42,18 @@ interface InsightInterface
      * @return bool
      */
     public function isEqual($insight): bool;
+
+    /**
+     * Increase the counter for this insight
+     *
+     * @return $this
+     */
+    public function increaseCounter();
+
+    /**
+     * Get the current counter value
+     *
+     * @return int
+     */
+    public function getCounterValue();
 }

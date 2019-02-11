@@ -17,6 +17,11 @@ abstract class Insight implements InsightInterface
     protected $entry;
 
     /**
+     * @var int
+     */
+    protected $counter = 1;
+
+    /**
      * Set the related entry
      *
      * @param EntryInterface $entry
@@ -36,6 +41,27 @@ abstract class Insight implements InsightInterface
     public function getEntry(): EntryInterface
     {
         return $this->entry;
+    }
+
+    /**
+     * Increase the counter for this insight
+     *
+     * @return $this
+     */
+    public function increaseCounter()
+    {
+        $this->counter++;
+        return $this;
+    }
+
+    /**
+     * Get the current counter value
+     *
+     * @return int
+     */
+    public function getCounterValue()
+    {
+        return $this->counter;
     }
 
     /**

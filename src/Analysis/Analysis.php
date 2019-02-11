@@ -41,6 +41,7 @@ class Analysis implements AnalysisInterface
     {
         foreach ($this as $existingInsight) {
             if (get_class($insight) === get_class($existingInsight) && $existingInsight->isEqual($insight)) {
+                $existingInsight->increaseCounter();
                 return $this;
             }
         }

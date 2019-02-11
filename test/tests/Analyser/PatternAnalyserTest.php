@@ -20,6 +20,7 @@ class PatternAnalyserTest extends TestCase
         $analysis = (new Analysis())
             ->addInsight((new TestPatternProblem())
                 ->setCause("ABC")
+                ->increaseCounter()
                 ->setEntry((new Entry())->setTime(2)->setLevel("ERROR")
                     ->addLine((new Line())->setNumber(2)->setText("[01.01.1970 00:00:02] [Log/ERROR] I have a problem with ABC"))
                 )
