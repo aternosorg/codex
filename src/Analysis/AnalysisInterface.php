@@ -10,25 +10,25 @@ namespace Aternos\Codex\Analysis;
 interface AnalysisInterface extends \Iterator, \Countable, \ArrayAccess
 {
     /**
-     * Set all problems at once in an array replacing the current problems
+     * Set all insights at once in an array replacing the current insights
      *
-     * @param array $problems
+     * @param array $insights
      * @return $this
      */
-    public function setProblems(array $problems = []);
+    public function setInsights(array $insights = []);
 
     /**
-     * Add a problem
+     * Add an insight
      *
-     * @param ProblemInterface $problem
+     * @param InsightInterface $insight
      * @return $this
      */
-    public function addProblem(ProblemInterface $problem);
+    public function addInsight(InsightInterface $insight);
 
     /**
-     * Get all problems
+     * Get all insights
      *
      * @return array
      */
-    public function getProblems(): array;
+    public function getInsights(): array;
 }

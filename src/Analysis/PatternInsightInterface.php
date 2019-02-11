@@ -3,11 +3,11 @@
 namespace Aternos\Codex\Analysis;
 
 /**
- * Interface PatternProblemInterface
+ * Interface PatternInsightInterface
  *
  * @package Aternos\Codex\Analysis
  */
-interface PatternProblemInterface extends ProblemInterface
+interface PatternInsightInterface extends InsightInterface
 {
     /**
      * Get an array of possible patterns

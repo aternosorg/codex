@@ -17,13 +17,13 @@ class PatternAnalyserTest extends TestCase
     protected function getExpectedAnalysis()
     {
         $analysis = (new Analysis())
-            ->addProblem((new TestPatternProblem())
+            ->addInsight((new TestPatternProblem())
                 ->setCause("ABC")
                 ->setEntry((new Entry())->setTime(2)->setLevel("ERROR")
                     ->addLine((new Line())->setNumber(2)->setText("[01.01.1970 00:00:02] [Log/ERROR] I have a problem with ABC"))
                 )
             )
-            ->addProblem((new TestPatternProblem())
+            ->addInsight((new TestPatternProblem())
                 ->setCause("XYZ")
                 ->setEntry((new Entry())->setTime(4)->setLevel("ERROR")
                     ->addLine((new Line())->setNumber(4)->setText("[01.01.1970 00:00:04] [Log/ERROR] I have a problem with XYZ"))
@@ -40,6 +40,6 @@ class PatternAnalyserTest extends TestCase
         $log->parse();
 
         $analysis = $log->analyse();
-        $this->assertEquals($this->getExpectedAnalysis()->getProblems(), $analysis->getProblems());
+        $this->assertEquals($this->getExpectedAnalysis()->getInsights(), $analysis->getInsights());
     }
 }

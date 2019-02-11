@@ -1,12 +1,12 @@
 <?php
 
-use Aternos\Codex\Analysis\PatternProblemInterface;
+use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Analysis\Problem;
 
 /**
  * Class TestPatternProblem
  */
-class TestPatternProblem extends Problem implements PatternProblemInterface
+class TestPatternProblem extends Problem implements PatternInsightInterface
 {
     /**
      * @var string
@@ -58,13 +58,13 @@ class TestPatternProblem extends Problem implements PatternProblemInterface
     }
 
     /**
-     * Check if the $problem object is equal with the current object
+     * Check if the $insight object is equal with the current object
      *
-     * @param static $problem
+     * @param static $insight
      * @return bool
      */
-    public function isEqual($problem): bool
+    public function isEqual($insight): bool
     {
-        return $this->cause === $problem->cause;
+        return $this->cause === $insight->cause;
     }
 }

@@ -18,12 +18,12 @@ class TestProblem extends Problem
     }
 
     /**
-     * Check if the $problem object is equal with the current object
+     * Check if the $insight object is equal with the current object
      *
-     * @param static $problem
+     * @param static $insight
      * @return bool
      */
-    public function isEqual($problem): bool
+    public function isEqual($insight): bool
     {
         return false;
     }

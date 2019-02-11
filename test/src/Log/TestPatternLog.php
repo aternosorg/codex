@@ -33,6 +33,6 @@ class TestPatternLog extends Log
     public static function getDefaultAnalyser()
     {
         return (new PatternAnalyser())
-            ->addPossibleProblemClass(TestPatternProblem::class);
+            ->addPossibleInsightClass(TestPatternProblem::class);
     }
 }

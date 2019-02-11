@@ -7,19 +7,19 @@ use PHPUnit\Framework\TestCase;
 
 class AnalysisTest extends TestCase
 {
-    public function testSetGetProblems()
+    public function testSetGetInsights()
     {
         $analysis = new Analysis();
         $problem = new TestProblem();
-        $this->assertSame($analysis, $analysis->setProblems([$problem]));
-        $this->assertSame([$problem], $analysis->getProblems());
+        $this->assertSame($analysis, $analysis->setInsights([$problem]));
+        $this->assertSame([$problem], $analysis->getInsights());
     }
 
-    public function testAddProblem()
+    public function testAddInsight()
     {
         $analysis = new Analysis();
         $problem = new TestProblem();
-        $this->assertSame($analysis, $analysis->addProblem($problem));
-        $this->assertSame([$problem], $analysis->getProblems());
+        $this->assertSame($analysis, $analysis->addInsight($problem));
+        $this->assertSame([$problem], $analysis->getInsights());
     }
 }

@@ -2,23 +2,13 @@
 
 namespace Aternos\Codex\Analysis;
 
-use Aternos\Codex\Log\EntryInterface;
-
 /**
  * Interface ProblemInterface
  *
  * @package Aternos\Codex\Analysis
  */
-interface ProblemInterface extends \Iterator, \Countable, \ArrayAccess
+interface ProblemInterface extends \Iterator, \Countable, \ArrayAccess, InsightInterface
 {
-    /**
-     * Get the problem as human readable message
-     *
-     * @return string
-     */
-    public function getMessage(): string;
-    public function __toString();
-
     /**
      * Set all solutions at once in an array replacing the current solutions
      *
@@ -41,27 +31,4 @@ interface ProblemInterface extends \Iterator, \Countable, \ArrayAccess
      * @return array
      */
     public function getSolutions(): array;
-
-    /**
-     * Set the related entry
-     *
-     * @param EntryInterface $entry
-     * @return $this
-     */
-    public function setEntry(EntryInterface $entry);
-
-    /**
-     * Get the related entry
-     *
-     * @return EntryInterface
-     */
-    public function getEntry(): EntryInterface;
-
-    /**
-     * Check if the $problem object is equal with the current object
-     *
-     * @param static $problem
-     * @return bool
-     */
-    public function isEqual($problem): bool;
 }

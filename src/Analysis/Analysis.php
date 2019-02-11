@@ -12,7 +12,7 @@ class Analysis implements AnalysisInterface
     /**
      * @var array
      */
-    protected $problems = [];
+    protected $insights = [];
 
     /**
      * @var int
@@ -20,53 +20,53 @@ class Analysis implements AnalysisInterface
     protected $iterator = 0;
 
     /**
-     * Set all problems at once in an array replacing the current problems
+     * Set all insights at once in an array replacing the current insights
      *
-     * @param array $problems
+     * @param array $insights
      * @return $this
      */
-    public function setProblems(array $problems = [])
+    public function setInsights(array $insights = [])
     {
-        $this->problems = $problems;
+        $this->insights = $insights;
         return $this;
     }
 
     /**
-     * Add a problem
+     * Add an insight
      *
-     * @param ProblemInterface $problem
+     * @param InsightInterface $insight
      * @return $this
      */
-    public function addProblem(ProblemInterface $problem)
+    public function addInsight(InsightInterface $insight)
     {
-        foreach ($this as $existingProblem) {
-            if (get_class($problem) === get_class($existingProblem) && $existingProblem->isEqual($problem)) {
+        foreach ($this as $existingInsight) {
+            if (get_class($insight) === get_class($existingInsight) && $existingInsight->isEqual($insight)) {
                 return $this;
             }
         }
 
-        $this->problems[] = $problem;
+        $this->insights[] = $insight;
         return $this;
     }
 
     /**
-     * Get all problems
+     * Get all insights
      *
      * @return array
      */
-    public function getProblems(): array
+    public function getInsights(): array
     {
-        return $this->problems;
+        return $this->insights;
     }
 
     /**
      * Return the current element
      *
-     * @return ProblemInterface
+     * @return InsightInterface
      */
     public function current()
     {
-        return $this->problems[$this->iterator];
+        return $this->insights[$this->iterator];
     }
 
     /**
@@ -96,7 +96,7 @@ class Analysis implements AnalysisInterface
      */
     public function valid()
     {
-        return array_key_exists($this->iterator, $this->problems);
+        return array_key_exists($this->iterator, $this->insights);
     }
 
     /**
@@ -116,7 +116,7 @@ class Analysis implements AnalysisInterface
      */
     public function count()
     {
-        return count($this->problems);
+        return count($this->insights);
     }
 
     /**
@@ -134,22 +134,22 @@ class Analysis implements AnalysisInterface
      * Offset to retrieve
      *
      * @param mixed $offset
-     * @return ProblemInterface
+     * @return InsightInterface
      */
     public function offsetGet($offset)
     {
-        return $this->problems[$offset];
+        return $this->insights[$offset];
     }
 
     /**
      * Offset to set
      *
      * @param $offset
-     * @param ProblemInterface $value
+     * @param InsightInterface $value
      */
     public function offsetSet($offset, $value)
     {
-        $this->problems[$offset] = $value;
+        $this->insights[$offset] = $value;
     }
 
     /**
@@ -159,6 +159,6 @@ class Analysis implements AnalysisInterface
      */
     public function offsetUnset($offset)
     {
-        unset($this->problems[$offset]);
+        unset($this->insights[$offset]);
     }
 }
