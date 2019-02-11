@@ -9,7 +9,7 @@ use Aternos\Codex\Log\EntryInterface;
  *
  * @package Aternos\Codex\Analysis
  */
-interface InsightInterface extends \Iterator, \Countable, \ArrayAccess
+interface InsightInterface
 {
     /**
      * Get a human readable message

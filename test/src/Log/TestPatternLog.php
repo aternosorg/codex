@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../src/Analysis/TestPatternProblem.php';
+require_once __DIR__ . '/../../src/Analysis/TestPatternInformation.php';
 
 use Aternos\Codex\Analyser\AnalyserInterface;
 use Aternos\Codex\Analyser\PatternAnalyser;
@@ -33,6 +34,7 @@ class TestPatternLog extends Log
     public static function getDefaultAnalyser()
     {
         return (new PatternAnalyser())
-            ->addPossibleInsightClass(TestPatternProblem::class);
+            ->addPossibleInsightClass(TestPatternProblem::class)
+            ->addPossibleInsightClass(TestPatternInformation::class);
     }
 }
