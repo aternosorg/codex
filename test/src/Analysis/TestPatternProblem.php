@@ -11,7 +11,7 @@ class TestPatternProblem extends Problem implements PatternInsightInterface
     /**
      * @var string
      */
-    public $cause;
+    protected $cause;
 
     /**
      * @param $cause
