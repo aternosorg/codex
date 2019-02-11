@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../../src/Log/TestLog.php';
-
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
@@ -17,7 +15,7 @@ class DefaultParserTest extends TestCase
      */
     protected function getSimpleExpectedLog()
     {
-        return (new TestLog())
+        return (new Log())
             ->setLogFile(new PathLogFile(__DIR__ . '/../../data/simple.log'))
             ->addEntry((new Entry())
                 ->addLine((new Line())->setNumber(1)->setText("[01.01.1970 00:00:01] [Log/INFO] This is the first message containing information.")))
@@ -39,7 +37,7 @@ class DefaultParserTest extends TestCase
     public function testParse()
     {
         $logFile = new PathLogFile(__DIR__ . '/../../data/simple.log');
-        $log = (new TestLog())->setLogFile($logFile);
+        $log = (new Log())->setLogFile($logFile);
         $log->parse();
 
         $this->assertEquals($this->getSimpleExpectedLog(), $log);

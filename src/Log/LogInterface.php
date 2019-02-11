@@ -2,8 +2,6 @@
 
 namespace Aternos\Codex\Log;
 
-use Aternos\Codex\Analyser\AnalyserInterface;
-use Aternos\Codex\Analysis\AnalysisInterface;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Parser\ParserInterface;
 
@@ -20,13 +18,6 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @return ParserInterface
      */
     public static function getDefaultParser();
-
-    /**
-     * Get the default analyser
-     *
-     * @return AnalyserInterface
-     */
-    public static function getDefaultAnalyser();
 
     /**
      * Set the log file
@@ -54,18 +45,6 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @return $this
      */
     public function parse(ParserInterface $parser = null);
-
-    /**
-     * Analyse a  log file with an analyser
-     *
-     * Every log type should have a default analyser,
-     * but the $analyser argument can be used to override
-     * the default analyser
-     *
-     * @param AnalyserInterface|null $analyser
-     * @return AnalysisInterface
-     */
-    public function analyse(AnalyserInterface $analyser = null);
 
     /**
      * Set all entries of the log at once replacing the current entries
