@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../src/Analysis/TestPatternProblem.php';
-require_once __DIR__ . '/../../src/Log/PatternLog.php';
+require_once __DIR__ . '/../../src/Log/TestPatternLog.php';
 
 use Aternos\Codex\Analysis\Analysis;
 use Aternos\Codex\Log\Entry;
@@ -36,7 +36,7 @@ class PatternAnalyserTest extends TestCase
     public function testAnalyse()
     {
         $logFile = new PathLogFile(__DIR__ . '/../../data/problem.log');
-        $log = (new PatternLog())->setLogFile($logFile);
+        $log = (new TestPatternLog())->setLogFile($logFile);
         $log->parse();
 
         $analysis = $log->analyse();

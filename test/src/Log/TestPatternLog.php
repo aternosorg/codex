@@ -10,7 +10,7 @@ use Aternos\Codex\Parser\PatternParser;
 /**
  * Class TestLog
  */
-class PatternLog extends Log
+class TestPatternLog extends Log
 {
     /**
      * Get the default parser
