@@ -5,14 +5,13 @@ require_once __DIR__ . '/../../src/Analysis/TestPatternInformation.php';
 
 use Aternos\Codex\Analyser\AnalyserInterface;
 use Aternos\Codex\Analyser\PatternAnalyser;
-use Aternos\Codex\Log\AnalysableLogInterface;
-use Aternos\Codex\Log\Log;
+use Aternos\Codex\Log\AnalysableLog;
 use Aternos\Codex\Parser\PatternParser;
 
 /**
  * Class TestLog
  */
-class TestPatternLog extends Log implements AnalysableLogInterface
+class TestPatternLog extends AnalysableLog
 {
     /**
      * Get the default parser

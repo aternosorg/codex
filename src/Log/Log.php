@@ -2,8 +2,6 @@
 
 namespace Aternos\Codex\Log;
 
-use Aternos\Codex\Analyser\AnalyserInterface;
-use Aternos\Codex\Analysis\AnalysisInterface;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Parser\DefaultParser;
 use Aternos\Codex\Parser\ParserInterface;
@@ -81,29 +79,6 @@ class Log implements LogInterface
         $parser->setLog($this)->parse();
 
         return $this;
-    }
-
-    /**
-     * Analyse a  log file with an analyser
-     *
-     * Every log type should have a default analyser,
-     * but the $analyser argument can be used to override
-     * the default analyser
-     *
-     * @param AnalyserInterface|null $analyser
-     * @return AnalysisInterface
-     */
-    public function analyse(AnalyserInterface $analyser = null)
-    {
-        if(!$this instanceof AnalysableLogInterface) {
-            throw new \BadMethodCallException("Class " . get_class($this) . " does not implement " . AnalysableLogInterface::class);
-        }
-
-        if ($analyser === null) {
-            $analyser = static::getDefaultAnalyser();
-        }
-
-        return $analyser->analyse($this);
     }
 
     /**
