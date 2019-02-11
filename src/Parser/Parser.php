@@ -2,7 +2,6 @@
 
 namespace Aternos\Codex\Parser;
 
-use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Log\LogInterface;
 
 /**

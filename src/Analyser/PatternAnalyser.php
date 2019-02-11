@@ -6,7 +6,6 @@ use Aternos\Codex\Analysis\Analysis;
 use Aternos\Codex\Analysis\AnalysisInterface;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Log\EntryInterface;
-use Aternos\Codex\Log\LogInterface;
 
 /**
  * Class PatternAnalyser
@@ -59,14 +58,13 @@ class PatternAnalyser extends Analyser
     /**
      * Analyse a log and return an Analysis
      *
-     * @param LogInterface $log
      * @return AnalysisInterface
      */
-    public function analyse(LogInterface $log)
+    public function analyse()
     {
         $analysis = new Analysis();
 
-        foreach ($log as $entry) {
+        foreach ($this->log as $entry) {
             foreach ($this->possibleInsightClasses as $possibleInsightClass) {
                 /** @var PatternInsightInterface $possibleInsightClass */
                 $patterns = $possibleInsightClass::getPatterns();

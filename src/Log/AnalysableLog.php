@@ -29,6 +29,7 @@ abstract class AnalysableLog extends Log implements AnalysableLogInterface
             $analyser = static::getDefaultAnalyser();
         }
 
-        return $analyser->analyse($this);
+        $analyser->setLog($this);
+        return $analyser->analyse();
     }
 }

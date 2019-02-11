@@ -3,7 +3,7 @@
 namespace Aternos\Codex\Analyser;
 
 use Aternos\Codex\Analysis\AnalysisInterface;
-use Aternos\Codex\Log\LogInterface;
+use Aternos\Codex\Log\AnalysableLogInterface;
 
 /**
  * Interface AnalyserInterface
@@ -13,10 +13,17 @@ use Aternos\Codex\Log\LogInterface;
 interface AnalyserInterface
 {
     /**
+     * Set the log
+     *
+     * @param AnalysableLogInterface $log
+     * @return $this
+     */
+    public function setLog(AnalysableLogInterface $log);
+
+    /**
      * Analyse a log and return an Analysis
      *
-     * @param LogInterface $log
      * @return AnalysisInterface
      */
-    public function analyse(LogInterface $log);
+    public function analyse();
 }
