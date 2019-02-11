@@ -60,6 +60,44 @@ class Analysis implements AnalysisInterface
     }
 
     /**
+     * Get all insights that are extended from $extendedFrom (class name)
+     *
+     * @param string $extendedFrom
+     * @return array
+     */
+    public function getFilteredInsights($extendedFrom)
+    {
+        $returnInsights = [];
+        foreach ($this->getInsights() as $insight) {
+            if ($insight instanceof $extendedFrom) {
+                $returnInsights[] = $insight;
+            }
+        }
+
+        return $returnInsights;
+    }
+
+    /**
+     * Get all problem insights
+     *
+     * @return array
+     */
+    public function getProblems(): array
+    {
+        return $this->getFilteredInsights(ProblemInterface::class);
+    }
+
+    /**
+     * Get all information insights
+     *
+     * @return array
+     */
+    public function getInformation(): array
+    {
+        return $this->getFilteredInsights(InformationInterface::class);
+    }
+
+    /**
      * Return the current element
      *
      * @return InsightInterface
