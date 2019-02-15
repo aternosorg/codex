@@ -22,7 +22,7 @@ and/or read the [code](src).
 ### Logfile
 
 A [`LogFile`](src/Log/File/LogFile.php) object implementing the [`LogFileInterface`](src/Log/File/LogFileInterface.php) object is required
-to start reading a log. There are currently three different log files in this library:
+to start reading a log. There are currently three different log file classes in this library.
 
 ```php
 <?php
@@ -35,7 +35,7 @@ $logFile = new \Aternos\Codex\Log\File\StreamLogFile(fopen("/path/to/log", "r"))
 ### Log
 
 A [`Log`](src/Log/Log.php) object implementing the [`LogInterface`](src/Log/LogInterface.php) is the most important object
-for the different operations. It represents the log content, which is split in [Entries](src/Log/Entry.php) and [Lines](src/Log/Line.php).
+for the different operations. It represents the log content, which is split in [Entries](src/Log/EntryInterface.php) and [Lines](src/Log/LineInterface.php).
 And it offers quick access to the detection, parsing and analysing functions and can define which classes are used
 for those functions. If you know which log type you have or just want to test the default [Log](src/Log/Log.php) class, you can
 directly create a new instance, otherwise you can use detection as described below.
@@ -51,7 +51,7 @@ $log->setLogFile($logFile);
 
 If the log type (specifically the class name of the log type) is unknown you can use the [`Detective`](src/Detective/Detective.php) class
 to automatically detect the log type. The `Detective` class gets a list of possible log class names and executes
-their given [Detectors](src/Detective/Detector.php).
+their given [Detectors](src/Detective/DetectorInterface.php).
 
 ```php
 <?php
@@ -65,8 +65,8 @@ The `detect()` function always returns a log object, if necessary it defaults to
 
 ### Parsing
 
-Parsing reads the entire log and creates the [`Entry`](src/Log/Entry.php) and [`Line`](src/Log/Line.php) objects which
-are parts of a [`Log`](src/Log/Log.php) object. Different log types can use different parsers by overwriting the 
+Parsing reads the entire log and creates the [`Entry`](src/Log/EntryInterface.php) and [`Line`](src/Log/LineInterface.php) objects which
+are parts of a [`Log`](src/Log/LogInterface.php) object. Different log types can use different parsers by overwriting the 
 `LogInterface::getDefaultParser()` function or by passing a parser object to the parse function.
 
 ```php
@@ -77,9 +77,9 @@ $log->parse();
 
 ### Analysing
 
-An analysis is done by an [`Analyser`](src/Analyser/Analyser.php) on an [`AnalysableLog`](src/Log/AnalysableLog.php) and returns
-and [`Analysis`](src/Analysis/Analysis.php), which contains different [`Insight`](src/Analysis/Insight.php) objects, e.g. a [`Problem`](src/Analysis/Problem.php)
-or an [`Information`](src/Analysis/Information.php). Different log types can use different analysers by overwriting
+An analysis is done by an [`Analyser`](src/Analyser/AnalyserInterface.php) on an [`AnalysableLog`](src/Log/AnalysableLogInterface.php) and returns
+and [`Analysis`](src/Analysis/AnalysisInterface.php), which contains different [`Insight`](src/Analysis/InsightInterface.php) objects, e.g. a [`Problem`](src/Analysis/ProblemInterface.php)
+or an [`Information`](src/Analysis/InformationInterface.php). Different log types can use different analysers by overwriting
 the `AnalysableLogInterface::getDefaultAnalyser()` function or by passing an analyser object to the analyse function.
 
 ```php
@@ -90,9 +90,9 @@ $analysis = $log->analyse();
 
 ### Printing
 
-The entire [`Log`](src/Log/Log.php) or just an [`Entry`](src/Log/Entry.php) can be printed through a [`Printer`](src/Printer/Printer.php). The basic
-[`DefaultPrinter`](src/Printer/DefaultPrinter.php) only prints the plain content line, by line. The [`ModifiablePrinter`](src/Printer/ModifiablePrinter.php)
-allows [`Modification`](src/Printer/Modification.php), e.g. to highlight certain characters/words.
+The entire [`Log`](src/Log/LogInterface.php) or just an [`Entry`](src/Log/EntryInterface.php) can be printed through a [`Printer`](src/Printer/PrinterInterface.php). The basic
+[`DefaultPrinter`](src/Printer/DefaultPrinter.php) only prints the plain content line by line. The [`ModifiableDefaultPrinter`](src/Printer/ModifiableDefaultPrinter.php)
+allows [`Modification`](src/Printer/ModificationInterface.php), e.g. to highlight certain characters/words.
 
 ```php
 <?php
