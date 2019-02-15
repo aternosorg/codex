@@ -146,10 +146,10 @@ class PatternParser extends Parser
      * if you dont know the match type (default in a switch)
      *
      * @param Entry $entry
-     * @param int $matchType One of the match constants
+     * @param string $matchType One of the match constants
      * @param string $matchString
      */
-    protected function parseEntryMatch(Entry $entry, int $matchType, string $matchString)
+    protected function parseEntryMatch(Entry $entry, string $matchType, string $matchString)
     {
         switch ($matchType) {
             case static::TIME:
