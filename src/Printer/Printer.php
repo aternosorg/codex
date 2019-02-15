@@ -19,6 +19,11 @@ abstract class Printer implements PrinterInterface
     protected $log;
 
     /**
+     * @var EntryInterface
+     */
+    protected $entry;
+
+    /**
      * Set the log
      *
      * @param LogInterface $log
@@ -31,13 +36,29 @@ abstract class Printer implements PrinterInterface
     }
 
     /**
+     * Set the entry
+     *
+     * @param EntryInterface $entry
+     * @return $this
+     */
+    public function setEntry(EntryInterface $entry)
+    {
+        $this->entry = $entry;
+        return $this;
+    }
+
+    /**
      * Print the log
      *
      * @return string
      */
     public function print(): string
     {
-        return $this->printLog($this->log);
+        if ($this->entry) {
+            return $this->printEntry($this->entry);
+        } else {
+            return $this->printLog($this->log);
+        }
     }
 
     /**
