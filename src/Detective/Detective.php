@@ -87,7 +87,7 @@ class Detective implements DetectiveInterface
                 if (!$detector instanceof DetectorInterface) {
                     throw new \InvalidArgumentException("Class " . get_class($detector) . " does not implement " . DetectorInterface::class . ".");
                 }
-                
+
                 $detector->setLogFile($this->logFile);
                 $result = $detector->detect();
                 if ($result === true) {
@@ -104,7 +104,7 @@ class Detective implements DetectiveInterface
         }
 
         if (count($detectionResults) === 0) {
-            return new Log();
+            return (new Log())->setLogFile($this->logFile);
         }
 
         usort($detectionResults, function ($a, $b) {
@@ -119,6 +119,6 @@ class Detective implements DetectiveInterface
             return 0;
         });
 
-        return new $detectionResults[0]["class"]();
+        return (new $detectionResults[0]["class"]())->setLogFile($this->logFile);
     }
 }
