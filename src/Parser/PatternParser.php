@@ -21,6 +21,11 @@ class PatternParser extends Parser
     /**
      * @var string
      */
+    protected $entryClass = Entry::class;
+
+    /**
+     * @var string
+     */
     protected $pattern;
 
     /**
@@ -114,14 +119,16 @@ class PatternParser extends Parser
             $result = preg_match($this->pattern, $lineString, $matches);
             if ($result !== 1) {
                 if (!isset($entry)) {
-                    $entry = new Entry();
+                    /** @var Entry $entry */
+                    $entry = new $this->entryClass();
                     $this->log->addEntry($entry);
                 }
                 $entry->addLine($line);
                 continue;
             }
 
-            $entry = new Entry();
+            /** @var Entry $entry */
+            $entry = new $this->entryClass();
             $this->log->addEntry($entry);
             foreach ($matches as $key => $match) {
                 if ($key === 0) {
