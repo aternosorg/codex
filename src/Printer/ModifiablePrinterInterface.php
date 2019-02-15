@@ -10,18 +10,18 @@ namespace Aternos\Codex\Printer;
 interface ModifiablePrinterInterface extends PrinterInterface
 {
     /**
-     * Set all modification classes replacing the current classes
+     * Set all modifications replacing the current modifications
      *
-     * @param array $modificationClasses
+     * @param array $modifications
      * @return $this
      */
-    public function setModificationClasses(array $modificationClasses);
+    public function setModifications(array $modifications);
 
     /**
-     * Add a modification class
+     * Add a modification
      *
-     * @param string $modificationClass
+     * @param ModificationInterface $modification
      * @return $this
      */
-    public function addModificationClass(string $modificationClass);
+    public function addModification(ModificationInterface $modification);
 }

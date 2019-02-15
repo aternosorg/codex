@@ -12,37 +12,33 @@ abstract class ModifiablePrinter extends Printer implements ModifiablePrinterInt
     /**
      * @var array
      */
-    protected $modificationClasses;
+    protected $modifications;
 
     /**
-     * Set all modification classes replacing the current classes
+     * Set all modifications replacing the current modifications
      *
-     * @param array $modificationClasses
+     * @param array $modifications
      * @return $this
      */
-    public function setModificationClasses(array $modificationClasses)
+    public function setModifications(array $modifications)
     {
-        $this->modificationClasses = [];
-        foreach ($modificationClasses as $modificationClass) {
-            $this->addModificationClass($modificationClass);
+        $this->modifications = [];
+        foreach ($modifications as $modification) {
+            $this->addModification($modification);
         }
 
         return $this;
     }
 
     /**
-     * Add a modification class
+     * Add a modification
      *
-     * @param string $modificationClass
+     * @param ModificationInterface $modification
      * @return $this
      */
-    public function addModificationClass(string $modificationClass)
+    public function addModification(ModificationInterface $modification)
     {
-        if (!is_subclass_of($modificationClass, ModificationInterface::class)) {
-            throw new \InvalidArgumentException("Class " . $modificationClass . " does not implement " . ModificationInterface::class . ".");
-        }
-
-        $this->modificationClasses[] = $modificationClass;
+        $this->modifications[] = $modification;
         return $this;
     }
 
@@ -54,9 +50,8 @@ abstract class ModifiablePrinter extends Printer implements ModifiablePrinterInt
      */
     protected function runModifications(string $text)
     {
-        foreach ($this->modificationClasses as $modificationClass) {
+        foreach ($this->modifications as $modification) {
             /** @var ModificationInterface $modification */
-            $modification = new $modificationClass();
             $text = $modification->modify($text);
         }
 

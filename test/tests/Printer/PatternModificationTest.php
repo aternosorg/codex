@@ -2,16 +2,14 @@
 
 require_once __DIR__ . "/../../src/Printer/TestModification.php";
 
-use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\StringLogFile;
-use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Printer\ModifiableDefaultPrinter;
+use Aternos\Codex\Printer\PatternModification;
 use PHPUnit\Framework\TestCase;
 
-class ModifiableDefaultPrinterTest extends TestCase
+class PatternModificationTest extends TestCase
 {
-
     public function testPrint()
     {
         $logFile = new StringLogFile("This is foo!");
@@ -20,18 +18,8 @@ class ModifiableDefaultPrinterTest extends TestCase
         $log->parse();
 
         $printer = new ModifiableDefaultPrinter();
-        $printer->addModification(new TestModification());
+        $printer->addModification((new PatternModification())->setPattern('/foo/')->setReplacement('bar'));
         $printer->setLog($log);
-        $this->assertEquals("This is bar!", trim($printer->print()));
-    }
-
-    public function testPrintEntry()
-    {
-        $entry = (new Entry())->addLine((new Line())->setText("This is foo!"));
-
-        $printer = new ModifiableDefaultPrinter();
-        $printer->addModification(new TestModification());
-        $printer->setEntry($entry);
         $this->assertEquals("This is bar!", trim($printer->print()));
     }
 }
