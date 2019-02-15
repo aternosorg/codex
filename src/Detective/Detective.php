@@ -91,7 +91,7 @@ class Detective implements DetectiveInterface
                 $detector->setLogFile($this->logFile);
                 $result = $detector->detect();
                 if ($result === true) {
-                    return new $possibleLogClass();
+                    return (new $possibleLogClass())->setLogFile($this->logFile);
                 }
                 if ($result === false) {
                     continue;
