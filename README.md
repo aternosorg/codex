@@ -19,7 +19,7 @@ composer require aternos/codex
 This is a short introduction to the idea of Codex, for some more examples check the [test](test) folder
 and/or read the [code](src).
 
-### `LogFile`
+### Logfile
 
 A [`LogFile`](src/Log/File/LogFile.php) object implementing the [`LogFileInterface`](src/Log/File/LogFileInterface.php) object is required
 to start reading a log. There are currently three different log files in this library:
