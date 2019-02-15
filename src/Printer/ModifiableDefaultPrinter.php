@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Printer;
 
+use Aternos\Codex\Log\LineInterface;
+
 /**
  * Class ModifiableDefaultPrinter
  *
@@ -10,19 +12,13 @@ namespace Aternos\Codex\Printer;
 class ModifiableDefaultPrinter extends ModifiablePrinter
 {
     /**
-     * Print the log
+     * Print a line
      *
+     * @param LineInterface $line
      * @return string
      */
-    public function print(): string
+    protected function printLine(LineInterface $line)
     {
-        $return = "";
-        foreach ($this->log as $entry) {
-            foreach ($entry as $line) {
-                $return .= $this->runModifications($line->getText()) . PHP_EOL;
-            }
-        }
-
-        return $return;
+        return $this->runModifications($line->getText()) . PHP_EOL;
     }
 }

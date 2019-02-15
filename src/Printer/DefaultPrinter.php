@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Printer;
 
+use Aternos\Codex\Log\LineInterface;
+
 /**
  * Class DefaultPrinter
  *
@@ -10,19 +12,13 @@ namespace Aternos\Codex\Printer;
 class DefaultPrinter extends Printer
 {
     /**
-     * Print the log
+     * Print a line
      *
+     * @param LineInterface $line
      * @return string
      */
-    public function print(): string
+    protected function printLine(LineInterface $line)
     {
-        $return = "";
-        foreach ($this->log as $entry) {
-            foreach ($entry as $line) {
-                $return .= $line->getText() . PHP_EOL;
-            }
-        }
-
-        return $return;
+        return $line->getText() . PHP_EOL;
     }
 }
