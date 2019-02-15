@@ -1,6 +1,6 @@
 {
   "name": "aternos/codex",
-  "description": "Log parser and interpreter for problem detection and solving",
+  "description": "PHP library to read, parse, print and analyse log files.",
   "type": "library",
   "license": "MIT",
   "authors": [
