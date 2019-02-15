@@ -15,8 +15,8 @@ class PatternParser extends Parser
     /**
      * Match constants, see setMatches()
      */
-    const TIME = 0;
-    const LEVEL = 1;
+    const TIME = "time";
+    const LEVEL = "level";
 
     /**
      * @var string
