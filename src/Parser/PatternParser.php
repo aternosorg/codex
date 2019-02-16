@@ -60,6 +60,16 @@ class PatternParser extends Parser
     }
 
     /**
+     * Get the entry pattern
+     *
+     * @return string
+     */
+    public function getPattern(): string
+    {
+        return $this->pattern;
+    }
+
+    /**
      * Set the array of match constants
      *
      * The position/key in the array defines
