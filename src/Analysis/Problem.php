@@ -12,7 +12,7 @@ abstract class Problem extends Insight implements ProblemInterface
     /**
      * @var array
      */
-    protected $solutions;
+    protected $solutions = [];
 
     /**
      * @var int

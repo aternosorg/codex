@@ -12,7 +12,7 @@ abstract class ModifiablePrinter extends Printer implements ModifiablePrinterInt
     /**
      * @var array
      */
-    protected $modifications;
+    protected $modifications = [];
 
     /**
      * Set all modifications replacing the current modifications

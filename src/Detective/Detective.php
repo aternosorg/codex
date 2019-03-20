@@ -17,7 +17,7 @@ class Detective implements DetectiveInterface
     /**
      * @var array
      */
-    protected $possibleLogClasses;
+    protected $possibleLogClasses = [];
 
     /**
      * @var LogFileInterface

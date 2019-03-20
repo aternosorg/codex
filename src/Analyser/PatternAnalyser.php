@@ -17,7 +17,7 @@ class PatternAnalyser extends Analyser
     /**
      * @var array
      */
-    protected $possibleInsightClasses;
+    protected $possibleInsightClasses = [];
 
     /**
      * Set possible insight classes

@@ -31,7 +31,7 @@ class PatternParser extends Parser
     /**
      * @var array
      */
-    protected $matches;
+    protected $matches = [];
 
     /**
      * @var string

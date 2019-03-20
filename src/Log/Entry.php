@@ -12,7 +12,7 @@ class Entry implements EntryInterface
     /**
      * @var array
      */
-    protected $lines;
+    protected $lines = [];
 
     /**
      * @var mixed

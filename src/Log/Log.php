@@ -26,7 +26,7 @@ class Log implements LogInterface
     /**
      * @var array
      */
-    protected $entries;
+    protected $entries = [];
 
     /**
      * @var int
