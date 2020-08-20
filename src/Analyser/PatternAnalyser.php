@@ -56,6 +56,50 @@ class PatternAnalyser extends Analyser
     }
 
     /**
+     * Find a possible insight class
+     *
+     * @param string $insightClass
+     * @return int|string
+     */
+    protected function findPossibleInsightClass(string $insightClass)
+    {
+        $index = array_search($insightClass, $this->possibleInsightClasses);
+        if ($index === false) {
+            throw new \InvalidArgumentException("Class " . $insightClass . " not found in possible insight classes.");
+        }
+        return $index;
+    }
+
+    /**
+     * Remove a possible insight class
+     *
+     * @param string $insightClass
+     */
+    public function removePossibleInsightClass(string $insightClass)
+    {
+        $index = $this->findPossibleInsightClass($insightClass);
+        unset($this->possibleInsightClasses[$index]);
+    }
+
+    /**
+     * Override a possible insight class with a child class
+     *
+     * The $childInsightClass has to extend $parentInsightClass
+     *
+     * @param string $parentInsightClass
+     * @param string $childInsightClass
+     */
+    public function overridePossibleInsightClass(string $parentInsightClass, string $childInsightClass)
+    {
+        if (!is_subclass_of($childInsightClass, $parentInsightClass)) {
+            throw new \InvalidArgumentException("Class " . $childInsightClass . " does not extend " . $parentInsightClass . ".");
+        }
+
+        $index = $this->findPossibleInsightClass($parentInsightClass);
+        $this->possibleInsightClasses[$index] = $childInsightClass;
+    }
+
+    /**
      * Analyse a log and return an Analysis
      *
      * @return AnalysisInterface
