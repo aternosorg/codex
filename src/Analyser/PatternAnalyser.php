@@ -113,9 +113,11 @@ class PatternAnalyser extends Analyser
                 /** @var PatternInsightInterface $possibleInsightClass */
                 $patterns = $possibleInsightClass::getPatterns();
                 foreach ($patterns as $patternKey => $pattern) {
-                    $insight = $this->analyseEntry($entry, $possibleInsightClass, $patternKey, $pattern);
-                    if ($insight) {
-                        $analysis->addInsight($insight);
+                    $insights = $this->analyseEntry($entry, $possibleInsightClass, $patternKey, $pattern);
+                    if ($insights) {
+                        foreach ($insights as $insight) {
+                            $analysis->addInsight($insight);
+                        }
                     }
                 }
             }
@@ -131,20 +133,25 @@ class PatternAnalyser extends Analyser
      * @param string $possibleInsightClass
      * @param $patternKey
      * @param string $pattern
-     * @return bool|PatternInsightInterface
+     * @return bool|PatternInsightInterface[]
      */
     protected function analyseEntry(EntryInterface $entry, string $possibleInsightClass, $patternKey, string $pattern)
     {
-        $result = preg_match($pattern, $entry, $matches);
-        if ($result !== 1) {
+        $result = preg_match_all($pattern, $entry, $matches, PREG_SET_ORDER);
+        if ($result === false || $result === 0) {
             return false;
         }
 
-        /** @var PatternInsightInterface $insight */
-        $insight = new $possibleInsightClass();
-        $insight->setMatches($matches, $patternKey);
-        $insight->setEntry($entry);
+        $return = [];
+        foreach ($matches as $match) {
+            /** @var PatternInsightInterface $insight */
+            $insight = new $possibleInsightClass();
+            $insight->setMatches($match, $patternKey);
+            $insight->setEntry($entry);
 
-        return $insight;
+            $return[] = $insight;
+        }
+
+        return $return;
     }
 }
