@@ -35,14 +35,14 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 
     /**
      * Return the current element
      *
      * @return LineInterface
      */
-    public function current();
+    public function current(): LineInterface;
 
     /**
      * Offset to set
@@ -50,7 +50,7 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
      * @param $offset
      * @param LineInterface $value
      */
-    public function offsetSet($offset, $value);
+    public function offsetSet($offset, $value): void;
 
     /**
      * Offset to retrieve
@@ -58,5 +58,5 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
      * @param mixed $offset
      * @return LineInterface
      */
-    public function offsetGet($offset);
+    public function offsetGet($offset): LineInterface;
 }

@@ -24,7 +24,7 @@ class Log implements LogInterface
     }
 
     /**
-     * @var array
+     * @var EntryInterface[]
      */
     protected $entries = [];
 
@@ -84,7 +84,7 @@ class Log implements LogInterface
     /**
      * Set all entries of the log at once replacing the current entries
      *
-     * @param array $entries
+     * @param EntryInterface[] $entries
      * @return $this
      */
     public function setEntries(array $entries = [])
@@ -108,7 +108,7 @@ class Log implements LogInterface
     /**
      * Get all entries of the log
      *
-     * @return array
+     * @return EntryInterface[]
      */
     public function getEntries(): array
     {
@@ -118,9 +118,9 @@ class Log implements LogInterface
     /**
      * Return the current element
      *
-     * @return Entry
+     * @return EntryInterface
      */
-    public function current()
+    public function current(): EntryInterface
     {
         return $this->entries[$this->iterator];
     }
@@ -130,7 +130,7 @@ class Log implements LogInterface
      *
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         $this->iterator++;
     }
@@ -140,7 +140,7 @@ class Log implements LogInterface
      *
      * @return int
      */
-    public function key()
+    public function key(): int
     {
         return $this->iterator;
     }
@@ -150,7 +150,7 @@ class Log implements LogInterface
      *
      * @return boolean
      */
-    public function valid()
+    public function valid(): bool
     {
         return array_key_exists($this->iterator, $this->entries);
     }
@@ -160,7 +160,7 @@ class Log implements LogInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator = 0;
     }
@@ -170,7 +170,7 @@ class Log implements LogInterface
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->entries);
     }
@@ -181,7 +181,7 @@ class Log implements LogInterface
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->result[$offset]);
     }
@@ -190,9 +190,9 @@ class Log implements LogInterface
      * Offset to retrieve
      *
      * @param mixed $offset
-     * @return Log
+     * @return EntryInterface
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): EntryInterface
     {
         return $this->entries[$offset];
     }
@@ -203,7 +203,7 @@ class Log implements LogInterface
      * @param $offset
      * @param Log $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->entries[$offset] = $value;
     }
@@ -213,7 +213,7 @@ class Log implements LogInterface
      *
      * @param $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->entries[$offset]);
     }
@@ -221,7 +221,7 @@ class Log implements LogInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return implode("\n", $this->getEntries());
     }

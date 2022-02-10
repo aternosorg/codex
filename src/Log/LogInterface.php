@@ -49,7 +49,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * Set all entries of the log at once replacing the current entries
      *
-     * @param array $entries
+     * @param EntryInterface[] $entries
      * @return $this
      */
     public function setEntries(array $entries = []);
@@ -65,21 +65,21 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * Get all entries of the log
      *
-     * @return array
+     * @return EntryInterface[]
      */
     public function getEntries(): array;
 
     /**
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 
     /**
      * Return the current element
      *
      * @return EntryInterface
      */
-    public function current();
+    public function current(): EntryInterface;
 
     /**
      * Offset to set
@@ -87,7 +87,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param $offset
      * @param EntryInterface $value
      */
-    public function offsetSet($offset, $value);
+    public function offsetSet($offset, $value): void;
 
     /**
      * Offset to retrieve
@@ -95,5 +95,5 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param mixed $offset
      * @return EntryInterface
      */
-    public function offsetGet($offset);
+    public function offsetGet($offset): EntryInterface;
 }

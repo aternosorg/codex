@@ -10,7 +10,7 @@ namespace Aternos\Codex\Log;
 class Entry implements EntryInterface
 {
     /**
-     * @var array
+     * @var LineInterface[]
      */
     protected $lines = [];
 
@@ -27,7 +27,7 @@ class Entry implements EntryInterface
     /**
      * Set all lines at once in an array replacing the current lines
      *
-     * @param array $lines
+     * @param LineInterface[] $lines
      * @return $this
      */
     public function setLines(array $lines = [])
@@ -112,7 +112,7 @@ class Entry implements EntryInterface
      *
      * @return Line
      */
-    public function current()
+    public function current(): Line
     {
         return $this->lines[$this->iterator];
     }
@@ -122,7 +122,7 @@ class Entry implements EntryInterface
      *
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         $this->iterator++;
     }
@@ -132,7 +132,7 @@ class Entry implements EntryInterface
      *
      * @return int
      */
-    public function key()
+    public function key(): int
     {
         return $this->iterator;
     }
@@ -142,7 +142,7 @@ class Entry implements EntryInterface
      *
      * @return boolean
      */
-    public function valid()
+    public function valid(): bool
     {
         return array_key_exists($this->iterator, $this->lines);
     }
@@ -152,7 +152,7 @@ class Entry implements EntryInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator = 0;
     }
@@ -162,7 +162,7 @@ class Entry implements EntryInterface
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->lines);
     }
@@ -173,7 +173,7 @@ class Entry implements EntryInterface
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->result[$offset]);
     }
@@ -182,9 +182,9 @@ class Entry implements EntryInterface
      * Offset to retrieve
      *
      * @param mixed $offset
-     * @return Line
+     * @return LineInterface
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): LineInterface
     {
         return $this->lines[$offset];
     }
@@ -193,9 +193,9 @@ class Entry implements EntryInterface
      * Offset to set
      *
      * @param $offset
-     * @param Line $value
+     * @param LineInterface $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->lines[$offset] = $value;
     }
@@ -205,7 +205,7 @@ class Entry implements EntryInterface
      *
      * @param $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->lines[$offset]);
     }
@@ -213,7 +213,7 @@ class Entry implements EntryInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return implode("\n", $this->getLines());
     }

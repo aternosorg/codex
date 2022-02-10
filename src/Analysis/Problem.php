@@ -58,7 +58,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return SolutionInterface
      */
-    public function current()
+    public function current(): SolutionInterface
     {
         return $this->solutions[$this->iterator];
     }
@@ -68,7 +68,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         $this->iterator++;
     }
@@ -78,7 +78,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return int
      */
-    public function key()
+    public function key(): int
     {
         return $this->iterator;
     }
@@ -88,7 +88,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return boolean
      */
-    public function valid()
+    public function valid(): bool
     {
         return array_key_exists($this->iterator, $this->solutions);
     }
@@ -98,7 +98,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator = 0;
     }
@@ -108,7 +108,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->solutions);
     }
@@ -119,7 +119,7 @@ abstract class Problem extends Insight implements ProblemInterface
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->result[$offset]);
     }
@@ -130,7 +130,7 @@ abstract class Problem extends Insight implements ProblemInterface
      * @param mixed $offset
      * @return SolutionInterface
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): SolutionInterface
     {
         return $this->solutions[$offset];
     }
@@ -141,7 +141,7 @@ abstract class Problem extends Insight implements ProblemInterface
      * @param $offset
      * @param SolutionInterface $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->solutions[$offset] = $value;
     }
@@ -151,7 +151,7 @@ abstract class Problem extends Insight implements ProblemInterface
      *
      * @param $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->solutions[$offset]);
     }

@@ -10,7 +10,7 @@ namespace Aternos\Codex\Analysis;
 class Analysis implements AnalysisInterface
 {
     /**
-     * @var array
+     * @var InsightInterface[]
      */
     protected $insights = [];
 
@@ -22,7 +22,7 @@ class Analysis implements AnalysisInterface
     /**
      * Set all insights at once in an array replacing the current insights
      *
-     * @param array $insights
+     * @param InsightInterface[] $insights
      * @return $this
      */
     public function setInsights(array $insights = [])
@@ -103,7 +103,7 @@ class Analysis implements AnalysisInterface
      *
      * @return InsightInterface
      */
-    public function current()
+    public function current(): InsightInterface
     {
         return $this->insights[$this->iterator];
     }
@@ -113,7 +113,7 @@ class Analysis implements AnalysisInterface
      *
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         $this->iterator++;
     }
@@ -123,7 +123,7 @@ class Analysis implements AnalysisInterface
      *
      * @return int
      */
-    public function key()
+    public function key(): int
     {
         return $this->iterator;
     }
@@ -133,7 +133,7 @@ class Analysis implements AnalysisInterface
      *
      * @return boolean
      */
-    public function valid()
+    public function valid(): bool
     {
         return array_key_exists($this->iterator, $this->insights);
     }
@@ -143,7 +143,7 @@ class Analysis implements AnalysisInterface
      *
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator = 0;
     }
@@ -153,18 +153,18 @@ class Analysis implements AnalysisInterface
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->insights);
     }
 
     /**
-     * Whether a offset exists
+     * Whether an offset exists
      *
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->result[$offset]);
     }
@@ -175,7 +175,7 @@ class Analysis implements AnalysisInterface
      * @param mixed $offset
      * @return InsightInterface
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): InsightInterface
     {
         return $this->insights[$offset];
     }
@@ -186,7 +186,7 @@ class Analysis implements AnalysisInterface
      * @param $offset
      * @param InsightInterface $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->insights[$offset] = $value;
     }
@@ -196,7 +196,7 @@ class Analysis implements AnalysisInterface
      *
      * @param $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->insights[$offset]);
     }
