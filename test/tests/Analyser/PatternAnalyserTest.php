@@ -16,7 +16,7 @@ class PatternAnalyserTest extends TestCase
     /**
      * @return Analysis
      */
-    protected function getExpectedAnalysis()
+    protected function getExpectedAnalysis(): Analysis
     {
         $analysis = (new Analysis())
             ->addInsight((new TestPatternProblem())
@@ -56,7 +56,7 @@ class PatternAnalyserTest extends TestCase
         return $analysis;
     }
 
-    public function testAnalyse()
+    public function testAnalyse(): void
     {
         $logFile = new PathLogFile(__DIR__ . '/../../data/problem.log');
         $log = (new TestPatternLog())->setLogFile($logFile);

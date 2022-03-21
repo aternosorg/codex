@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class ModifiableDefaultPrinterTest extends TestCase
 {
 
-    public function testPrint()
+    public function testPrint(): void
     {
         $logFile = new StringLogFile("This is foo!");
         $log = new Log();
@@ -26,7 +26,7 @@ class ModifiableDefaultPrinterTest extends TestCase
         $this->assertEquals("This is bar!", trim($printer->print()));
     }
 
-    public function testPrintEntry()
+    public function testPrintEntry(): void
     {
         $entry = (new Entry())->addLine((new Line())->setText("This is foo!"));
 

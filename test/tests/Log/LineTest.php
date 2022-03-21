@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class LineTest extends TestCase
 {
-    public function testSetGetText()
+    public function testSetGetText(): void
     {
         $text = uniqid();
         $line = new Line();
@@ -15,7 +15,7 @@ class LineTest extends TestCase
         $this->assertEquals($text, $line->getText());
     }
 
-    public function testSetGetNumber()
+    public function testSetGetNumber(): void
     {
         $number = rand(0, 100);
         $line = new Line();
@@ -23,7 +23,7 @@ class LineTest extends TestCase
         $this->assertEquals($number, $line->getNumber());
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $text = uniqid();
         $line = new Line();

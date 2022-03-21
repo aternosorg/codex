@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class LogTest extends TestCase
 {
-    public function testAddEntry()
+    public function testAddEntry(): void
     {
         $log = new Log();
         $entry = (new Entry())->setLevel(rand(0, 100));
@@ -16,7 +16,7 @@ class LogTest extends TestCase
         $this->assertEquals([$entry], $log->getEntries());
     }
 
-    public function testSetGetEntries()
+    public function testSetGetEntries(): void
     {
         $log = new Log();
         $entry = (new Entry())->setLevel(rand(0, 100));

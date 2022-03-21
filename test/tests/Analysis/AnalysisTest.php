@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class AnalysisTest extends TestCase
 {
-    public function testSetGetInsights()
+    public function testSetGetInsights(): void
     {
         $analysis = new Analysis();
         $insight = new TestInsight();
@@ -18,7 +18,7 @@ class AnalysisTest extends TestCase
         $this->assertSame([$insight], $analysis->getInsights());
     }
 
-    public function testAddInsight()
+    public function testAddInsight(): void
     {
         $analysis = new Analysis();
         $insight = new TestInsight();
@@ -26,7 +26,7 @@ class AnalysisTest extends TestCase
         $this->assertSame([$insight], $analysis->getInsights());
     }
 
-    public function testGetProblems()
+    public function testGetProblems(): void
     {
         $analysis = new Analysis();
         $problem = new TestProblem();
@@ -38,7 +38,7 @@ class AnalysisTest extends TestCase
         $this->assertEquals([$problem], $analysis->getProblems());
     }
 
-    public function testGetInformation()
+    public function testGetInformation(): void
     {
         $analysis = new Analysis();
         $problem = new TestProblem();

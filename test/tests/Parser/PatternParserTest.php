@@ -16,7 +16,7 @@ class PatternParserTest extends TestCase
      *
      * @return Log
      */
-    protected function getSimpleExpectedLog()
+    protected function getSimpleExpectedLog(): Log
     {
         return (new TestPatternLog())
             ->setLogFile(new PathLogFile(__DIR__ . '/../../data/simple.log'))
@@ -35,7 +35,7 @@ class PatternParserTest extends TestCase
     }
 
 
-    public function testParse()
+    public function testParse(): void
     {
         $logFile = new PathLogFile(__DIR__ . '/../../data/simple.log');
         $log = (new TestPatternLog())->setLogFile($logFile);

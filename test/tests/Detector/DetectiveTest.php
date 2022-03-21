@@ -16,7 +16,7 @@ class DetectiveTest extends TestCase
      * @param array $possibleLogClasses
      * @return Detective
      */
-    protected function getDetective(array $possibleLogClasses)
+    protected function getDetective(array $possibleLogClasses): Detective
     {
         $detective = new Detective();
         $detective->setLogFile(new \Aternos\Codex\Log\File\PathLogFile(__DIR__ . '/../../data/simple.log'));
@@ -24,7 +24,7 @@ class DetectiveTest extends TestCase
         return $detective;
     }
 
-    public function testDetect()
+    public function testDetect(): void
     {
         $this->assertEquals(TestAlwaysDetectableLog::class,
             get_class($this->getDetective([

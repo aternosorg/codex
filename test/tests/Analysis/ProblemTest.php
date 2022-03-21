@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class ProblemTest extends TestCase
 {
 
-    public function testSetGetSolutions()
+    public function testSetGetSolutions(): void
     {
         $problem = new TestProblem();
         $solution = new TestSolution();
@@ -17,7 +17,7 @@ class ProblemTest extends TestCase
         $this->assertEquals([$solution], $problem->getSolutions());
     }
 
-    public function testAddSolutions()
+    public function testAddSolutions(): void
     {
         $problem = new TestProblem();
         $solution = new TestSolution();
