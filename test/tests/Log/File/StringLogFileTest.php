@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class StringLogFileTest extends TestCase
 {
-    public function testGetContent()
+    public function testGetContent(): void
     {
         $content = uniqid();
         $logFile = new StringLogFile($content);

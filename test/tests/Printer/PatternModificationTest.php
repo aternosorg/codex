@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class PatternModificationTest extends TestCase
 {
-    public function testPrint()
+    public function testPrint(): void
     {
         $logFile = new StringLogFile("This is foo!");
         $log = new Log();

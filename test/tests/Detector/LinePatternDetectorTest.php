@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class LinePatternDetectorTest extends TestCase
 {
-    public function testDetect()
+    public function testDetect(): void
     {
         $this->assertEquals(5 / 7, (new LinePatternDetector())
             ->setLogFile(new \Aternos\Codex\Log\File\PathLogFile(__DIR__ . '/../../data/simple.log'))

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class DefaultPrinterTest extends TestCase
 {
-    public function testPrint()
+    public function testPrint(): void
     {
         $logFile = new PathLogFile(__DIR__ . "/../../data/simple.log");
         $log = new Log();
@@ -23,7 +23,7 @@ class DefaultPrinterTest extends TestCase
         $this->assertEquals($logFile->getContent(), trim($printer->print()));
     }
 
-    public function testPrintEntry()
+    public function testPrintEntry(): void
     {
         $text = uniqid();
         $entry = (new Entry())->addLine((new Line())->setText($text));

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class InformationTest extends TestCase
 {
 
-    public function testSetGetValue()
+    public function testSetGetValue(): void
     {
         $value = uniqid();
         $information = new TestInformation();
@@ -16,12 +16,12 @@ class InformationTest extends TestCase
         $this->assertEquals($value, $information->getValue());
     }
 
-    public function testGetLabel()
+    public function testGetLabel(): void
     {
         $this->assertEquals("Label", (new TestInformation())->getLabel());
     }
 
-    public function testGetMessage()
+    public function testGetMessage(): void
     {
         $value = uniqid();
         $information = new TestInformation();
@@ -30,7 +30,7 @@ class InformationTest extends TestCase
         $this->assertEquals("Label: " . $value, (string)$information);
     }
 
-    public function testIsEqual()
+    public function testIsEqual(): void
     {
         $value = uniqid();
         $informationA = new TestInformation();

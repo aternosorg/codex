@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class WeightedSinglePatternDetectorTest extends TestCase
 {
-    public function testDetect()
+    public function testDetect(): void
     {
         $this->assertEquals(1, (new WeightedSinglePatternDetector())
             ->setLogFile(new \Aternos\Codex\Log\File\PathLogFile(__DIR__ . '/../../data/simple.log'))

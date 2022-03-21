@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class PathLogFileTest extends TestCase
 {
-    public function testGetContent()
+    public function testGetContent(): void
     {
         $path = __DIR__ . "/../../../data/simple.log";
         $logFile = new PathLogFile($path);

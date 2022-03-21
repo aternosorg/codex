@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class EntryTest extends TestCase
 {
 
-    public function testAddLine()
+    public function testAddLine(): void
     {
         $entry = new Entry();
         $line = (new Line())->setText(uniqid());
@@ -17,7 +17,7 @@ class EntryTest extends TestCase
         $this->assertEquals([$line], $entry->getLines());
     }
 
-    public function testSetGetLines()
+    public function testSetGetLines(): void
     {
         $entry = new Entry();
         $line = (new Line())->setText(uniqid());
@@ -25,7 +25,7 @@ class EntryTest extends TestCase
         $this->assertEquals([$line], $entry->getLines());
     }
 
-    public function testSetGetLevel()
+    public function testSetGetLevel(): void
     {
         $entry = new Entry();
         $level = rand(0, 100);
@@ -33,7 +33,7 @@ class EntryTest extends TestCase
         $this->assertEquals($level, $entry->getLevel());
     }
 
-    public function testSetGetTime()
+    public function testSetGetTime(): void
     {
         $entry = new Entry();
         $time = time();
