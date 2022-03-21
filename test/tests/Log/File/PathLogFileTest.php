@@ -12,6 +12,6 @@ class PathLogFileTest extends TestCase
         $path = __DIR__ . "/../../../data/simple.log";
         $logFile = new PathLogFile($path);
 
-        $this->assertEquals(file_get_contents($path), $logFile->getContent());
+        $this->assertStringEqualsFile($path, $logFile->getContent());
     }
 }

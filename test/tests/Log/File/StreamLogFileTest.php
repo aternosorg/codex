@@ -13,6 +13,6 @@ class StreamLogFileTest extends TestCase
         $streamResource = fopen($path, 'r');
 
         $logFile = new StreamLogFile($streamResource);
-        $this->assertEquals(file_get_contents($path), $logFile->getContent());
+        $this->assertStringEqualsFile($path, $logFile->getContent());
     }
 }
