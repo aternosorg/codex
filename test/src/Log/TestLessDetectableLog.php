@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Src\Log;
+
 use Aternos\Codex\Detective\LinePatternDetector;
 use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\Log;

@@ -1,10 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../../src/Analysis/TestInsight.php';
-require_once __DIR__ . '/../../src/Analysis/TestProblem.php';
-require_once __DIR__ . '/../../src/Analysis/TestInformation.php';
+namespace Aternos\Codex\Test\Tests\Analysis;
 
 use Aternos\Codex\Analysis\Analysis;
+use Aternos\Codex\Test\Src\Analysis\TestInformation;
+use Aternos\Codex\Test\Src\Analysis\TestInsight;
+use Aternos\Codex\Test\Src\Analysis\TestProblem;
 use PHPUnit\Framework\TestCase;
 
 class AnalysisTest extends TestCase

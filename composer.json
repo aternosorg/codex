@@ -17,6 +17,12 @@
       "Aternos\\Codex\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Aternos\\Codex\\Test\\Src\\": "test/src/",
+      "Aternos\\Codex\\Test\\Tests\\": "test/tests/"
+    }
+  },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
   },

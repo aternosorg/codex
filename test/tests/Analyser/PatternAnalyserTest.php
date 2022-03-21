@@ -1,13 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../../src/Analysis/TestPatternProblem.php';
-require_once __DIR__ . '/../../src/Analysis/TestPatternInformation.php';
-require_once __DIR__ . '/../../src/Log/TestPatternLog.php';
+namespace Aternos\Codex\Test\Tests\Analyser;
 
 use Aternos\Codex\Analysis\Analysis;
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
+use Aternos\Codex\Test\Src\Analysis\TestPatternInformation;
+use Aternos\Codex\Test\Src\Analysis\TestPatternProblem;
+use Aternos\Codex\Test\Src\Log\TestPatternLog;
 use PHPUnit\Framework\TestCase;
 
 class PatternAnalyserTest extends TestCase

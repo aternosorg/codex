@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../../src/Analysis/TestInformation.php';
+namespace Aternos\Codex\Test\Tests\Analysis;
 
+use Aternos\Codex\Test\Src\Analysis\TestInformation;
 use PHPUnit\Framework\TestCase;
 
 class InformationTest extends TestCase
@@ -33,7 +34,7 @@ class InformationTest extends TestCase
     {
         $value = uniqid();
         $informationA = new TestInformation();
-        $informationA->setValue($value);;
+        $informationA->setValue($value);
         $informationB = new TestInformation();
         $informationB->setValue($value);
 

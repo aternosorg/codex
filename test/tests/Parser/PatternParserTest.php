@@ -1,11 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../../src/Log/TestPatternLog.php';
+namespace Aternos\Codex\Test\Tests\Parser;
 
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
+use Aternos\Codex\Test\Src\Log\TestPatternLog;
 use PHPUnit\Framework\TestCase;
 
 class PatternParserTest extends TestCase
