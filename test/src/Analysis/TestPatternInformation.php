@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Src\Analysis;
+
 use Aternos\Codex\Analysis\Information;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 

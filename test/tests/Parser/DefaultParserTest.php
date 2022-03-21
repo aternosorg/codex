@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Tests\Parser;
+
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;

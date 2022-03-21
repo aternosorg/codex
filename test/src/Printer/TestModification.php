@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Src\Printer;
+
 use Aternos\Codex\Printer\Modification;
 
 /**

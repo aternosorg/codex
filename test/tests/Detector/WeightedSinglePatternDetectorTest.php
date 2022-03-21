@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Tests\Detector;
+
 use Aternos\Codex\Detective\WeightedSinglePatternDetector;
 use Aternos\Codex\Log\File\StringLogFile;
 use PHPUnit\Framework\TestCase;

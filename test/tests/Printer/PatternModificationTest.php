@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../../src/Printer/TestModification.php";
+namespace Aternos\Codex\Test\Tests\Printer;
 
 use Aternos\Codex\Log\File\StringLogFile;
 use Aternos\Codex\Log\Log;

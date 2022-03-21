@@ -1,5 +1,6 @@
 <?php
 
+namespace Aternos\Codex\Test\Tests\Log\File;
 
 use Aternos\Codex\Log\File\StreamLogFile;
 use PHPUnit\Framework\TestCase;

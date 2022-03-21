@@ -1,12 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../../src/Log/TestAlwaysDetectableLog.php';
-require_once __DIR__ . '/../../src/Log/TestLessDetectableLog.php';
-require_once __DIR__ . '/../../src/Log/TestMoreDetectableLog.php';
-require_once __DIR__ . '/../../src/Log/TestNeverDetectableLog.php';
+namespace Aternos\Codex\Test\Tests\Detector;
 
 use Aternos\Codex\Detective\Detective;
 use Aternos\Codex\Log\Log;
+use Aternos\Codex\Test\Src\Log\TestAlwaysDetectableLog;
+use Aternos\Codex\Test\Src\Log\TestLessDetectableLog;
+use Aternos\Codex\Test\Src\Log\TestMoreDetectableLog;
+use Aternos\Codex\Test\Src\Log\TestNeverDetectableLog;
 use PHPUnit\Framework\TestCase;
 
 class DetectiveTest extends TestCase

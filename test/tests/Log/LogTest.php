@@ -1,5 +1,7 @@
 <?php
 
+namespace Aternos\Codex\Test\Tests\Log;
+
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\Log;
 use PHPUnit\Framework\TestCase;

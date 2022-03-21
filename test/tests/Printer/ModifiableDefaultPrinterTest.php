@@ -1,12 +1,13 @@
 <?php
 
-require_once __DIR__ . "/../../src/Printer/TestModification.php";
+namespace Aternos\Codex\Test\Tests\Printer;
 
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\StringLogFile;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Printer\ModifiableDefaultPrinter;
+use Aternos\Codex\Test\Src\Printer\TestModification;
 use PHPUnit\Framework\TestCase;
 
 class ModifiableDefaultPrinterTest extends TestCase

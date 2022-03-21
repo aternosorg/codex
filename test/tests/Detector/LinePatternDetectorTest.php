@@ -1,5 +1,6 @@
 <?php
 
+namespace Aternos\Codex\Test\Tests\Detector;
 
 use Aternos\Codex\Detective\LinePatternDetector;
 use PHPUnit\Framework\TestCase;
