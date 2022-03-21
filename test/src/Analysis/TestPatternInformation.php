@@ -29,9 +29,9 @@ class TestPatternInformation extends Information implements PatternInsightInterf
      *
      * @param array $matches
      * @param $patternKey
-     * @return mixed
+     * @return void
      */
-    public function setMatches(array $matches, $patternKey)
+    public function setMatches(array $matches, $patternKey): void
     {
         $this->value = $matches[1];
     }

@@ -42,9 +42,9 @@ class TestPatternProblem extends Problem implements PatternInsightInterface
      *
      * @param array $matches
      * @param $patternKey
-     * @return mixed
+     * @return void
      */
-    public function setMatches(array $matches, $patternKey)
+    public function setMatches(array $matches, $patternKey): void
     {
         $this->cause = $matches[1];
     }
