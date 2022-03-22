@@ -77,9 +77,9 @@ $log->parse();
 
 ### Analysing
 
-An analysis is done by an [`Analyser`](src/Analyser/AnalyserInterface.php) on an [`AnalysableLog`](src/Log/AnalysableLogInterface.php) and returns
-and [`Analysis`](src/Analysis/AnalysisInterface.php), which contains different [`Insight`](src/Analysis/InsightInterface.php) objects, e.g. a [`Problem`](src/Analysis/ProblemInterface.php)
-or an [`Information`](src/Analysis/InformationInterface.php). Different log types can use different analysers by overwriting
+An analysis is performed by an [`Analyser`](src/Analyser/AnalyserInterface.php) on an [`AnalysableLog`](src/Log/AnalysableLogInterface.php) and returns
+an [`Analysis`](src/Analysis/AnalysisInterface.php) object containing various [`Insight`](src/Analysis/InsightInterface.php) objects, e.g. a [`Problem`](src/Analysis/ProblemInterface.php)
+or an [`Information`](src/Analysis/InformationInterface.php) object. Different log types can use different analysers by overwriting
 the `AnalysableLogInterface::getDefaultAnalyser()` function or by passing an analyser object to the analyse function.
 
 ```php
