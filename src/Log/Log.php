@@ -183,7 +183,7 @@ class Log implements LogInterface
      */
     public function offsetExists($offset): bool
     {
-        return isset($this->result[$offset]);
+        return isset($this->entries[$offset]);
     }
 
     /**

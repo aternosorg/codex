@@ -121,7 +121,7 @@ abstract class Problem extends Insight implements ProblemInterface
      */
     public function offsetExists($offset): bool
     {
-        return isset($this->result[$offset]);
+        return isset($this->solutions[$offset]);
     }
 
     /**
