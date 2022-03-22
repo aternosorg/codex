@@ -6,6 +6,7 @@ use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
+use Aternos\Codex\Parser\PatternParser;
 use Aternos\Codex\Test\Src\Log\TestPatternLog;
 use PHPUnit\Framework\TestCase;
 
@@ -43,4 +44,33 @@ class PatternParserTest extends TestCase
 
         $this->assertEquals($this->getSimpleExpectedLog(), $log);
     }
+
+
+    public function testParseWithCustomParser(): void
+    {
+        $logFile = new PathLogFile(__DIR__ . '/../../data/simple.log');
+        $log = (new TestPatternLog())->setLogFile($logFile);
+
+        $patternParser = (new PatternParser())
+            ->setPattern('/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/')
+            ->setMatches([PatternParser::TIME, PatternParser::LEVEL])
+            ->setTimeFormat('d.m.Y H:i:s');
+        $log->parse($patternParser);
+
+        $this->assertEquals($this->getSimpleExpectedLog(), $log);
+    }
+
+    public function testGetPattern(): void
+    {
+        $pattern = '/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/';
+
+        $patternParser = (new PatternParser())
+            ->setPattern($pattern)
+            ->setMatches([PatternParser::TIME, PatternParser::LEVEL])
+            ->setTimezone(new \DateTimeZone('Europe/Berlin'))
+            ->setTimeFormat('d.m.Y H:i:s');
+
+        $this->assertEquals($pattern, $patternParser->getPattern());
+    }
+
 }
