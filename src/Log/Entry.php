@@ -175,7 +175,7 @@ class Entry implements EntryInterface
      */
     public function offsetExists($offset): bool
     {
-        return isset($this->result[$offset]);
+        return isset($this->lines[$offset]);
     }
 
     /**
