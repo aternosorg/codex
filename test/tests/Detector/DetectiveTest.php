@@ -3,7 +3,10 @@
 namespace Aternos\Codex\Test\Tests\Detector;
 
 use Aternos\Codex\Detective\Detective;
+use Aternos\Codex\Detective\DetectorInterface;
+use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\Log;
+use Aternos\Codex\Test\Src\Analysis\TestSolution;
 use Aternos\Codex\Test\Src\Log\TestAlwaysDetectableLog;
 use Aternos\Codex\Test\Src\Log\TestLessDetectableLog;
 use Aternos\Codex\Test\Src\Log\TestMoreDetectableLog;
@@ -47,5 +50,39 @@ class DetectiveTest extends TestCase
         $this->assertEquals(Log::class,
             get_class($this->getDetective([
                 TestNeverDetectableLog::class])->detect()));
+    }
+
+    public function testAddPossibleLogClassThrowsExceptionIfPossibleClassDoesNotImplementDetectableLogInterface(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Class " . TestSolution::class . " does not implement " . DetectableLogInterface::class . ".");
+        (new Detective())->addPossibleLogClass(TestSolution::class);
+    }
+
+    public function testDetectThrowsExceptionIfDetectorClassDoesNotImplementDetectorInterface(): void
+    {
+        $invalidDetectorClass = new class {
+            // Is empty and not a child class of DetectorInterface
+        };
+
+        $customLogClass = new class() extends Log implements DetectableLogInterface {
+            private static $detectors;
+
+            public static function setDetectors($detectors): void
+            {
+                self::$detectors = $detectors;
+            }
+
+            public static function getDetectors()
+            {
+                return self::$detectors;
+            }
+        };
+
+        $customLogClass::setDetectors([$invalidDetectorClass]);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Class " . get_class($invalidDetectorClass) . " does not implement " . DetectorInterface::class . ".");
+        $this->getDetective([get_class($customLogClass)])->detect();
     }
 }
