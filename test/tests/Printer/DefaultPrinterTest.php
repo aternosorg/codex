@@ -26,7 +26,7 @@ class DefaultPrinterTest extends TestCase
     public function testPrintEntry(): void
     {
         $text = uniqid();
-        $entry = (new Entry())->addLine(new Line($text, 1));
+        $entry = (new Entry())->addLine(new Line(1, $text));
 
         $printer = new DefaultPrinter();
         $printer->setEntry($entry);

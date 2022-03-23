@@ -19,7 +19,7 @@ class DefaultParser extends Parser
     {
         foreach ($this->getLogContentAsArray() as $number => $logLineString) {
             $this->log->addEntry((new Entry())
-                ->addLine(new Line($logLineString, $number + 1))
+                ->addLine(new Line($number + 1, $logLineString))
             );
         }
     }

@@ -28,7 +28,7 @@ class ModifiableDefaultPrinterTest extends TestCase
 
     public function testPrintEntry(): void
     {
-        $entry = (new Entry())->addLine(new Line("This is foo!", 1));
+        $entry = (new Entry())->addLine(new Line(1, "This is foo!"));
 
         $printer = new ModifiableDefaultPrinter();
         $printer->addModification(new TestModification());

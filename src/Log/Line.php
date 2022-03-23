@@ -20,10 +20,10 @@ class Line implements LineInterface
     protected int $number;
 
     /**
-     * @param string $text
      * @param int $number
+     * @param string $text
      */
-    public function __construct(string $text, int $number)
+    public function __construct(int $number, string $text)
     {
         $this->text = $text;
         $this->number = $number;
