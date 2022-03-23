@@ -32,7 +32,8 @@ class Analysis implements AnalysisInterface
     }
 
     /**
-     * Add an insight
+     * Add an insight.
+     * If the insight already exists, we increase its counter.
      *
      * @param InsightInterface $insight
      * @return $this
