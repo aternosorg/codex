@@ -100,17 +100,14 @@ class PatternAnalyserTest extends TestCase
             ]);
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
-        $this->assertEquals(
-            [TestPatternInformation::class, TestPatternProblem::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
+        $possibleInsightClassesProperty->setAccessible(true);
+
+        $this->assertEquals([TestPatternInformation::class, TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
         $analyser->removePossibleInsightClass(TestPatternProblem::class);
 
-        $this->assertEquals(
-            [TestPatternInformation::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $this->assertEquals([TestPatternInformation::class], $possibleInsightClassesProperty->getValue($analyser));
     }
 
     public function testRemovePossibleInsightClassThrowsExceptionIfPossibleInsightClassIsNotAdded(): void
@@ -122,20 +119,17 @@ class PatternAnalyserTest extends TestCase
             ]);
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
-        $this->assertEquals(
-            [TestPatternProblem::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
+        $possibleInsightClassesProperty->setAccessible(true);
+
+        $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
         // Remove TestPatternInformation class -> not found
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage("Class " . TestPatternInformation::class . " not found in possible insight classes.");
         $analyser->removePossibleInsightClass(TestPatternInformation::class);
 
-        $this->assertEquals(
-            [TestPatternInformation::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $this->assertEquals([TestPatternInformation::class], $possibleInsightClassesProperty->getValue($analyser));
     }
 
     public function testOverridePossibleInsightClass(): void
@@ -146,10 +140,10 @@ class PatternAnalyserTest extends TestCase
             ]);
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
-        $this->assertEquals(
-            [TestPatternProblem::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
+        $possibleInsightClassesProperty->setAccessible(true);
+
+        $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
         $childInsightClass = new class extends TestPatternProblem {
             // Is empty child class
@@ -157,10 +151,7 @@ class PatternAnalyserTest extends TestCase
 
         $analyser->overridePossibleInsightClass(TestPatternProblem::class, get_class($childInsightClass));
 
-        $this->assertEquals(
-            [get_class($childInsightClass)],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $this->assertEquals([get_class($childInsightClass)], $possibleInsightClassesProperty->getValue($analyser));
     }
 
     public function testOverridePossibleInsightClassThrowsExceptionIfClassDoesNotExtendParent(): void
@@ -171,10 +162,10 @@ class PatternAnalyserTest extends TestCase
             ]);
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
-        $this->assertEquals(
-            [TestPatternProblem::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
+        $possibleInsightClassesProperty->setAccessible(true);
+
+        $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
         $childInsightClass = new class {
             // Is empty and not a child class
@@ -184,9 +175,6 @@ class PatternAnalyserTest extends TestCase
         $this->expectExceptionMessage("Class " . get_class($childInsightClass) . " does not extend " . TestPatternProblem::class . ".");
         $analyser->overridePossibleInsightClass(TestPatternProblem::class, get_class($childInsightClass));
 
-        $this->assertEquals(
-            [TestPatternProblem::class],
-            $reflector->getProperty('possibleInsightClasses')->getValue($analyser)
-        );
+        $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
     }
 }
