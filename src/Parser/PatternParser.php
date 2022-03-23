@@ -122,10 +122,7 @@ class PatternParser extends Parser
     public function parse()
     {
         foreach ($this->getLogContentAsArray() as $number => $lineString) {
-            $line = (new Line())
-                ->setNumber($number + 1)
-                ->setText($lineString);
-
+            $line = new Line($lineString, $number + 1);
             $result = preg_match($this->pattern, $lineString, $matches);
             if ($result !== 1) {
                 if (!isset($entry)) {
