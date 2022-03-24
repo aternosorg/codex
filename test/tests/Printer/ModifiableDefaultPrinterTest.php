@@ -31,7 +31,7 @@ class ModifiableDefaultPrinterTest extends TestCase
         $entry = (new Entry())->addLine(new Line(1, "This is foo!"));
 
         $printer = new ModifiableDefaultPrinter();
-        $printer->addModification(new TestModification());
+        $printer->setModifications([new TestModification()]);
         $printer->setEntry($entry);
         $this->assertEquals("This is bar!", trim($printer->print()));
     }
