@@ -12,7 +12,7 @@ class EntryTest extends TestCase
     public function testAddLine(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
         $this->assertSame($entry, $entry->addLine($line));
         $this->assertEquals([$line], $entry->getLines());
     }
@@ -20,7 +20,7 @@ class EntryTest extends TestCase
     public function testSetGetLines(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
         $this->assertSame($entry, $entry->setLines([$line]));
         $this->assertEquals([$line], $entry->getLines());
     }
