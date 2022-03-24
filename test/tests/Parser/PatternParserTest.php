@@ -22,17 +22,17 @@ class PatternParserTest extends TestCase
         return (new TestPatternLog())
             ->setLogFile(new PathLogFile(__DIR__ . '/../../data/simple.log'))
             ->addEntry((new Entry())->setLevel("INFO")->setTime(1)
-                ->addLine((new Line())->setNumber(1)->setText("[01.01.1970 00:00:01] [Log/INFO] This is the first message containing information.")))
+                ->addLine(new Line(1, "[01.01.1970 00:00:01] [Log/INFO] This is the first message containing information.")))
             ->addEntry((new Entry())->setLevel("DEBUG")->setTime(2)
-                ->addLine((new Line())->setNumber(2)->setText("[01.01.1970 00:00:02] [Log/DEBUG] This is the second message containing a debug information.")))
+                ->addLine(new Line(2, "[01.01.1970 00:00:02] [Log/DEBUG] This is the second message containing a debug information.")))
             ->addEntry((new Entry())->setLevel("WARN")->setTime(3)
-                ->addLine((new Line())->setNumber(3)->setText("[01.01.1970 00:00:03] [Log/WARN] This is the third message containing a warning information.")))
+                ->addLine(new Line(3, "[01.01.1970 00:00:03] [Log/WARN] This is the third message containing a warning information.")))
             ->addEntry((new Entry())->setLevel("ERROR")->setTime(4)
-                ->addLine((new Line())->setNumber(4)->setText("[01.01.1970 00:00:04] [Log/ERROR] This is the third message containing an error information."))
-                ->addLine((new Line())->setNumber(5)->setText("This line continues the error entry to add even more information."))
-                ->addLine((new Line())->setNumber(6)->setText("This line is also part of the error entry.")))
+                ->addLine(new Line(4, "[01.01.1970 00:00:04] [Log/ERROR] This is the third message containing an error information."))
+                ->addLine(new Line(5, "This line continues the error entry to add even more information."))
+                ->addLine(new Line(6, "This line is also part of the error entry.")))
             ->addEntry((new Entry())->setLevel("INFO")->setTime(5)
-                ->addLine((new Line())->setNumber(7)->setText("[01.01.1970 00:00:05] [Log/INFO] This is the last message of the log.")));
+                ->addLine(new Line(7, "[01.01.1970 00:00:05] [Log/INFO] This is the last message of the log.")));
     }
 
 

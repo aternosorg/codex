@@ -12,12 +12,22 @@ class PatternModification extends Modification
     /**
      * @var string
      */
-    protected $pattern;
+    protected string $pattern;
 
     /**
      * @var string
      */
-    protected $replacement;
+    protected string $replacement;
+
+    /**
+     * @param string $pattern
+     * @param string $replacement
+     */
+    public function __construct(string $pattern, string $replacement)
+    {
+        $this->pattern = $pattern;
+        $this->replacement = $replacement;
+    }
 
     /**
      * Set the pattern
@@ -27,7 +37,7 @@ class PatternModification extends Modification
      * @param string $pattern
      * @return $this
      */
-    public function setPattern(string $pattern)
+    public function setPattern(string $pattern): PatternModification
     {
         $this->pattern = $pattern;
         return $this;
@@ -41,7 +51,7 @@ class PatternModification extends Modification
      * @param string $replacement
      * @return $this
      */
-    public function setReplacement(string $replacement)
+    public function setReplacement(string $replacement): PatternModification
     {
         $this->replacement = $replacement;
         return $this;
