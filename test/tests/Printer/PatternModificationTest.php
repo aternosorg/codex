@@ -18,7 +18,7 @@ class PatternModificationTest extends TestCase
         $log->parse();
 
         $printer = new ModifiableDefaultPrinter();
-        $printer->addModification((new PatternModification())->setPattern('/foo/')->setReplacement('bar'));
+        $printer->addModification(new PatternModification('/foo/', 'bar'));
         $printer->setLog($log);
         $this->assertEquals("This is bar!", trim($printer->print()));
     }
