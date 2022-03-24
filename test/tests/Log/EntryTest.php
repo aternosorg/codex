@@ -44,7 +44,7 @@ class EntryTest extends TestCase
     public function testKey(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
 
         $entry->addLine($line);
         foreach ($entry as $ignored) {
@@ -57,8 +57,8 @@ class EntryTest extends TestCase
     public function testCount(): void
     {
         $entry = new Entry();
-        $line1 = (new Line())->setText(uniqid());
-        $line2 = (new Line())->setText(uniqid());
+        $line1 = new Line(1, uniqid());
+        $line2 = new Line(2, uniqid());
 
         $this->assertEquals(0, $entry->count());
         $entry->addLine($line1);
@@ -70,7 +70,7 @@ class EntryTest extends TestCase
     public function testOffsetExists(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
 
         $this->assertArrayNotHasKey(0, $entry);
         $this->assertEquals(0, $entry->count());
@@ -82,7 +82,7 @@ class EntryTest extends TestCase
     public function testOffsetGet(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
         $entry->addLine($line);
 
         // Exists
@@ -96,7 +96,7 @@ class EntryTest extends TestCase
     public function testOffsetSet(): void
     {
         $entry = new Entry();
-        $line1 = (new Line())->setText(uniqid());
+        $line1 = new Line(1, uniqid());
 
         $this->assertArrayNotHasKey(0, $entry);
         $this->assertEquals(0, $entry->count());
@@ -105,7 +105,7 @@ class EntryTest extends TestCase
         $this->assertEquals($line1, $entry[0]);
 
         // Overwrite $line1 on $entry[0] using the offsetSet
-        $line2 = (new Line())->setText(uniqid());
+        $line2 = new Line(2, uniqid());
         $entry[0] = $line2;
         $this->assertEquals($line2, $entry[0]);
     }
@@ -113,7 +113,7 @@ class EntryTest extends TestCase
     public function testOffsetUnset(): void
     {
         $entry = new Entry();
-        $line = (new Line())->setText(uniqid());
+        $line = new Line(1, uniqid());
 
         $this->assertArrayNotHasKey(0, $entry);
         $this->assertEquals(0, $entry->count());
