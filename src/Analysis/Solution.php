@@ -16,4 +16,14 @@ abstract class Solution implements SolutionInterface
     {
         return $this->getMessage();
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'message' => $this->getMessage()
+        ];
+    }
 }

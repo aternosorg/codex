@@ -197,4 +197,15 @@ class Analysis implements AnalysisInterface
     {
         unset($this->insights[$offset]);
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            "problems" => $this->getProblems(),
+            "information" => $this->getInformation()
+        ];
+    }
 }

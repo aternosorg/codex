@@ -7,7 +7,7 @@ namespace Aternos\Codex\Log;
  *
  * @package Aternos\Codex\Log
  */
-interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
+interface EntryInterface extends \Iterator, \Countable, \ArrayAccess, \JsonSerializable
 {
     /**
      * Set all lines at once in an array replacing the current lines

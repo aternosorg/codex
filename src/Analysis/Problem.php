@@ -155,4 +155,14 @@ abstract class Problem extends Insight implements ProblemInterface
     {
         unset($this->solutions[$offset]);
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            "solutions" => $this->getSolutions()
+        ]);
+    }
 }

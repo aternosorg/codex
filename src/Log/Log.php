@@ -217,4 +217,14 @@ class Log implements LogInterface
     {
         return implode("\n", $this->getEntries());
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            "entries" => $this->getEntries()
+        ];
+    }
 }

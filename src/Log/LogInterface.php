@@ -10,7 +10,7 @@ use Aternos\Codex\Parser\ParserInterface;
  *
  * @package Aternos\Codex\Log
  */
-interface LogInterface extends \Iterator, \Countable, \ArrayAccess
+interface LogInterface extends \Iterator, \Countable, \ArrayAccess, \JsonSerializable
 {
     /**
      * Get the default parser

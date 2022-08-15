@@ -9,7 +9,7 @@ use Aternos\Codex\Log\EntryInterface;
  *
  * @package Aternos\Codex\Analysis
  */
-interface InsightInterface
+interface InsightInterface extends \JsonSerializable
 {
     /**
      * Get a human-readable message

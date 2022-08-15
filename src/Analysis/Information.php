@@ -76,4 +76,15 @@ abstract class Information extends Insight implements InformationInterface
     {
         return $this->getLabel() === $insight->getLabel() && $this->getValue() === $insight->getValue();
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            "label" => $this->getLabel(),
+            "value" => $this->getValue()
+        ]);
+    }
 }

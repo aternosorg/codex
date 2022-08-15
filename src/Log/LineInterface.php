@@ -7,7 +7,7 @@ namespace Aternos\Codex\Log;
  *
  * @package Aternos\Codex\Log
  */
-interface LineInterface
+interface LineInterface extends \JsonSerializable
 {
     /**
      * Set the text of the line

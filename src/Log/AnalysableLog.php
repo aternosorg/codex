@@ -24,12 +24,21 @@ abstract class AnalysableLog extends Log implements AnalysableLogInterface
      */
     public function analyse(AnalyserInterface $analyser = null): AnalysisInterface
     {
-
         if ($analyser === null) {
             $analyser = static::getDefaultAnalyser();
         }
 
         $analyser->setLog($this);
         return $analyser->analyse();
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            'analysis' => $this->analyse()
+        ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Aternos\Codex\Log;
 
-enum Level: int
+enum Level: int implements \JsonSerializable
 {
     case EMERGENCY = 0;
     case ALERT = 1;
@@ -42,5 +42,13 @@ enum Level: int
             Level::INFO => "info",
             Level::DEBUG => "debug"
         };
+    }
+
+    /**
+     * @return int
+     */
+    public function jsonSerialize(): int
+    {
+        return $this->value;
     }
 }

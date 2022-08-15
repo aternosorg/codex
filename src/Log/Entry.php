@@ -205,4 +205,16 @@ class Entry implements EntryInterface
     {
         return implode("\n", $this->getLines());
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'level' => $this->getLevel(),
+            'time' => $this->getTime(),
+            'lines' => $this->getLines()
+        ];
+    }
 }

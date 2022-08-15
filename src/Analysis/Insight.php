@@ -64,4 +64,16 @@ abstract class Insight implements InsightInterface
     {
         return $this->getMessage();
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'message' => $this->getMessage(),
+            'counter' => $this->getCounterValue(),
+            'entry' => $this->getEntry()
+        ];
+    }
 }

@@ -70,4 +70,15 @@ class Line implements LineInterface
     {
         return $this->getText();
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'number' => $this->getNumber(),
+            'content' => $this->getText()
+        ];
+    }
 }
