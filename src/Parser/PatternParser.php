@@ -5,6 +5,7 @@ namespace Aternos\Codex\Parser;
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\EntryInterface;
 use Aternos\Codex\Log\Level;
+use Aternos\Codex\Log\LevelInterface;
 use Aternos\Codex\Log\Line;
 use DateTime;
 use DateTimeZone;
@@ -27,6 +28,13 @@ class PatternParser extends Parser
      * @var class-string<EntryInterface>
      */
     protected string $entryClass = Entry::class;
+
+    /**
+     * @noinspection PhpDocFieldTypeMismatchInspection
+     * @var class-string<LevelInterface>|LevelInterface
+     */
+    protected string $levelClass = Level::class;
+
     protected ?string $pattern = null;
     protected array $matches = [];
     protected ?string $timeFormat = null;
@@ -162,7 +170,7 @@ class PatternParser extends Parser
                 }
                 break;
             case static::LEVEL:
-                $entry->setLevel(Level::fromString($matchString));
+                $entry->setLevel($this->levelClass::fromString($matchString));
                 break;
             default:
                 throw new InvalidArgumentException("Match type '" . $matchType . "' is not defined.");

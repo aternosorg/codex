@@ -2,9 +2,7 @@
 
 namespace Aternos\Codex\Log;
 
-use JsonSerializable;
-
-enum Level: int implements JsonSerializable
+enum Level: int implements LevelInterface
 {
     case EMERGENCY = 0;
     case ALERT = 1;
@@ -15,6 +13,10 @@ enum Level: int implements JsonSerializable
     case INFO = 6;
     case DEBUG = 7;
 
+    /**
+     * @param string $level
+     * @return Level
+     */
     public static function fromString(string $level): Level
     {
         return match (strtolower($level)) {

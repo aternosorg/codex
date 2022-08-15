@@ -13,7 +13,7 @@ class Entry implements EntryInterface
      * @var LineInterface[]
      */
     protected array $lines = [];
-    protected ?Level $level = null;
+    protected ?LevelInterface $level = null;
     protected ?int $time = null;
     protected int $iterator = 0;
 
@@ -54,10 +54,10 @@ class Entry implements EntryInterface
     /**
      * Set the log level of the entry
      *
-     * @param Level $level
+     * @param LevelInterface $level
      * @return $this
      */
-    public function setLevel(Level $level): static
+    public function setLevel(LevelInterface $level): static
     {
         $this->level = $level;
         return $this;
@@ -66,9 +66,9 @@ class Entry implements EntryInterface
     /**
      * Get the log level of the entry
      *
-     * @return null|Level
+     * @return null|LevelInterface
      */
-    public function getLevel(): ?Level
+    public function getLevel(): ?LevelInterface
     {
         return $this->level;
     }
