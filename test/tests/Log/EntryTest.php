@@ -3,6 +3,7 @@
 namespace Aternos\Codex\Test\Tests\Log;
 
 use Aternos\Codex\Log\Entry;
+use Aternos\Codex\Log\Level;
 use Aternos\Codex\Log\Line;
 use PHPUnit\Framework\TestCase;
 
@@ -28,7 +29,7 @@ class EntryTest extends TestCase
     public function testSetGetLevel(): void
     {
         $entry = new Entry();
-        $level = rand(0, 100);
+        $level = Level::CRITICAL;
         $this->assertSame($entry, $entry->setLevel($level));
         $this->assertEquals($level, $entry->getLevel());
     }

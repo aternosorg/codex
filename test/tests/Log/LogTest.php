@@ -11,7 +11,7 @@ class LogTest extends TestCase
     public function testAddEntry(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
         $this->assertSame($log, $log->addEntry($entry));
         $this->assertEquals([$entry], $log->getEntries());
     }
@@ -19,7 +19,7 @@ class LogTest extends TestCase
     public function testSetGetEntries(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
         $this->assertSame($log, $log->setEntries([$entry]));
         $this->assertEquals([$entry], $log->getEntries());
     }
@@ -28,7 +28,7 @@ class LogTest extends TestCase
     public function testKey(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
 
         $log->addEntry($entry);
         /** @noinspection PhpStatementHasEmptyBodyInspection */
@@ -42,8 +42,8 @@ class LogTest extends TestCase
     public function testCount(): void
     {
         $log = new Log();
-        $entry1 = (new Entry())->setLevel(rand(0, 100));
-        $entry2 = (new Entry())->setLevel(rand(0, 100));
+        $entry1 = new Entry();
+        $entry2 = new Entry();
 
         $this->assertEquals(0, $log->count());
         $log->addEntry($entry1);
@@ -55,7 +55,7 @@ class LogTest extends TestCase
     public function testOffsetExists(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
 
         $this->assertArrayNotHasKey(0, $log);
         $this->assertEquals(0, $log->count());
@@ -67,7 +67,7 @@ class LogTest extends TestCase
     public function testOffsetGet(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
         $log->addEntry($entry);
 
         // Exists
@@ -81,11 +81,11 @@ class LogTest extends TestCase
     public function testOffsetSet(): void
     {
         $log = new Log();
-        $entry1 = (new Entry())->setLevel(rand(0, 100));
+        $entry1 = new Entry();
         $log->addEntry($entry1);
 
         // Overwrite $entry1 on $log[0] using the offsetSet
-        $entry2 = (new Entry())->setLevel(rand(0, 100));
+        $entry2 = new Entry();
         $log[0] = $entry2;
         $this->assertEquals($entry2, $log[0]);
     }
@@ -93,7 +93,7 @@ class LogTest extends TestCase
     public function testOffsetUnset(): void
     {
         $log = new Log();
-        $entry = (new Entry())->setLevel(rand(0, 100));
+        $entry = new Entry();
         $log->addEntry($entry);
 
         // Unset $entry on $log[0] using the offsetUnset

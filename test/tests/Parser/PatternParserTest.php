@@ -4,6 +4,7 @@ namespace Aternos\Codex\Test\Tests\Parser;
 
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\File\PathLogFile;
+use Aternos\Codex\Log\Level;
 use Aternos\Codex\Log\Line;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Parser\PatternParser;
@@ -21,17 +22,17 @@ class PatternParserTest extends TestCase
     {
         return (new TestPatternLog())
             ->setLogFile(new PathLogFile(__DIR__ . '/../../data/simple.log'))
-            ->addEntry((new Entry())->setLevel("INFO")->setTime(1)
+            ->addEntry((new Entry())->setLevel(Level::INFO)->setTime(1)
                 ->addLine(new Line(1, "[01.01.1970 00:00:01] [Log/INFO] This is the first message containing information.")))
-            ->addEntry((new Entry())->setLevel("DEBUG")->setTime(2)
+            ->addEntry((new Entry())->setLevel(Level::DEBUG)->setTime(2)
                 ->addLine(new Line(2, "[01.01.1970 00:00:02] [Log/DEBUG] This is the second message containing a debug information.")))
-            ->addEntry((new Entry())->setLevel("WARN")->setTime(3)
+            ->addEntry((new Entry())->setLevel(Level::WARNING)->setTime(3)
                 ->addLine(new Line(3, "[01.01.1970 00:00:03] [Log/WARN] This is the third message containing a warning information.")))
-            ->addEntry((new Entry())->setLevel("ERROR")->setTime(4)
+            ->addEntry((new Entry())->setLevel(Level::ERROR)->setTime(4)
                 ->addLine(new Line(4, "[01.01.1970 00:00:04] [Log/ERROR] This is the third message containing an error information."))
                 ->addLine(new Line(5, "This line continues the error entry to add even more information."))
                 ->addLine(new Line(6, "This line is also part of the error entry.")))
-            ->addEntry((new Entry())->setLevel("INFO")->setTime(5)
+            ->addEntry((new Entry())->setLevel(Level::INFO)->setTime(5)
                 ->addLine(new Line(7, "[01.01.1970 00:00:05] [Log/INFO] This is the last message of the log.")));
     }
 
