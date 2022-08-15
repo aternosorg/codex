@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Log\File;
 
+use InvalidArgumentException;
+
 /**
  * Class StreamLogFile
  *
@@ -17,7 +19,7 @@ class StreamLogFile extends LogFile
     public function __construct($streamResource)
     {
         if (!is_resource($streamResource)) {
-            throw new \InvalidArgumentException("Stream argument is not a resource");
+            throw new InvalidArgumentException("Stream argument is not a resource");
         }
         
         $this->content = '';

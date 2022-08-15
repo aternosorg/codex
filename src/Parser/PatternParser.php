@@ -6,6 +6,7 @@ use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\EntryInterface;
 use Aternos\Codex\Log\Level;
 use Aternos\Codex\Log\Line;
+use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
 
@@ -155,7 +156,7 @@ class PatternParser extends Parser
     {
         switch ($matchType) {
             case static::TIME:
-                $date = \DateTime::createFromFormat($this->timeFormat, $matchString, $this->timeZone);
+                $date = DateTime::createFromFormat($this->timeFormat, $matchString, $this->timeZone);
                 if ($date) {
                     $entry->setTime($date->getTimestamp());
                 }

@@ -2,12 +2,17 @@
 
 namespace Aternos\Codex\Log;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
+use JsonSerializable;
+
 /**
  * Interface EntryInterface
  *
  * @package Aternos\Codex\Log
  */
-interface EntryInterface extends \Iterator, \Countable, \ArrayAccess, \JsonSerializable
+interface EntryInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**
      * Set all lines at once in an array replacing the current lines

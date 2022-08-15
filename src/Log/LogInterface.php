@@ -2,15 +2,19 @@
 
 namespace Aternos\Codex\Log;
 
+use ArrayAccess;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Parser\ParserInterface;
+use Countable;
+use Iterator;
+use JsonSerializable;
 
 /**
  * Interface LogInterface
  *
  * @package Aternos\Codex\Log
  */
-interface LogInterface extends \Iterator, \Countable, \ArrayAccess, \JsonSerializable
+interface LogInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**
      * Get the default parser

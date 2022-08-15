@@ -6,6 +6,7 @@ use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Log\LogInterface;
+use InvalidArgumentException;
 
 /**
  * Class Detective
@@ -49,7 +50,7 @@ class Detective implements DetectiveInterface
     public function addPossibleLogClass(string $logClass): static
     {
         if (!is_subclass_of($logClass, DetectableLogInterface::class)) {
-            throw new \InvalidArgumentException("Class " . $logClass . " does not implement " . DetectableLogInterface::class . ".");
+            throw new InvalidArgumentException("Class " . $logClass . " does not implement " . DetectableLogInterface::class . ".");
         }
 
         $this->possibleLogClasses[] = $logClass;
@@ -81,7 +82,7 @@ class Detective implements DetectiveInterface
             $detectors = $possibleLogClass::getDetectors();
             foreach ($detectors as $detector) {
                 if (!$detector instanceof DetectorInterface) {
-                    throw new \InvalidArgumentException("Class " . get_class($detector) . " does not implement " . DetectorInterface::class . ".");
+                    throw new InvalidArgumentException("Class " . get_class($detector) . " does not implement " . DetectorInterface::class . ".");
                 }
 
                 $detector->setLogFile($this->logFile);
@@ -93,7 +94,7 @@ class Detective implements DetectiveInterface
                     continue;
                 }
                 if (!is_numeric($result) || $result < 0 || $result > 1) {
-                    throw new \InvalidArgumentException("Detector " . get_class($detector) . " returned " . var_export($result));
+                    throw new InvalidArgumentException("Detector " . get_class($detector) . " returned " . var_export($result));
                 }
                 $detectionResults[] = ["class" => $possibleLogClass, "result" => $result];
             }

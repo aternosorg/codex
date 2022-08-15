@@ -2,12 +2,14 @@
 
 namespace Aternos\Codex\Analysis;
 
+use JsonSerializable;
+
 /**
  * Interface SolutionInterface
  *
  * @package Aternos\Codex\Analysis
  */
-interface SolutionInterface extends \JsonSerializable
+interface SolutionInterface extends JsonSerializable
 {
     /**
      * Get the solution as a human-readable message

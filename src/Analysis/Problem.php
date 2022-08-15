@@ -114,7 +114,7 @@ abstract class Problem extends Insight implements ProblemInterface
     }
 
     /**
-     * Whether a offset exists
+     * Whether an offset exists
      *
      * @param mixed $offset
      * @return bool

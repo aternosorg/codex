@@ -2,12 +2,16 @@
 
 namespace Aternos\Codex\Analysis;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
+
 /**
  * Interface ProblemInterface
  *
  * @package Aternos\Codex\Analysis
  */
-interface ProblemInterface extends \Iterator, \Countable, \ArrayAccess, InsightInterface
+interface ProblemInterface extends Iterator, Countable, ArrayAccess, InsightInterface
 {
     /**
      * Set all solutions at once in an array replacing the current solutions

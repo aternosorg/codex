@@ -2,12 +2,17 @@
 
 namespace Aternos\Codex\Analysis;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
+use JsonSerializable;
+
 /**
  * Interface AnalysisInterface
  *
  * @package Aternos\Codex\Analysis
  */
-interface AnalysisInterface extends \Iterator, \Countable, \ArrayAccess, \JsonSerializable
+interface AnalysisInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**
      * Set all insights at once in an array replacing the current insights

@@ -2,7 +2,9 @@
 
 namespace Aternos\Codex\Log;
 
-enum Level: int implements \JsonSerializable
+use JsonSerializable;
+
+enum Level: int implements JsonSerializable
 {
     case EMERGENCY = 0;
     case ALERT = 1;

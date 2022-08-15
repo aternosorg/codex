@@ -74,7 +74,7 @@ abstract class Information extends Insight implements InformationInterface
      */
     public function isEqual(InsightInterface $insight): bool
     {
-        return $this->getLabel() === $insight->getLabel() && $this->getValue() === $insight->getValue();
+        return $insight instanceof InformationInterface && $this->getLabel() === $insight->getLabel() && $this->getValue() === $insight->getValue();
     }
 
     /**

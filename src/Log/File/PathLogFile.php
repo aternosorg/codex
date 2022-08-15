@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Log\File;
 
+use InvalidArgumentException;
+
 /**
  * Class PathLogFile
  *
@@ -17,7 +19,7 @@ class PathLogFile extends LogFile
     public function __construct(string $path)
     {
         if (!file_exists($path)) {
-            throw new \InvalidArgumentException("File '" . $path . "' not found.");
+            throw new InvalidArgumentException("File '" . $path . "' not found.");
         }
 
         $this->content = file_get_contents($path);

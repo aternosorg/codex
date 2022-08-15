@@ -6,6 +6,7 @@ use Aternos\Codex\Analysis\Analysis;
 use Aternos\Codex\Analysis\AnalysisInterface;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Log\EntryInterface;
+use InvalidArgumentException;
 
 /**
  * Class PatternAnalyser
@@ -48,7 +49,7 @@ class PatternAnalyser extends Analyser
     public function addPossibleInsightClass(string $insightClass): static
     {
         if (!is_subclass_of($insightClass, PatternInsightInterface::class)) {
-            throw new \InvalidArgumentException("Class " . $insightClass . " does not implement " . PatternInsightInterface::class . ".");
+            throw new InvalidArgumentException("Class " . $insightClass . " does not implement " . PatternInsightInterface::class . ".");
         }
 
         $this->possibleInsightClasses[] = $insightClass;
@@ -65,7 +66,7 @@ class PatternAnalyser extends Analyser
     {
         $index = array_search($insightClass, $this->possibleInsightClasses);
         if ($index === false) {
-            throw new \InvalidArgumentException("Class " . $insightClass . " not found in possible insight classes.");
+            throw new InvalidArgumentException("Class " . $insightClass . " not found in possible insight classes.");
         }
         return $index;
     }
@@ -92,7 +93,7 @@ class PatternAnalyser extends Analyser
     public function overridePossibleInsightClass(string $parentInsightClass, string $childInsightClass): void
     {
         if (!is_subclass_of($childInsightClass, $parentInsightClass)) {
-            throw new \InvalidArgumentException("Class " . $childInsightClass . " does not extend " . $parentInsightClass . ".");
+            throw new InvalidArgumentException("Class " . $childInsightClass . " does not extend " . $parentInsightClass . ".");
         }
 
         $index = $this->findPossibleInsightClass($parentInsightClass);
