@@ -15,7 +15,7 @@ interface LineInterface
      * @param string $text
      * @return $this
      */
-    public function setText(string $text);
+    public function setText(string $text): static;
 
     /**
      * Get the text of the line
@@ -30,7 +30,7 @@ interface LineInterface
      * @param int $number
      * @return $this
      */
-    public function setNumber(int $number);
+    public function setNumber(int $number): static;
 
     /**
      * Get the line number
@@ -42,5 +42,5 @@ interface LineInterface
     /**
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 }

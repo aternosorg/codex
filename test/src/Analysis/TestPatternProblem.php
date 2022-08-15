@@ -2,6 +2,7 @@
 
 namespace Aternos\Codex\Test\Src\Analysis;
 
+use Aternos\Codex\Analysis\InsightInterface;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Analysis\Problem;
 
@@ -10,16 +11,13 @@ use Aternos\Codex\Analysis\Problem;
  */
 class TestPatternProblem extends Problem implements PatternInsightInterface
 {
-    /**
-     * @var string
-     */
-    protected $cause;
+    protected ?string $cause = null;
 
     /**
-     * @param $cause
+     * @param string $cause
      * @return TestPatternProblem
      */
-    public function setCause($cause)
+    public function setCause(string $cause): static
     {
         $this->cause = $cause;
         return $this;
@@ -41,16 +39,16 @@ class TestPatternProblem extends Problem implements PatternInsightInterface
      * Apply the matches from the pattern
      *
      * @param array $matches
-     * @param $patternKey
+     * @param mixed $patternKey
      * @return void
      */
-    public function setMatches(array $matches, $patternKey): void
+    public function setMatches(array $matches, mixed $patternKey): void
     {
         $this->cause = $matches[1];
     }
 
     /**
-     * Get the problem as human readable message
+     * Get the problem as human-readable message
      *
      * @return string
      */
@@ -62,11 +60,11 @@ class TestPatternProblem extends Problem implements PatternInsightInterface
     /**
      * Check if the $insight object is equal with the current object
      *
-     * @param static $insight
+     * @param InsightInterface $insight
      * @return bool
      */
-    public function isEqual($insight): bool
+    public function isEqual(InsightInterface $insight): bool
     {
-        return $this->cause === $insight->cause;
+        return $insight instanceof static && $this->cause === $insight->cause;
     }
 }

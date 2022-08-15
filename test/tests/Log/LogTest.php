@@ -31,6 +31,7 @@ class LogTest extends TestCase
         $entry = (new Entry())->setLevel(rand(0, 100));
 
         $log->addEntry($entry);
+        /** @noinspection PhpStatementHasEmptyBodyInspection */
         foreach ($log as $ignored) {
             // do nothing
         }
@@ -81,12 +82,7 @@ class LogTest extends TestCase
     {
         $log = new Log();
         $entry1 = (new Entry())->setLevel(rand(0, 100));
-
-        $this->assertArrayNotHasKey(0, $log);
-        $this->assertEquals(0, $log->count());
         $log->addEntry($entry1);
-        $this->assertArrayHasKey(0, $log);
-        $this->assertEquals($entry1, $log[0]);
 
         // Overwrite $entry1 on $log[0] using the offsetSet
         $entry2 = (new Entry())->setLevel(rand(0, 100));
@@ -98,12 +94,7 @@ class LogTest extends TestCase
     {
         $log = new Log();
         $entry = (new Entry())->setLevel(rand(0, 100));
-
-        $this->assertArrayNotHasKey(0, $log);
-        $this->assertEquals(0, $log->count());
         $log->addEntry($entry);
-        $this->assertArrayHasKey(0, $log);
-        $this->assertEquals($entry, $log[0]);
 
         // Unset $entry on $log[0] using the offsetUnset
         unset($log[0]);

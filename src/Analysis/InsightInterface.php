@@ -12,13 +12,16 @@ use Aternos\Codex\Log\EntryInterface;
 interface InsightInterface
 {
     /**
-     * Get a human readable message
+     * Get a human-readable message
      *
      * @return string
      */
     public function getMessage(): string;
 
-    public function __toString();
+    /**
+     * @return string
+     */
+    public function __toString(): string;
 
     /**
      * Set the related entry
@@ -26,7 +29,7 @@ interface InsightInterface
      * @param EntryInterface $entry
      * @return $this
      */
-    public function setEntry(EntryInterface $entry);
+    public function setEntry(EntryInterface $entry): static;
 
     /**
      * Get the related entry
@@ -38,22 +41,22 @@ interface InsightInterface
     /**
      * Check if the $insight object is equal with the current object
      *
-     * @param static $insight
+     * @param InsightInterface $insight
      * @return bool
      */
-    public function isEqual($insight): bool;
+    public function isEqual(InsightInterface $insight): bool;
 
     /**
      * Increase the counter for this insight
      *
      * @return $this
      */
-    public function increaseCounter();
+    public function increaseCounter(): static;
 
     /**
      * Get the current counter value
      *
      * @return int
      */
-    public function getCounterValue();
+    public function getCounterValue(): int;
 }

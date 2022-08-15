@@ -15,19 +15,19 @@ use Aternos\Codex\Log\EntryInterface;
 class PatternAnalyser extends Analyser
 {
     /**
-     * @var array
+     * @var class-string<PatternInsightInterface>[]
      */
-    protected $possibleInsightClasses = [];
+    protected array $possibleInsightClasses = [];
 
     /**
      * Set possible insight classes
      *
      * Every class must implement PatternInsightInterface
      *
-     * @param array $insightClasses
+     * @param class-string<PatternInsightInterface>[] $insightClasses
      * @return $this
      */
-    public function setPossibleInsightClasses(array $insightClasses)
+    public function setPossibleInsightClasses(array $insightClasses): static
     {
         $this->possibleInsightClasses = [];
         foreach ($insightClasses as $insightClass) {
@@ -42,10 +42,10 @@ class PatternAnalyser extends Analyser
      *
      * The class must implement PatternInsightInterface
      *
-     * @param string $insightClass
+     * @param class-string<PatternInsightInterface> $insightClass
      * @return $this
      */
-    public function addPossibleInsightClass(string $insightClass)
+    public function addPossibleInsightClass(string $insightClass): static
     {
         if (!is_subclass_of($insightClass, PatternInsightInterface::class)) {
             throw new \InvalidArgumentException("Class " . $insightClass . " does not implement " . PatternInsightInterface::class . ".");
@@ -58,10 +58,10 @@ class PatternAnalyser extends Analyser
     /**
      * Find a possible insight class
      *
-     * @param string $insightClass
-     * @return int|string
+     * @param class-string<PatternInsightInterface> $insightClass
+     * @return int
      */
-    protected function findPossibleInsightClass(string $insightClass)
+    protected function findPossibleInsightClass(string $insightClass): int
     {
         $index = array_search($insightClass, $this->possibleInsightClasses);
         if ($index === false) {
@@ -73,9 +73,9 @@ class PatternAnalyser extends Analyser
     /**
      * Remove a possible insight class
      *
-     * @param string $insightClass
+     * @param class-string<PatternInsightInterface> $insightClass
      */
-    public function removePossibleInsightClass(string $insightClass)
+    public function removePossibleInsightClass(string $insightClass): void
     {
         $index = $this->findPossibleInsightClass($insightClass);
         unset($this->possibleInsightClasses[$index]);
@@ -86,10 +86,10 @@ class PatternAnalyser extends Analyser
      *
      * The $childInsightClass has to extend $parentInsightClass
      *
-     * @param string $parentInsightClass
-     * @param string $childInsightClass
+     * @param class-string<PatternInsightInterface> $parentInsightClass
+     * @param class-string<PatternInsightInterface> $childInsightClass
      */
-    public function overridePossibleInsightClass(string $parentInsightClass, string $childInsightClass)
+    public function overridePossibleInsightClass(string $parentInsightClass, string $childInsightClass): void
     {
         if (!is_subclass_of($childInsightClass, $parentInsightClass)) {
             throw new \InvalidArgumentException("Class " . $childInsightClass . " does not extend " . $parentInsightClass . ".");
@@ -104,7 +104,7 @@ class PatternAnalyser extends Analyser
      *
      * @return AnalysisInterface
      */
-    public function analyse()
+    public function analyse(): AnalysisInterface
     {
         $analysis = new Analysis();
 
@@ -131,15 +131,15 @@ class PatternAnalyser extends Analyser
      *
      * @param EntryInterface $entry
      * @param string $possibleInsightClass
-     * @param $patternKey
+     * @param mixed $patternKey
      * @param string $pattern
-     * @return bool|PatternInsightInterface[]
+     * @return null|PatternInsightInterface[]
      */
-    protected function analyseEntry(EntryInterface $entry, string $possibleInsightClass, $patternKey, string $pattern)
+    protected function analyseEntry(EntryInterface $entry, string $possibleInsightClass, mixed $patternKey, string $pattern): ?array
     {
         $result = preg_match_all($pattern, $entry, $matches, PREG_SET_ORDER);
         if ($result === false || $result === 0) {
-            return false;
+            return null;
         }
 
         $return = [];

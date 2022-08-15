@@ -12,17 +12,10 @@ class Entry implements EntryInterface
     /**
      * @var LineInterface[]
      */
-    protected $lines = [];
-
-    /**
-     * @var mixed
-     */
-    protected $level;
-
-    /**
-     * @var int
-     */
-    protected $time;
+    protected array $lines = [];
+    protected mixed $level = null;
+    protected ?int $time = null;
+    protected int $iterator = 0;
 
     /**
      * Set all lines at once in an array replacing the current lines
@@ -30,7 +23,7 @@ class Entry implements EntryInterface
      * @param LineInterface[] $lines
      * @return $this
      */
-    public function setLines(array $lines = [])
+    public function setLines(array $lines = []): static
     {
         $this->lines = $lines;
         return $this;
@@ -42,7 +35,7 @@ class Entry implements EntryInterface
      * @param LineInterface $line
      * @return $this
      */
-    public function addLine(LineInterface $line)
+    public function addLine(LineInterface $line): static
     {
         $this->lines[] = $line;
         return $this;
@@ -61,10 +54,10 @@ class Entry implements EntryInterface
     /**
      * Set the log level of the entry
      *
-     * @param $level
+     * @param mixed $level
      * @return $this
      */
-    public function setLevel($level)
+    public function setLevel(mixed $level): static
     {
         $this->level = $level;
         return $this;
@@ -75,7 +68,7 @@ class Entry implements EntryInterface
      *
      * @return mixed
      */
-    public function getLevel()
+    public function getLevel(): mixed
     {
         return $this->level;
     }
@@ -86,7 +79,7 @@ class Entry implements EntryInterface
      * @param int $time
      * @return $this
      */
-    public function setTime(int $time)
+    public function setTime(int $time): static
     {
         $this->time = $time;
         return $this;
@@ -95,17 +88,12 @@ class Entry implements EntryInterface
     /**
      * Get the timestamp of the entry
      *
-     * @return int
+     * @return int|null
      */
-    public function getTime()
+    public function getTime(): ?int
     {
         return $this->time;
     }
-
-    /**
-     * @var int
-     */
-    protected $iterator = 0;
 
     /**
      * Return the current element
@@ -168,12 +156,12 @@ class Entry implements EntryInterface
     }
 
     /**
-     * Whether a offset exists
+     * Whether an offset exists
      *
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->lines[$offset]);
     }
@@ -184,7 +172,7 @@ class Entry implements EntryInterface
      * @param mixed $offset
      * @return LineInterface
      */
-    public function offsetGet($offset): LineInterface
+    public function offsetGet(mixed $offset): LineInterface
     {
         return $this->lines[$offset];
     }
@@ -192,10 +180,10 @@ class Entry implements EntryInterface
     /**
      * Offset to set
      *
-     * @param $offset
+     * @param mixed $offset
      * @param LineInterface $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->lines[$offset] = $value;
     }
@@ -203,9 +191,9 @@ class Entry implements EntryInterface
     /**
      * Offset to unset
      *
-     * @param $offset
+     * @param mixed $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->lines[$offset]);
     }

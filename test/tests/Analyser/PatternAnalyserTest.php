@@ -101,7 +101,6 @@ class PatternAnalyserTest extends TestCase
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
         $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
-        $possibleInsightClassesProperty->setAccessible(true);
 
         $this->assertEquals([TestPatternInformation::class, TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
@@ -120,7 +119,6 @@ class PatternAnalyserTest extends TestCase
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
         $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
-        $possibleInsightClassesProperty->setAccessible(true);
 
         $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
@@ -141,7 +139,6 @@ class PatternAnalyserTest extends TestCase
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
         $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
-        $possibleInsightClassesProperty->setAccessible(true);
 
         $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 
@@ -163,7 +160,6 @@ class PatternAnalyserTest extends TestCase
 
         $reflector = new ReflectionClass(PatternAnalyser::class);
         $possibleInsightClassesProperty = $reflector->getProperty('possibleInsightClasses');
-        $possibleInsightClassesProperty->setAccessible(true);
 
         $this->assertEquals([TestPatternProblem::class], $possibleInsightClassesProperty->getValue($analyser));
 

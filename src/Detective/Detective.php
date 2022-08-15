@@ -15,24 +15,20 @@ use Aternos\Codex\Log\LogInterface;
 class Detective implements DetectiveInterface
 {
     /**
-     * @var array
+     * @var class-string<LogInterface>[]
      */
-    protected $possibleLogClasses = [];
-
-    /**
-     * @var LogFileInterface
-     */
-    protected $logFile;
+    protected array $possibleLogClasses = [];
+    protected ?LogFileInterface $logFile = null;
 
     /**
      * Set possible log classes
      *
      * Every class must implement DetectableLogInterface
      *
-     * @param array $logClasses
+     * @param class-string<LogInterface>[] $logClasses
      * @return $this
      */
-    public function setPossibleLogClasses(array $logClasses)
+    public function setPossibleLogClasses(array $logClasses): static
     {
         $this->possibleLogClasses = [];
         foreach ($logClasses as $logClass) {
@@ -47,10 +43,10 @@ class Detective implements DetectiveInterface
      *
      * The class must implement DetectableLogInterface
      *
-     * @param string $logClass
+     * @param class-string<LogInterface> $logClass
      * @return $this
      */
-    public function addPossibleLogClass(string $logClass)
+    public function addPossibleLogClass(string $logClass): static
     {
         if (!is_subclass_of($logClass, DetectableLogInterface::class)) {
             throw new \InvalidArgumentException("Class " . $logClass . " does not implement " . DetectableLogInterface::class . ".");
@@ -66,7 +62,7 @@ class Detective implements DetectiveInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile)
+    public function setLogFile(LogFileInterface $logFile): static
     {
         $this->logFile = $logFile;
         return $this;
@@ -77,7 +73,7 @@ class Detective implements DetectiveInterface
      *
      * @return LogInterface
      */
-    public function detect()
+    public function detect(): LogInterface
     {
         $detectionResults = [];
         foreach ($this->possibleLogClasses as $possibleLogClass) {

@@ -47,6 +47,7 @@ class EntryTest extends TestCase
         $line = new Line(1, uniqid());
 
         $entry->addLine($line);
+        /** @noinspection PhpStatementHasEmptyBodyInspection */
         foreach ($entry as $ignored) {
             // do nothing
         }

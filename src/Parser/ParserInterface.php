@@ -17,10 +17,10 @@ interface ParserInterface
      * @param LogInterface $log
      * @return $this
      */
-    public function setLog(LogInterface $log);
+    public function setLog(LogInterface $log): static;
 
     /**
      * Parse a log from resource to Log object
      */
-    public function parse();
+    public function parse(): void;
 }

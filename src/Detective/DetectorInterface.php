@@ -17,7 +17,7 @@ interface DetectorInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile);
+    public function setLogFile(LogFileInterface $logFile): static;
 
     /**
      * Detect if the log matches
@@ -32,7 +32,7 @@ interface DetectorInterface
      *     highest return
      *     default log
      *
-     * @return bool|int|float
+     * @return bool|float
      */
-    public function detect();
+    public function detect(): float|bool;
 }

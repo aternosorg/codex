@@ -11,10 +11,7 @@ use Aternos\Codex\Log\File\LogFileInterface;
  */
 abstract class Detector implements DetectorInterface
 {
-    /**
-     * @var LogFileInterface
-     */
-    protected $logFile;
+    protected ?LogFileInterface $logFile = null;
 
     /**
      * Set the log file
@@ -22,7 +19,7 @@ abstract class Detector implements DetectorInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile)
+    public function setLogFile(LogFileInterface $logFile): static
     {
         $this->logFile = $logFile;
         return $this;
@@ -41,7 +38,7 @@ abstract class Detector implements DetectorInterface
     /**
      * Get the log content as array split by line
      *
-     * @return array
+     * @return string[]
      */
     protected function getLogContentAsArray(): array
     {

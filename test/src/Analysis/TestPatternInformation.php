@@ -10,7 +10,7 @@ use Aternos\Codex\Analysis\PatternInsightInterface;
  */
 class TestPatternInformation extends Information implements PatternInsightInterface
 {
-    protected $label = "Software version";
+    protected ?string $label = "Software version";
 
     /**
      * Get an array of possible patterns
@@ -28,10 +28,10 @@ class TestPatternInformation extends Information implements PatternInsightInterf
      * Apply the matches from the pattern
      *
      * @param array $matches
-     * @param $patternKey
+     * @param mixed $patternKey
      * @return void
      */
-    public function setMatches(array $matches, $patternKey): void
+    public function setMatches(array $matches, mixed $patternKey): void
     {
         $this->value = $matches[1];
     }

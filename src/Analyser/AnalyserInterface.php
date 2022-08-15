@@ -18,12 +18,12 @@ interface AnalyserInterface
      * @param AnalysableLogInterface $log
      * @return $this
      */
-    public function setLog(AnalysableLogInterface $log);
+    public function setLog(AnalysableLogInterface $log): static;
 
     /**
      * Analyse a log and return an Analysis
      *
      * @return AnalysisInterface
      */
-    public function analyse();
+    public function analyse(): AnalysisInterface;
 }

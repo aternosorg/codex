@@ -10,23 +10,13 @@ namespace Aternos\Codex\Log;
 class Line implements LineInterface
 {
     /**
-     * @var string
-     */
-    protected string $text = "";
-
-    /**
-     * @var int
-     */
-    protected int $number;
-
-    /**
      * @param int $number
      * @param string $text
      */
-    public function __construct(int $number, string $text)
+    public function __construct(
+        protected int    $number,
+        protected string $text)
     {
-        $this->text = $text;
-        $this->number = $number;
     }
 
     /**
@@ -35,7 +25,7 @@ class Line implements LineInterface
      * @param string $text
      * @return $this
      */
-    public function setText(string $text): Line
+    public function setText(string $text): static
     {
         $this->text = $text;
         return $this;
@@ -57,7 +47,7 @@ class Line implements LineInterface
      * @param int $number
      * @return $this
      */
-    public function setNumber(int $number): Line
+    public function setNumber(int $number): static
     {
         $this->number = $number;
         return $this;
@@ -76,7 +66,7 @@ class Line implements LineInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getText();
     }

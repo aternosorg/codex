@@ -12,7 +12,7 @@ abstract class Solution implements SolutionInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getMessage();
     }

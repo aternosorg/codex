@@ -13,15 +13,8 @@ use Aternos\Codex\Log\LogInterface;
  */
 abstract class Printer implements PrinterInterface
 {
-    /**
-     * @var LogInterface
-     */
-    protected $log;
-
-    /**
-     * @var EntryInterface
-     */
-    protected $entry;
+    protected ?LogInterface $log = null;
+    protected ?EntryInterface $entry = null;
 
     /**
      * Set the log
@@ -29,7 +22,7 @@ abstract class Printer implements PrinterInterface
      * @param LogInterface $log
      * @return $this
      */
-    public function setLog(LogInterface $log)
+    public function setLog(LogInterface $log): static
     {
         $this->log = $log;
         return $this;
@@ -41,7 +34,7 @@ abstract class Printer implements PrinterInterface
      * @param EntryInterface $entry
      * @return $this
      */
-    public function setEntry(EntryInterface $entry)
+    public function setEntry(EntryInterface $entry): static
     {
         $this->entry = $entry;
         return $this;
@@ -55,22 +48,21 @@ abstract class Printer implements PrinterInterface
     public function print(): string
     {
         if ($this->entry) {
-            return $this->printEntry($this->entry);
+            return $this->printEntry();
         } else {
-            return $this->printLog($this->log);
+            return $this->printLog();
         }
     }
 
     /**
      * Print a log
      *
-     * @param LogInterface $log
      * @return string
      */
-    protected function printLog(LogInterface $log)
+    protected function printLog(): string
     {
         $return = "";
-        foreach ($log as $entry) {
+        foreach ($this->log as $entry) {
             $return .= $this->printEntry($entry);
         }
 
@@ -80,11 +72,15 @@ abstract class Printer implements PrinterInterface
     /**
      * Print an entry
      *
-     * @param EntryInterface $entry
+     * @param EntryInterface|null $entry
      * @return string
      */
-    protected function printEntry(EntryInterface $entry)
+    protected function printEntry(?EntryInterface $entry = null): string
     {
+        if ($entry === null) {
+            $entry = $this->entry;
+        }
+
         $return = "";
         foreach ($entry as $line) {
             $return .= $this->printLine($line);
@@ -99,5 +95,5 @@ abstract class Printer implements PrinterInterface
      * @param LineInterface $line
      * @return string
      */
-    abstract protected function printLine(LineInterface $line);
+    abstract protected function printLine(LineInterface $line): string;
 }

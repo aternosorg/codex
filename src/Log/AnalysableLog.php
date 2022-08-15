@@ -13,7 +13,7 @@ use Aternos\Codex\Analysis\AnalysisInterface;
 abstract class AnalysableLog extends Log implements AnalysableLogInterface
 {
     /**
-     * Analyse a  log file with an analyser
+     * Analyse a log file with an analyser
      *
      * Every log type should have a default analyser,
      * but the $analyser argument can be used to override
@@ -22,7 +22,7 @@ abstract class AnalysableLog extends Log implements AnalysableLogInterface
      * @param AnalyserInterface|null $analyser
      * @return AnalysisInterface
      */
-    public function analyse(AnalyserInterface $analyser = null)
+    public function analyse(AnalyserInterface $analyser = null): AnalysisInterface
     {
 
         if ($analyser === null) {

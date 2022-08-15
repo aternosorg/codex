@@ -16,9 +16,9 @@ class LinePatternDetector extends PatternDetector
      *
      * Returns false when no match is found
      *
-     * @return bool|int|float
+     * @return bool|float
      */
-    public function detect()
+    public function detect(): bool|float
     {
         $lines = $this->getLogContentAsArray();
         $matchingCounter = 0;

@@ -17,7 +17,7 @@ class DefaultPrinter extends Printer
      * @param LineInterface $line
      * @return string
      */
-    protected function printLine(LineInterface $line)
+    protected function printLine(LineInterface $line): string
     {
         return $line->getText() . PHP_EOL;
     }

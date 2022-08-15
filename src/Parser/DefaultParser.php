@@ -15,7 +15,7 @@ class DefaultParser extends Parser
     /**
      * Parse a log from resource to Log object
      */
-    public function parse()
+    public function parse(): void
     {
         foreach ($this->getLogContentAsArray() as $number => $logLineString) {
             $this->log->addEntry((new Entry())

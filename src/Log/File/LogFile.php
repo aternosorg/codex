@@ -9,7 +9,7 @@ namespace Aternos\Codex\Log\File;
  */
 abstract class LogFile implements LogFileInterface
 {
-    protected $content;
+    protected ?string $content = null;
 
     /**
      * Get the log file content

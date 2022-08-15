@@ -12,10 +12,10 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * Set all lines at once in an array replacing the current lines
      *
-     * @param array $lines
+     * @param LineInterface[] $lines
      * @return $this
      */
-    public function setLines(array $lines = []);
+    public function setLines(array $lines = []): static;
 
     /**
      * Add a line
@@ -23,12 +23,12 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
      * @param LineInterface $line
      * @return $this
      */
-    public function addLine(LineInterface $line);
+    public function addLine(LineInterface $line): static;
 
     /**
      * Get all lines
      *
-     * @return array
+     * @return LineInterface[]
      */
     public function getLines(): array;
 
@@ -47,10 +47,10 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to set
      *
-     * @param $offset
+     * @param mixed $offset
      * @param LineInterface $value
      */
-    public function offsetSet($offset, $value): void;
+    public function offsetSet(mixed $offset, mixed $value): void;
 
     /**
      * Offset to retrieve
@@ -58,5 +58,5 @@ interface EntryInterface extends \Iterator, \Countable, \ArrayAccess
      * @param mixed $offset
      * @return LineInterface
      */
-    public function offsetGet($offset): LineInterface;
+    public function offsetGet(mixed $offset): LineInterface;
 }
