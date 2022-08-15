@@ -23,10 +23,10 @@ enum Level: int implements LevelInterface
             "emergency" => Level::EMERGENCY,
             "alert" => Level::ALERT,
             "critical", "severe" => Level::CRITICAL,
-            "error", "stderr", "stacktrace" => Level::ERROR,
+            "error", "stderr" => Level::ERROR,
             "warning", "warn" => Level::WARNING,
             "notice" => Level::NOTICE,
-            "debug", "comment" => Level::DEBUG,
+            "debug" => Level::DEBUG,
             default => Level::INFO
         };
     }
