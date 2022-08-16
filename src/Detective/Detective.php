@@ -19,6 +19,12 @@ class Detective implements DetectiveInterface
      * @var class-string<LogInterface>[]
      */
     protected array $possibleLogClasses = [];
+
+    /**
+     * @var class-string<LogInterface>
+     */
+    protected string $defaultLogClass = Log::class;
+
     protected ?LogFileInterface $logFile = null;
 
     /**
@@ -101,7 +107,7 @@ class Detective implements DetectiveInterface
         }
 
         if (count($detectionResults) === 0) {
-            return (new Log())->setLogFile($this->logFile);
+            return (new $this->defaultLogClass())->setLogFile($this->logFile);
         }
 
         usort($detectionResults, function ($a, $b) {
