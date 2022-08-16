@@ -19,6 +19,7 @@ class Log implements LogInterface
     protected array $entries = [];
     protected int $iterator = 0;
     protected ?LogFileInterface $logFile = null;
+    protected bool $includeEntries = true;
 
     /**
      * Get the default parser
@@ -219,10 +220,24 @@ class Log implements LogInterface
     }
 
     /**
+     * @param bool $includeEntries
+     * @return $this
+     */
+    public function setIncludeEntries(bool $includeEntries): static
+    {
+        $this->includeEntries = $includeEntries;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function jsonSerialize(): array
     {
+        if (!$this->includeEntries) {
+            return [];
+        }
+
         return [
             "entries" => $this->getEntries()
         ];
