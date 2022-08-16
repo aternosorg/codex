@@ -12,6 +12,8 @@ use Aternos\Codex\Analysis\AnalysisInterface;
  */
 abstract class AnalysableLog extends Log implements AnalysableLogInterface
 {
+    protected ?AnalysisInterface $analysis = null;
+
     /**
      * Analyse a log file with an analyser
      *
@@ -24,12 +26,16 @@ abstract class AnalysableLog extends Log implements AnalysableLogInterface
      */
     public function analyse(AnalyserInterface $analyser = null): AnalysisInterface
     {
+        if ($this->analysis !== null) {
+            return $this->analysis;
+        }
+
         if ($analyser === null) {
             $analyser = static::getDefaultAnalyser();
         }
 
         $analyser->setLog($this);
-        return $analyser->analyse();
+        return $this->analysis = $analyser->analyse();
     }
 
     /**
