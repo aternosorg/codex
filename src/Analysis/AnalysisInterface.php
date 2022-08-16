@@ -50,4 +50,12 @@ interface AnalysisInterface extends Iterator, Countable, ArrayAccess, JsonSerial
      * @return InformationInterface[]
      */
     public function getInformation(): array;
+
+    /**
+     * Get all insights that are extended from $extendedFrom (class name)
+     *
+     * @param class-string<InsightInterface> $extendedFrom
+     * @return InsightInterface[]
+     */
+    public function getFilteredInsights(string $extendedFrom): array;
 }
