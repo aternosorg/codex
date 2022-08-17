@@ -2,22 +2,26 @@
 
 namespace Aternos\Codex\Log;
 
+use ArrayAccess;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Parser\ParserInterface;
+use Countable;
+use Iterator;
+use JsonSerializable;
 
 /**
  * Interface LogInterface
  *
  * @package Aternos\Codex\Log
  */
-interface LogInterface extends \Iterator, \Countable, \ArrayAccess
+interface LogInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**
      * Get the default parser
      *
      * @return ParserInterface
      */
-    public static function getDefaultParser();
+    public static function getDefaultParser(): ParserInterface;
 
     /**
      * Set the log file
@@ -25,7 +29,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile);
+    public function setLogFile(LogFileInterface $logFile): static;
 
     /**
      * Get the log file
@@ -44,7 +48,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param ParserInterface|null $parser
      * @return $this
      */
-    public function parse(ParserInterface $parser = null);
+    public function parse(?ParserInterface $parser = null): static;
 
     /**
      * Set all entries of the log at once replacing the current entries
@@ -52,7 +56,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param EntryInterface[] $entries
      * @return $this
      */
-    public function setEntries(array $entries = []);
+    public function setEntries(array $entries = []): static;
 
     /**
      * Add an entry to the log
@@ -60,7 +64,7 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param EntryInterface $entry
      * @return $this
      */
-    public function addEntry(EntryInterface $entry);
+    public function addEntry(EntryInterface $entry): static;
 
     /**
      * Get all entries of the log
@@ -84,10 +88,10 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to set
      *
-     * @param $offset
+     * @param mixed $offset
      * @param EntryInterface $value
      */
-    public function offsetSet($offset, $value): void;
+    public function offsetSet(mixed $offset, mixed $value): void;
 
     /**
      * Offset to retrieve
@@ -95,5 +99,5 @@ interface LogInterface extends \Iterator, \Countable, \ArrayAccess
      * @param mixed $offset
      * @return EntryInterface
      */
-    public function offsetGet($offset): EntryInterface;
+    public function offsetGet(mixed $offset): EntryInterface;
 }

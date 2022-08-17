@@ -11,15 +11,8 @@ use Aternos\Codex\Log\EntryInterface;
  */
 abstract class Insight implements InsightInterface
 {
-    /**
-     * @var EntryInterface
-     */
-    protected $entry;
-
-    /**
-     * @var int
-     */
-    protected $counter = 1;
+    protected ?EntryInterface $entry = null;
+    protected int $counter = 1;
 
     /**
      * Set the related entry
@@ -27,7 +20,7 @@ abstract class Insight implements InsightInterface
      * @param EntryInterface $entry
      * @return $this
      */
-    public function setEntry(EntryInterface $entry)
+    public function setEntry(EntryInterface $entry): static
     {
         $this->entry = $entry;
         return $this;
@@ -48,7 +41,7 @@ abstract class Insight implements InsightInterface
      *
      * @return $this
      */
-    public function increaseCounter()
+    public function increaseCounter(): static
     {
         $this->counter++;
         return $this;
@@ -59,7 +52,7 @@ abstract class Insight implements InsightInterface
      *
      * @return int
      */
-    public function getCounterValue()
+    public function getCounterValue(): int
     {
         return $this->counter;
     }
@@ -67,8 +60,20 @@ abstract class Insight implements InsightInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getMessage();
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'message' => $this->getMessage(),
+            'counter' => $this->getCounterValue(),
+            'entry' => $this->getEntry()
+        ];
     }
 }

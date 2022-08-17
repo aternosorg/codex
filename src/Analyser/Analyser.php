@@ -11,10 +11,7 @@ use Aternos\Codex\Log\AnalysableLogInterface;
  */
 abstract class Analyser implements AnalyserInterface
 {
-    /**
-     * @var AnalysableLogInterface
-     */
-    protected $log;
+    protected ?AnalysableLogInterface $log = null;
 
     /**
      * Set the log
@@ -22,7 +19,7 @@ abstract class Analyser implements AnalyserInterface
      * @param AnalysableLogInterface $log
      * @return $this
      */
-    public function setLog(AnalysableLogInterface $log)
+    public function setLog(AnalysableLogInterface $log): static
     {
         $this->log = $log;
         return $this;

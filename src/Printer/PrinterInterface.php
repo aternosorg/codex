@@ -18,7 +18,7 @@ interface PrinterInterface
      * @param LogInterface $log
      * @return $this
      */
-    public function setLog(LogInterface $log);
+    public function setLog(LogInterface $log): static;
 
     /**
      * Set the entry
@@ -26,7 +26,7 @@ interface PrinterInterface
      * @param EntryInterface $entry
      * @return $this
      */
-    public function setEntry(EntryInterface $entry);
+    public function setEntry(EntryInterface $entry): static;
 
     /**
      * Print the log

@@ -14,7 +14,7 @@ interface PatternInsightInterface extends InsightInterface
      *
      * The array key of the pattern will be passed to setMatches()
      *
-     * @return array
+     * @return string[]
      */
     public static function getPatterns(): array;
 
@@ -22,8 +22,8 @@ interface PatternInsightInterface extends InsightInterface
      * Apply the matches from the pattern
      *
      * @param array $matches
-     * @param $patternKey
+     * @param mixed $patternKey
      * @return void
      */
-    public function setMatches(array $matches, $patternKey): void;
+    public function setMatches(array $matches, mixed $patternKey): void;
 }

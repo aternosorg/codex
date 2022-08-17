@@ -9,10 +9,7 @@ namespace Aternos\Codex\Detective;
  */
 class WeightedSinglePatternDetector extends SinglePatternDetector
 {
-    /**
-     * @var float
-     */
-    protected $weight;
+    protected ?float $weight = null;
 
     /**
      * Set the weight that will be returned if the pattern matches
@@ -20,7 +17,7 @@ class WeightedSinglePatternDetector extends SinglePatternDetector
      * @param float $weight
      * @return $this
      */
-    public function setWeight(float $weight)
+    public function setWeight(float $weight): static
     {
         $this->weight = $weight;
         return $this;
@@ -35,7 +32,7 @@ class WeightedSinglePatternDetector extends SinglePatternDetector
      *
      * @return bool|float
      */
-    public function detect()
+    public function detect(): bool|float
     {
         if (parent::detect()) {
             return $this->weight;

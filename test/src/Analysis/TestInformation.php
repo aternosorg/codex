@@ -9,5 +9,5 @@ use Aternos\Codex\Analysis\Information;
  */
 class TestInformation extends Information
 {
-    protected $label = "Label";
+    protected ?string $label = "Label";
 }

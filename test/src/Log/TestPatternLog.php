@@ -19,7 +19,7 @@ class TestPatternLog extends AnalysableLog
      *
      * @return PatternParser
      */
-    public static function getDefaultParser()
+    public static function getDefaultParser(): PatternParser
     {
         return (new PatternParser())
             ->setPattern('/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/')
@@ -30,9 +30,9 @@ class TestPatternLog extends AnalysableLog
     /**
      * Get the default analyser
      *
-     * @return AnalyserInterface
+     * @return PatternAnalyser
      */
-    public static function getDefaultAnalyser()
+    public static function getDefaultAnalyser(): PatternAnalyser
     {
         return (new PatternAnalyser())
             ->addPossibleInsightClass(TestPatternProblem::class)

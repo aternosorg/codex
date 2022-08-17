@@ -14,29 +14,22 @@ use Aternos\Codex\Parser\ParserInterface;
 class Log implements LogInterface
 {
     /**
+     * @var EntryInterface[]
+     */
+    protected array $entries = [];
+    protected int $iterator = 0;
+    protected ?LogFileInterface $logFile = null;
+    protected bool $includeEntries = true;
+
+    /**
      * Get the default parser
      *
      * @return ParserInterface
      */
-    public static function getDefaultParser()
+    public static function getDefaultParser(): ParserInterface
     {
         return new DefaultParser();
     }
-
-    /**
-     * @var EntryInterface[]
-     */
-    protected $entries = [];
-
-    /**
-     * @var int
-     */
-    protected $iterator = 0;
-
-    /**
-     * @var LogFileInterface $logFile
-     */
-    protected $logFile;
 
     /**
      * Set the log file
@@ -44,7 +37,7 @@ class Log implements LogInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile)
+    public function setLogFile(LogFileInterface $logFile): static
     {
         $this->logFile = $logFile;
         return $this;
@@ -70,7 +63,7 @@ class Log implements LogInterface
      * @param ParserInterface|null $parser
      * @return $this
      */
-    public function parse(ParserInterface $parser = null)
+    public function parse(?ParserInterface $parser = null): static
     {
         if ($parser === null) {
             $parser = static::getDefaultParser();
@@ -87,7 +80,7 @@ class Log implements LogInterface
      * @param EntryInterface[] $entries
      * @return $this
      */
-    public function setEntries(array $entries = [])
+    public function setEntries(array $entries = []): static
     {
         $this->entries = $entries;
         return $this;
@@ -99,7 +92,7 @@ class Log implements LogInterface
      * @param EntryInterface $entry
      * @return $this
      */
-    public function addEntry(EntryInterface $entry)
+    public function addEntry(EntryInterface $entry): static
     {
         $this->entries[] = $entry;
         return $this;
@@ -176,12 +169,12 @@ class Log implements LogInterface
     }
 
     /**
-     * Whether a offset exists
+     * Whether an offset exists
      *
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->entries[$offset]);
     }
@@ -192,7 +185,7 @@ class Log implements LogInterface
      * @param mixed $offset
      * @return EntryInterface
      */
-    public function offsetGet($offset): EntryInterface
+    public function offsetGet(mixed $offset): EntryInterface
     {
         return $this->entries[$offset];
     }
@@ -200,10 +193,10 @@ class Log implements LogInterface
     /**
      * Offset to set
      *
-     * @param $offset
-     * @param Log $value
+     * @param mixed $offset
+     * @param EntryInterface $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->entries[$offset] = $value;
     }
@@ -211,9 +204,9 @@ class Log implements LogInterface
     /**
      * Offset to unset
      *
-     * @param $offset
+     * @param mixed $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->entries[$offset]);
     }
@@ -224,5 +217,29 @@ class Log implements LogInterface
     public function __toString(): string
     {
         return implode("\n", $this->getEntries());
+    }
+
+    /**
+     * @param bool $includeEntries
+     * @return $this
+     */
+    public function setIncludeEntries(bool $includeEntries): static
+    {
+        $this->includeEntries = $includeEntries;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        if (!$this->includeEntries) {
+            return [];
+        }
+
+        return [
+            "entries" => $this->getEntries()
+        ];
     }
 }

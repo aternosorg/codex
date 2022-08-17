@@ -10,7 +10,7 @@ use Aternos\Codex\Analysis\Solution;
 class TestSolution extends Solution
 {
     /**
-     * Get the solution as a human readable message
+     * Get the solution as a human-readable message
      *
      * @return string
      */

@@ -66,14 +66,14 @@ class DetectiveTest extends TestCase
         };
 
         $customLogClass = new class() extends Log implements DetectableLogInterface {
-            private static $detectors;
+            private static array $detectors = [];
 
             public static function setDetectors($detectors): void
             {
                 self::$detectors = $detectors;
             }
 
-            public static function getDetectors()
+            public static function getDetectors(): array
             {
                 return self::$detectors;
             }

@@ -12,10 +12,10 @@ interface ModifiablePrinterInterface extends PrinterInterface
     /**
      * Set all modifications replacing the current modifications
      *
-     * @param array $modifications
+     * @param ModificationInterface[] $modifications
      * @return $this
      */
-    public function setModifications(array $modifications);
+    public function setModifications(array $modifications): static;
 
     /**
      * Add a modification
@@ -23,5 +23,5 @@ interface ModifiablePrinterInterface extends PrinterInterface
      * @param ModificationInterface $modification
      * @return $this
      */
-    public function addModification(ModificationInterface $modification);
+    public function addModification(ModificationInterface $modification): static;
 }

@@ -17,20 +17,20 @@ interface DetectiveInterface
      *
      * Every class must implement DetectableLogInterface
      *
-     * @param array $logClasses
+     * @param class-string<LogInterface>[] $logClasses
      * @return $this
      */
-    public function setPossibleLogClasses(array $logClasses);
+    public function setPossibleLogClasses(array $logClasses): static;
 
     /**
      * Add a possible insight class
      *
      * The class must implement DetectableLogInterface
      *
-     * @param string $logClass
+     * @param class-string<LogInterface> $logClass
      * @return $this
      */
-    public function addPossibleLogClass(string $logClass);
+    public function addPossibleLogClass(string $logClass): static;
 
     /**
      * Set the log file
@@ -38,12 +38,12 @@ interface DetectiveInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile);
+    public function setLogFile(LogFileInterface $logFile): static;
 
     /**
      * Detect a log type out of possible classes by using detector
      *
      * @return LogInterface
      */
-    public function detect();
+    public function detect(): LogInterface;
 }

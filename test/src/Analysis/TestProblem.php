@@ -2,6 +2,7 @@
 
 namespace Aternos\Codex\Test\Src\Analysis;
 
+use Aternos\Codex\Analysis\InsightInterface;
 use Aternos\Codex\Analysis\Problem;
 
 /**
@@ -10,7 +11,7 @@ use Aternos\Codex\Analysis\Problem;
 class TestProblem extends Problem
 {
     /**
-     * Get the problem as human readable message
+     * Get the problem as human-readable message
      *
      * @return string
      */
@@ -22,10 +23,10 @@ class TestProblem extends Problem
     /**
      * Check if the $insight object is equal with the current object
      *
-     * @param static $insight
+     * @param InsightInterface $insight
      * @return bool
      */
-    public function isEqual($insight): bool
+    public function isEqual(InsightInterface $insight): bool
     {
         return false;
     }

@@ -17,7 +17,7 @@ interface AnalysableLogInterface
      *
      * @return AnalyserInterface
      */
-    public static function getDefaultAnalyser();
+    public static function getDefaultAnalyser(): AnalyserInterface;
 
     /**
      * Analyse a  log file with an analyser
@@ -29,5 +29,5 @@ interface AnalysableLogInterface
      * @param AnalyserInterface|null $analyser
      * @return AnalysisInterface
      */
-    public function analyse(AnalyserInterface $analyser = null);
+    public function analyse(AnalyserInterface $analyser = null): AnalysisInterface;
 }

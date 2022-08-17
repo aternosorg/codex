@@ -17,7 +17,7 @@ class ModifiableDefaultPrinter extends ModifiablePrinter
      * @param LineInterface $line
      * @return string
      */
-    protected function printLine(LineInterface $line)
+    protected function printLine(LineInterface $line): string
     {
         return $this->runModifications($line->getText()) . PHP_EOL;
     }

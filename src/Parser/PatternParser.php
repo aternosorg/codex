@@ -3,7 +3,13 @@
 namespace Aternos\Codex\Parser;
 
 use Aternos\Codex\Log\Entry;
+use Aternos\Codex\Log\EntryInterface;
+use Aternos\Codex\Log\Level;
+use Aternos\Codex\Log\LevelInterface;
 use Aternos\Codex\Log\Line;
+use DateTime;
+use DateTimeZone;
+use InvalidArgumentException;
 
 /**
  * Class PatternParser
@@ -19,29 +25,20 @@ class PatternParser extends Parser
     const LEVEL = "level";
 
     /**
-     * @var string
+     * @var class-string<EntryInterface>
      */
-    protected $entryClass = Entry::class;
+    protected string $entryClass = Entry::class;
 
     /**
-     * @var string
+     * @noinspection PhpDocFieldTypeMismatchInspection
+     * @var class-string<LevelInterface>|LevelInterface
      */
-    protected $pattern;
+    protected string $levelClass = Level::class;
 
-    /**
-     * @var array
-     */
-    protected $matches = [];
-
-    /**
-     * @var string
-     */
-    protected $timeFormat;
-
-    /**
-     * @var \DateTimeZone
-     */
-    protected $timeZone = null;
+    protected ?string $pattern = null;
+    protected array $matches = [];
+    protected ?string $timeFormat = null;
+    protected ?DateTimeZone $timeZone = null;
 
     /**
      * Set the entry pattern
@@ -53,7 +50,7 @@ class PatternParser extends Parser
      * @param string $pattern
      * @return $this
      */
-    public function setPattern(string $pattern)
+    public function setPattern(string $pattern): static
     {
         $this->pattern = $pattern;
         return $this;
@@ -79,7 +76,7 @@ class PatternParser extends Parser
      * @param array $matches
      * @return $this
      */
-    public function setMatches(array $matches)
+    public function setMatches(array $matches): static
     {
         $this->matches = $matches;
         return $this;
@@ -96,7 +93,7 @@ class PatternParser extends Parser
      * @param string $timeFormat
      * @return $this
      */
-    public function setTimeFormat(string $timeFormat)
+    public function setTimeFormat(string $timeFormat): static
     {
         $this->timeFormat = $timeFormat;
         return $this;
@@ -107,10 +104,10 @@ class PatternParser extends Parser
      *
      * Optional, uses OS timezone otherwise
      *
-     * @param \DateTimeZone $timeZone
+     * @param DateTimeZone $timeZone
      * @return $this
      */
-    public function setTimezone(\DateTimeZone $timeZone)
+    public function setTimezone(DateTimeZone $timeZone): static
     {
         $this->timeZone = $timeZone;
         return $this;
@@ -119,7 +116,7 @@ class PatternParser extends Parser
     /**
      * Parse a log from resource to Log object
      */
-    public function parse()
+    public function parse(): void
     {
         foreach ($this->getLogContentAsArray() as $number => $lineString) {
             $line = new Line($number + 1, $lineString);
@@ -143,7 +140,7 @@ class PatternParser extends Parser
                 }
                 $matchKey = $key - 1;
                 if (!isset($this->matches[$matchKey])) {
-                    throw new \InvalidArgumentException("More matches found in string than defined in PatternParser::setMatches().");
+                    throw new InvalidArgumentException("More matches found in string than defined in PatternParser::setMatches().");
                 }
 
                 $this->parseEntryMatch($entry, $this->matches[$matchKey], $match);
@@ -157,26 +154,26 @@ class PatternParser extends Parser
      *
      * Overwrite this function to add more different
      * match types and call the parent function (this function)
-     * if you dont know the match type (default in a switch)
+     * if you don't know the match type (default in a switch)
      *
      * @param Entry $entry
      * @param string $matchType One of the match constants
      * @param string $matchString
      */
-    protected function parseEntryMatch(Entry $entry, string $matchType, string $matchString)
+    protected function parseEntryMatch(Entry $entry, string $matchType, string $matchString): void
     {
         switch ($matchType) {
             case static::TIME:
-                $date = \DateTime::createFromFormat($this->timeFormat, $matchString, $this->timeZone);
+                $date = DateTime::createFromFormat($this->timeFormat, $matchString, $this->timeZone);
                 if ($date) {
                     $entry->setTime($date->getTimestamp());
                 }
                 break;
             case static::LEVEL:
-                $entry->setLevel(strtoupper($matchString));
+                $entry->setLevel($this->levelClass::fromString($matchString));
                 break;
             default:
-                throw new \InvalidArgumentException("Match type '" . $matchType . "' is not defined.");
+                throw new InvalidArgumentException("Match type '" . $matchType . "' is not defined.");
         }
     }
 }

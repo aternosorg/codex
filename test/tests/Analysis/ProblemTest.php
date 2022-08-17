@@ -31,6 +31,7 @@ class ProblemTest extends TestCase
         $solution = new TestSolution();
 
         $problem->addSolution($solution);
+        /** @noinspection PhpStatementHasEmptyBodyInspection */
         foreach ($problem as $ignored) {
             // do nothing
         }

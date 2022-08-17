@@ -12,12 +12,8 @@ class Analysis implements AnalysisInterface
     /**
      * @var InsightInterface[]
      */
-    protected $insights = [];
-
-    /**
-     * @var int
-     */
-    protected $iterator = 0;
+    protected array $insights = [];
+    protected int $iterator = 0;
 
     /**
      * Set all insights at once in an array replacing the current insights
@@ -25,7 +21,7 @@ class Analysis implements AnalysisInterface
      * @param InsightInterface[] $insights
      * @return $this
      */
-    public function setInsights(array $insights = [])
+    public function setInsights(array $insights = []): static
     {
         $this->insights = $insights;
         return $this;
@@ -38,7 +34,7 @@ class Analysis implements AnalysisInterface
      * @param InsightInterface $insight
      * @return $this
      */
-    public function addInsight(InsightInterface $insight)
+    public function addInsight(InsightInterface $insight): static
     {
         foreach ($this as $existingInsight) {
             if (get_class($insight) === get_class($existingInsight) && $existingInsight->isEqual($insight)) {
@@ -54,7 +50,7 @@ class Analysis implements AnalysisInterface
     /**
      * Get all insights
      *
-     * @return array
+     * @return InsightInterface[]
      */
     public function getInsights(): array
     {
@@ -64,10 +60,10 @@ class Analysis implements AnalysisInterface
     /**
      * Get all insights that are extended from $extendedFrom (class name)
      *
-     * @param string $extendedFrom
-     * @return array
+     * @param class-string<InsightInterface> $extendedFrom
+     * @return InsightInterface[]
      */
-    public function getFilteredInsights($extendedFrom)
+    public function getFilteredInsights(string $extendedFrom): array
     {
         $returnInsights = [];
         foreach ($this->getInsights() as $insight) {
@@ -82,7 +78,7 @@ class Analysis implements AnalysisInterface
     /**
      * Get all problem insights
      *
-     * @return array
+     * @return ProblemInterface[]
      */
     public function getProblems(): array
     {
@@ -92,7 +88,7 @@ class Analysis implements AnalysisInterface
     /**
      * Get all information insights
      *
-     * @return array
+     * @return InformationInterface[]
      */
     public function getInformation(): array
     {
@@ -165,7 +161,7 @@ class Analysis implements AnalysisInterface
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->insights[$offset]);
     }
@@ -176,7 +172,7 @@ class Analysis implements AnalysisInterface
      * @param mixed $offset
      * @return InsightInterface
      */
-    public function offsetGet($offset): InsightInterface
+    public function offsetGet(mixed $offset): InsightInterface
     {
         return $this->insights[$offset];
     }
@@ -184,10 +180,10 @@ class Analysis implements AnalysisInterface
     /**
      * Offset to set
      *
-     * @param $offset
+     * @param mixed $offset
      * @param InsightInterface $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->insights[$offset] = $value;
     }
@@ -195,10 +191,21 @@ class Analysis implements AnalysisInterface
     /**
      * Offset to unset
      *
-     * @param $offset
+     * @param mixed $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->insights[$offset]);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            "problems" => $this->getProblems(),
+            "information" => $this->getInformation()
+        ];
     }
 }

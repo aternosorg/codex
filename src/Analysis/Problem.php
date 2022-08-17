@@ -10,22 +10,22 @@ namespace Aternos\Codex\Analysis;
 abstract class Problem extends Insight implements ProblemInterface
 {
     /**
-     * @var array
+     * @var SolutionInterface[]
      */
-    protected $solutions = [];
+    protected array $solutions = [];
 
     /**
      * @var int
      */
-    protected $iterator = 0;
+    protected int $iterator = 0;
 
     /**
      * Set all solutions at once in an array replacing the current solutions
      *
-     * @param array $solutions
+     * @param SolutionInterface[] $solutions
      * @return $this
      */
-    public function setSolutions(array $solutions = [])
+    public function setSolutions(array $solutions = []): static
     {
         $this->solutions = $solutions;
         return $this;
@@ -37,7 +37,7 @@ abstract class Problem extends Insight implements ProblemInterface
      * @param SolutionInterface $solution
      * @return $this
      */
-    public function addSolution(SolutionInterface $solution)
+    public function addSolution(SolutionInterface $solution): static
     {
         $this->solutions[] = $solution;
         return $this;
@@ -114,12 +114,12 @@ abstract class Problem extends Insight implements ProblemInterface
     }
 
     /**
-     * Whether a offset exists
+     * Whether an offset exists
      *
      * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->solutions[$offset]);
     }
@@ -130,7 +130,7 @@ abstract class Problem extends Insight implements ProblemInterface
      * @param mixed $offset
      * @return SolutionInterface
      */
-    public function offsetGet($offset): SolutionInterface
+    public function offsetGet(mixed $offset): SolutionInterface
     {
         return $this->solutions[$offset];
     }
@@ -138,10 +138,10 @@ abstract class Problem extends Insight implements ProblemInterface
     /**
      * Offset to set
      *
-     * @param $offset
+     * @param mixed $offset
      * @param SolutionInterface $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->solutions[$offset] = $value;
     }
@@ -149,10 +149,20 @@ abstract class Problem extends Insight implements ProblemInterface
     /**
      * Offset to unset
      *
-     * @param $offset
+     * @param mixed $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->solutions[$offset]);
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            "solutions" => $this->getSolutions()
+        ]);
     }
 }

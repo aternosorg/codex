@@ -11,10 +11,7 @@ use Aternos\Codex\Log\LogInterface;
  */
 abstract class Parser implements ParserInterface
 {
-    /**
-     * @var LogInterface $log
-     */
-    protected $log;
+    protected ?LogInterface $log = null;
 
     /**
      * Set the output log object
@@ -22,7 +19,7 @@ abstract class Parser implements ParserInterface
      * @param LogInterface $log
      * @return $this
      */
-    public function setLog(LogInterface $log)
+    public function setLog(LogInterface $log): static
     {
         $this->log = $log;
         return $this;
@@ -41,7 +38,7 @@ abstract class Parser implements ParserInterface
     /**
      * Get the log content as array split by line
      *
-     * @return array
+     * @return string[]
      */
     protected function getLogContentAsArray(): array
     {

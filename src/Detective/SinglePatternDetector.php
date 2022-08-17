@@ -16,9 +16,9 @@ class SinglePatternDetector extends PatternDetector
      *
      * Returns either true or false
      *
-     * @return bool
+     * @return bool|float
      */
-    public function detect()
+    public function detect(): bool|float
     {
         if (preg_match($this->pattern, $this->getLogContent()) === 1) {
             return true;

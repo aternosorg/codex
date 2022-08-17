@@ -22,12 +22,12 @@ interface InformationInterface extends InsightInterface
      * @param mixed $value
      * @return $this
      */
-    public function setValue($value);
+    public function setValue(mixed $value): static;
 
     /**
      * Get the information value
      *
      * @return mixed
      */
-    public function getValue();
+    public function getValue(): mixed;
 }

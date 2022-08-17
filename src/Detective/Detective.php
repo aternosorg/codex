@@ -6,6 +6,7 @@ use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Log\Log;
 use Aternos\Codex\Log\LogInterface;
+use InvalidArgumentException;
 
 /**
  * Class Detective
@@ -15,24 +16,26 @@ use Aternos\Codex\Log\LogInterface;
 class Detective implements DetectiveInterface
 {
     /**
-     * @var array
+     * @var class-string<LogInterface>[]
      */
-    protected $possibleLogClasses = [];
+    protected array $possibleLogClasses = [];
 
     /**
-     * @var LogFileInterface
+     * @var class-string<LogInterface>
      */
-    protected $logFile;
+    protected string $defaultLogClass = Log::class;
+
+    protected ?LogFileInterface $logFile = null;
 
     /**
      * Set possible log classes
      *
      * Every class must implement DetectableLogInterface
      *
-     * @param array $logClasses
+     * @param class-string<LogInterface>[] $logClasses
      * @return $this
      */
-    public function setPossibleLogClasses(array $logClasses)
+    public function setPossibleLogClasses(array $logClasses): static
     {
         $this->possibleLogClasses = [];
         foreach ($logClasses as $logClass) {
@@ -47,13 +50,13 @@ class Detective implements DetectiveInterface
      *
      * The class must implement DetectableLogInterface
      *
-     * @param string $logClass
+     * @param class-string<LogInterface> $logClass
      * @return $this
      */
-    public function addPossibleLogClass(string $logClass)
+    public function addPossibleLogClass(string $logClass): static
     {
         if (!is_subclass_of($logClass, DetectableLogInterface::class)) {
-            throw new \InvalidArgumentException("Class " . $logClass . " does not implement " . DetectableLogInterface::class . ".");
+            throw new InvalidArgumentException("Class " . $logClass . " does not implement " . DetectableLogInterface::class . ".");
         }
 
         $this->possibleLogClasses[] = $logClass;
@@ -66,7 +69,7 @@ class Detective implements DetectiveInterface
      * @param LogFileInterface $logFile
      * @return $this
      */
-    public function setLogFile(LogFileInterface $logFile)
+    public function setLogFile(LogFileInterface $logFile): static
     {
         $this->logFile = $logFile;
         return $this;
@@ -77,7 +80,7 @@ class Detective implements DetectiveInterface
      *
      * @return LogInterface
      */
-    public function detect()
+    public function detect(): LogInterface
     {
         $detectionResults = [];
         foreach ($this->possibleLogClasses as $possibleLogClass) {
@@ -85,7 +88,7 @@ class Detective implements DetectiveInterface
             $detectors = $possibleLogClass::getDetectors();
             foreach ($detectors as $detector) {
                 if (!$detector instanceof DetectorInterface) {
-                    throw new \InvalidArgumentException("Class " . get_class($detector) . " does not implement " . DetectorInterface::class . ".");
+                    throw new InvalidArgumentException("Class " . get_class($detector) . " does not implement " . DetectorInterface::class . ".");
                 }
 
                 $detector->setLogFile($this->logFile);
@@ -97,14 +100,14 @@ class Detective implements DetectiveInterface
                     continue;
                 }
                 if (!is_numeric($result) || $result < 0 || $result > 1) {
-                    throw new \InvalidArgumentException("Detector " . get_class($detector) . " returned " . var_export($result));
+                    throw new InvalidArgumentException("Detector " . get_class($detector) . " returned " . var_export($result));
                 }
                 $detectionResults[] = ["class" => $possibleLogClass, "result" => $result];
             }
         }
 
         if (count($detectionResults) === 0) {
-            return (new Log())->setLogFile($this->logFile);
+            return (new $this->defaultLogClass())->setLogFile($this->logFile);
         }
 
         usort($detectionResults, function ($a, $b) {

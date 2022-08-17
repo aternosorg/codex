@@ -10,23 +10,13 @@ namespace Aternos\Codex\Printer;
 class PatternModification extends Modification
 {
     /**
-     * @var string
-     */
-    protected string $pattern;
-
-    /**
-     * @var string
-     */
-    protected string $replacement;
-
-    /**
      * @param string $pattern
      * @param string $replacement
      */
-    public function __construct(string $pattern, string $replacement)
+    public function __construct(
+        protected string $pattern,
+        protected string $replacement)
     {
-        $this->pattern = $pattern;
-        $this->replacement = $replacement;
     }
 
     /**

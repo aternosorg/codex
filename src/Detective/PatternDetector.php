@@ -9,10 +9,7 @@ namespace Aternos\Codex\Detective;
  */
 abstract class PatternDetector extends Detector
 {
-    /**
-     * @var string
-     */
-    protected $pattern;
+    protected ?string $pattern = null;
 
     /**
      * Set the matching pattern for one line
@@ -20,7 +17,7 @@ abstract class PatternDetector extends Detector
      * @param string $pattern
      * @return $this
      */
-    public function setPattern(string $pattern)
+    public function setPattern(string $pattern): static
     {
         $this->pattern = $pattern;
         return $this;

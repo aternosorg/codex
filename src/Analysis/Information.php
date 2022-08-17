@@ -9,15 +9,8 @@ namespace Aternos\Codex\Analysis;
  */
 abstract class Information extends Insight implements InformationInterface
 {
-    /**
-     * @var string
-     */
-    protected $label;
-
-    /**
-     * @var
-     */
-    protected $value;
+    protected ?string $label = null;
+    protected mixed $value = null;
 
     /**
      * Get the information label
@@ -33,9 +26,9 @@ abstract class Information extends Insight implements InformationInterface
      * Set the information label
      *
      * @param string $label
-     * @return Information
+     * @return $this
      */
-    protected function setLabel(string $label)
+    protected function setLabel(string $label): static
     {
         $this->label = $label;
         return $this;
@@ -46,7 +39,7 @@ abstract class Information extends Insight implements InformationInterface
      *
      * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -57,14 +50,14 @@ abstract class Information extends Insight implements InformationInterface
      * @param mixed $value
      * @return $this
      */
-    public function setValue($value)
+    public function setValue(mixed $value): static
     {
         $this->value = $value;
         return $this;
     }
 
     /**
-     * Get a human readable message
+     * Get a human-readable message
      *
      * @return string
      */
@@ -76,11 +69,22 @@ abstract class Information extends Insight implements InformationInterface
     /**
      * Check if the $insight object is equal with the current object
      *
-     * @param static $insight
+     * @param InsightInterface $insight
      * @return bool
      */
-    public function isEqual($insight): bool
+    public function isEqual(InsightInterface $insight): bool
     {
-        return $this->getLabel() === $insight->getLabel() && $this->getValue() === $insight->getValue();
+        return $insight instanceof InformationInterface && $this->getLabel() === $insight->getLabel() && $this->getValue() === $insight->getValue();
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return array_merge(parent::jsonSerialize(), [
+            "label" => $this->getLabel(),
+            "value" => $this->getValue()
+        ]);
     }
 }
