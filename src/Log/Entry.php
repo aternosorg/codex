@@ -66,11 +66,11 @@ class Entry implements EntryInterface
     /**
      * Get the log level of the entry
      *
-     * @return null|LevelInterface
+     * @return LevelInterface
      */
-    public function getLevel(): ?LevelInterface
+    public function getLevel(): LevelInterface
     {
-        return $this->level;
+        return $this->level ?? Level::INFO;
     }
 
     /**
