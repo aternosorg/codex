@@ -51,6 +51,14 @@ enum Level: int implements LevelInterface
     /**
      * @return int
      */
+    public function asInt(): int
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return int
+     */
     public function jsonSerialize(): int
     {
         return $this->value;

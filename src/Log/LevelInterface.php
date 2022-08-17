@@ -16,4 +16,9 @@ interface LevelInterface extends JsonSerializable
      * @return string
      */
     public function asString(): string;
+
+    /**
+     * @return int
+     */
+    public function asInt(): int;
 }
