@@ -22,7 +22,7 @@ enum Level: int implements LevelInterface
         return match (strtolower($level)) {
             "emergency" => Level::EMERGENCY,
             "alert" => Level::ALERT,
-            "critical", "severe" => Level::CRITICAL,
+            "critical", "severe", "fatal" => Level::CRITICAL,
             "error", "stderr" => Level::ERROR,
             "warning", "warn" => Level::WARNING,
             "notice" => Level::NOTICE,
