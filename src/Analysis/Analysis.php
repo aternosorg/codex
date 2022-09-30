@@ -2,6 +2,8 @@
 
 namespace Aternos\Codex\Analysis;
 
+use Aternos\Codex\Log\LogInterface;
+
 /**
  * Class Analysis
  *
@@ -14,6 +16,7 @@ class Analysis implements AnalysisInterface
      */
     protected array $insights = [];
     protected int $iterator = 0;
+    protected ?LogInterface $log = null;
 
     /**
      * Set all insights at once in an array replacing the current insights
@@ -23,6 +26,9 @@ class Analysis implements AnalysisInterface
      */
     public function setInsights(array $insights = []): static
     {
+        foreach ($insights as $insight) {
+            $insight->setAnalysis($this);
+        }
         $this->insights = $insights;
         return $this;
     }
@@ -43,6 +49,7 @@ class Analysis implements AnalysisInterface
             }
         }
 
+        $insight->setAnalysis($this);
         $this->insights[] = $insight;
         return $this;
     }
@@ -185,6 +192,7 @@ class Analysis implements AnalysisInterface
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        $value->setAnalysis($this);
         $this->insights[$offset] = $value;
     }
 
@@ -207,5 +215,23 @@ class Analysis implements AnalysisInterface
             "problems" => $this->getProblems(),
             "information" => $this->getInformation()
         ];
+    }
+
+    /**
+     * @param LogInterface $log
+     * @return $this
+     */
+    public function setLog(LogInterface $log): static
+    {
+        $this->log = $log;
+        return $this;
+    }
+
+    /**
+     * @return LogInterface|null
+     */
+    public function getLog(): ?LogInterface
+    {
+        return $this->log;
     }
 }

@@ -66,7 +66,7 @@ class PatternAnalyserTest extends TestCase
         $log->parse();
 
         $analysis = $log->analyse();
-        $this->assertEquals($this->getExpectedAnalysis()->getInsights(), $analysis->getInsights());
+        $this->assertJsonStringEqualsJsonString(json_encode($this->getExpectedAnalysis()->getInsights()), json_encode($analysis->getInsights()));
     }
 
     public function testAnalyseWithPossibleInsightClasses(): void
@@ -82,7 +82,7 @@ class PatternAnalyserTest extends TestCase
             ]);
 
         $analysis = $log->analyse($analyser);
-        $this->assertEquals($this->getExpectedAnalysis()->getInsights(), $analysis->getInsights());
+        $this->assertJsonStringEqualsJsonString(json_encode($this->getExpectedAnalysis()->getInsights()), json_encode($analysis->getInsights()));
     }
 
     public function testAddPossibleInsightClassThrowsExceptionIfPossibleInsightClassDoesNotImplementPatternInsightInterface(): void

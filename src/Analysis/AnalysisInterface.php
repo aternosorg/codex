@@ -3,6 +3,8 @@
 namespace Aternos\Codex\Analysis;
 
 use ArrayAccess;
+use Aternos\Codex\Log\AnalysableLogInterface;
+use Aternos\Codex\Log\LogInterface;
 use Countable;
 use Iterator;
 use JsonSerializable;
@@ -14,6 +16,21 @@ use JsonSerializable;
  */
 interface AnalysisInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
+    /**
+     * Set the log
+     *
+     * @param LogInterface $log
+     * @return $this
+     */
+    public function setLog(LogInterface $log): static;
+
+    /**
+     * Get the log
+     *
+     * @return LogInterface|null
+     */
+    public function getLog(): ?LogInterface;
+
     /**
      * Set all insights at once in an array replacing the current insights
      *

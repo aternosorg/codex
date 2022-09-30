@@ -60,4 +60,19 @@ interface InsightInterface extends JsonSerializable
      * @return int
      */
     public function getCounterValue(): int;
+
+    /**
+     * Set the related analysis
+     *
+     * @param AnalysisInterface $analysis
+     * @return $this
+     */
+    public function setAnalysis(AnalysisInterface $analysis): static;
+
+    /**
+     * Get the related analysis
+     *
+     * @return AnalysisInterface|null
+     */
+    public function getAnalysis(): ?AnalysisInterface;
 }

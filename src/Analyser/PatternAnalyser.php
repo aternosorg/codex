@@ -108,6 +108,7 @@ class PatternAnalyser extends Analyser
     public function analyse(): AnalysisInterface
     {
         $analysis = new Analysis();
+        $analysis->setLog($this->log);
 
         foreach ($this->log as $entry) {
             foreach ($this->possibleInsightClasses as $possibleInsightClass) {
