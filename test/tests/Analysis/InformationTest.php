@@ -2,7 +2,11 @@
 
 namespace Aternos\Codex\Test\Tests\Analysis;
 
+use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Test\Src\Analysis\TestInformation;
+use Aternos\Codex\Test\Src\Analysis\TestInsight;
+use Aternos\Codex\Test\Src\Analysis\TestPatternInformation;
+use Aternos\Codex\Test\Src\Log\TestPatternLog;
 use PHPUnit\Framework\TestCase;
 
 class InformationTest extends TestCase
@@ -40,5 +44,20 @@ class InformationTest extends TestCase
 
         $this->assertTrue($informationA->isEqual($informationB));
         $this->assertTrue($informationA->isEqual($informationA));
+    }
+
+    public function testGetLogContent(): void
+    {
+        $logFile = new PathLogFile(__DIR__ . '/../../data/problem.log');
+        $log = (new TestPatternLog())->setLogFile($logFile);
+        $log->parse();
+
+        $analysis = $log->analyse();
+        foreach ($analysis->getInformation() as $information) {
+            var_dump(get_class($information));
+            /** @var TestPatternInformation $information */
+            $this->assertNotNull($information->getLogContent());
+            $this->assertEquals($logFile->getContent(), $information->getLogContent());
+        }
     }
 }

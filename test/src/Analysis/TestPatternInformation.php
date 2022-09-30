@@ -35,4 +35,9 @@ class TestPatternInformation extends Information implements PatternInsightInterf
     {
         $this->value = $matches[1];
     }
+
+    public function getLogContent(): ?string
+    {
+        return parent::getLogContent();
+    }
 }
