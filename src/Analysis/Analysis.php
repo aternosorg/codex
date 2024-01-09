@@ -42,6 +42,8 @@ class Analysis implements AnalysisInterface
      */
     public function addInsight(InsightInterface $insight): static
     {
+        $insight->setAnalysis($this);
+
         foreach ($this as $existingInsight) {
             if (get_class($insight) === get_class($existingInsight) && $existingInsight->isEqual($insight)) {
                 $existingInsight->increaseCounter();
@@ -49,7 +51,6 @@ class Analysis implements AnalysisInterface
             }
         }
 
-        $insight->setAnalysis($this);
         $this->insights[] = $insight;
         return $this;
     }
