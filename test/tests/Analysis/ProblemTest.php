@@ -74,8 +74,7 @@ class ProblemTest extends TestCase
         $this->assertEquals($solution, $problem[0]);
 
         // Does not exist -> "undefined array key" error
-        $this->expectError();
-        $this->assertEquals(null, $problem[1]);
+        $this->assertArrayNotHasKey(1, $problem);
     }
 
     public function testOffsetSet(): void
@@ -109,7 +108,6 @@ class ProblemTest extends TestCase
         // Unset $solution on $problem[0] using the offsetUnset
         unset($problem[0]);
         $this->assertArrayNotHasKey(0, $problem);
-        $this->expectError();
-        $this->assertEquals(null, $problem[1]);
+        $this->assertArrayNotHasKey(1, $problem);
     }
 }
