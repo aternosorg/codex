@@ -91,8 +91,7 @@ class EntryTest extends TestCase
         $this->assertEquals($line, $entry[0]);
 
         // Does not exist -> "undefined array key" error
-        $this->expectError();
-        $this->assertEquals(null, $entry[1]);
+        $this->assertArrayNotHasKey(1, $entry);
     }
 
     public function testOffsetSet(): void
@@ -126,7 +125,6 @@ class EntryTest extends TestCase
         // Unset $line1 on $entry[0] using the offsetUnset
         unset($entry[0]);
         $this->assertArrayNotHasKey(0, $entry);
-        $this->expectError();
-        $this->assertEquals(null, $entry[1]);
+        $this->assertArrayNotHasKey(1, $entry);
     }
 }
