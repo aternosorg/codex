@@ -74,8 +74,7 @@ class LogTest extends TestCase
         $this->assertEquals($entry, $log[0]);
 
         // Does not exist -> "undefined array key" error
-        $this->expectError();
-        $this->assertEquals(null, $log[1]);
+        $this->assertArrayNotHasKey(1, $log);
     }
 
     public function testOffsetSet(): void
@@ -99,7 +98,6 @@ class LogTest extends TestCase
         // Unset $entry on $log[0] using the offsetUnset
         unset($log[0]);
         $this->assertArrayNotHasKey(0, $log);
-        $this->expectError();
-        $this->assertEquals(null, $log[1]);
+        $this->assertArrayNotHasKey(1, $log);
     }
 }
