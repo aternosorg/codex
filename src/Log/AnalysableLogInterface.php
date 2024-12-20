@@ -29,5 +29,5 @@ interface AnalysableLogInterface
      * @param AnalyserInterface|null $analyser
      * @return AnalysisInterface
      */
-    public function analyse(AnalyserInterface $analyser = null): AnalysisInterface;
+    public function analyse(?AnalyserInterface $analyser = null): AnalysisInterface;
 }
