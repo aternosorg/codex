@@ -21,8 +21,8 @@ class PatternParser extends Parser
     /**
      * Match constants, see setMatches()
      */
-    const TIME = "time";
-    const LEVEL = "level";
+    const string TIME = "time";
+    const string LEVEL = "level";
 
     /**
      * @var class-string<EntryInterface>
