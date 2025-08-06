@@ -24,7 +24,7 @@ abstract class AnalysableLog extends Log implements AnalysableLogInterface
      * @param AnalyserInterface|null $analyser
      * @return AnalysisInterface
      */
-    public function analyse(AnalyserInterface $analyser = null): AnalysisInterface
+    public function analyse(?AnalyserInterface $analyser = null): AnalysisInterface
     {
         if ($this->analysis !== null) {
             return $this->analysis;
