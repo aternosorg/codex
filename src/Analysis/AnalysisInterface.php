@@ -3,7 +3,6 @@
 namespace Aternos\Codex\Analysis;
 
 use ArrayAccess;
-use Aternos\Codex\Log\AnalysableLogInterface;
 use Aternos\Codex\Log\LogInterface;
 use Countable;
 use Iterator;
