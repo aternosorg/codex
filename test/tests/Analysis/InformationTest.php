@@ -4,7 +4,6 @@ namespace Aternos\Codex\Test\Tests\Analysis;
 
 use Aternos\Codex\Log\File\PathLogFile;
 use Aternos\Codex\Test\Src\Analysis\TestInformation;
-use Aternos\Codex\Test\Src\Analysis\TestInsight;
 use Aternos\Codex\Test\Src\Analysis\TestPatternInformation;
 use Aternos\Codex\Test\Src\Log\TestPatternLog;
 use PHPUnit\Framework\TestCase;

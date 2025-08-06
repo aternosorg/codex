@@ -2,7 +2,6 @@
 
 namespace Aternos\Codex\Test\Src\Log;
 
-use Aternos\Codex\Analyser\AnalyserInterface;
 use Aternos\Codex\Analyser\PatternAnalyser;
 use Aternos\Codex\Log\AnalysableLog;
 use Aternos\Codex\Parser\PatternParser;
