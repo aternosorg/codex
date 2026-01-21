@@ -25,8 +25,8 @@ enum Level: int implements LevelInterface
             "critical", "severe", "fatal" => Level::CRITICAL,
             "error", "stderr" => Level::ERROR,
             "warning", "warn" => Level::WARNING,
-            "notice" => Level::NOTICE,
-            "debug" => Level::DEBUG,
+            "notice", "fine" => Level::NOTICE,
+            "debug", "finer", "finest" => Level::DEBUG,
             default => Level::INFO
         };
     }
