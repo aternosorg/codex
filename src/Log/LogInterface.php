@@ -39,6 +39,13 @@ interface LogInterface extends Iterator, Countable, ArrayAccess, JsonSerializabl
     public function getLogFile(): LogFileInterface;
 
     /**
+     * Get a human-readable title for the log
+     *
+     * @return string
+     */
+    public function getTitle(): string;
+
+    /**
      * Parse a log file with a parser
      *
      * Every log type should have a default parser,

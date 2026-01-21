@@ -242,4 +242,12 @@ class Log implements LogInterface
             "entries" => $this->getEntries()
         ];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTitle(): string
+    {
+        return "Log";
+    }
 }
