@@ -85,4 +85,38 @@ class DetectiveTest extends TestCase
         $this->expectExceptionMessage("Class " . get_class($invalidDetectorClass) . " does not implement " . DetectorInterface::class . ".");
         $this->getDetective([get_class($customLogClass)])->detect();
     }
+
+    public function testGetPossibleLogClasses(): void
+    {
+        $possibleLogClasses = [
+            TestAlwaysDetectableLog::class,
+            TestLessDetectableLog::class,
+            TestMoreDetectableLog::class,
+            TestNeverDetectableLog::class
+        ];
+
+        $detective = $this->getDetective($possibleLogClasses);
+
+        $this->assertEquals($possibleLogClasses, $detective->getPossibleLogClasses());
+    }
+
+    public function testAddDetective(): void
+    {
+        $possibleLogClasses1 = [
+            TestAlwaysDetectableLog::class,
+            TestLessDetectableLog::class
+        ];
+
+        $possibleLogClasses2 = [
+            TestMoreDetectableLog::class,
+            TestNeverDetectableLog::class
+        ];
+
+        $detective1 = $this->getDetective($possibleLogClasses1);
+        $detective2 = $this->getDetective($possibleLogClasses2);
+
+        $detective1->addDetective($detective2);
+
+        $this->assertEquals(array_merge($possibleLogClasses1, $possibleLogClasses2), $detective1->getPossibleLogClasses());
+    }
 }

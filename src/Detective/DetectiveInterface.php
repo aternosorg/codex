@@ -23,7 +23,7 @@ interface DetectiveInterface
     public function setPossibleLogClasses(array $logClasses): static;
 
     /**
-     * Add a possible insight class
+     * Add a possible log class
      *
      * The class must implement DetectableLogInterface
      *
@@ -31,6 +31,13 @@ interface DetectiveInterface
      * @return $this
      */
     public function addPossibleLogClass(string $logClass): static;
+
+    /**
+     * Get all possible log classes
+     *
+     * @return class-string<LogInterface>[]
+     */
+    public function getPossibleLogClasses(): array;
 
     /**
      * Set the log file

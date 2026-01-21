@@ -64,6 +64,28 @@ class Detective implements DetectiveInterface
     }
 
     /**
+     * Add all possible log classes from another detective
+     *
+     * @param DetectiveInterface $detective
+     * @return $this
+     */
+    public function addDetective(DetectiveInterface $detective): static
+    {
+        foreach ($detective->getPossibleLogClasses() as $logClass) {
+            $this->addPossibleLogClass($logClass);
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPossibleLogClasses(): array
+    {
+        return $this->possibleLogClasses;
+    }
+
+    /**
      * Set the log file
      *
      * @param LogFileInterface $logFile
