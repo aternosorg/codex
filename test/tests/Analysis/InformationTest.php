@@ -53,7 +53,6 @@ class InformationTest extends TestCase
 
         $analysis = $log->analyse();
         foreach ($analysis->getInformation() as $information) {
-            var_dump(get_class($information));
             /** @var TestPatternInformation $information */
             $this->assertNotNull($information->getLogContent());
             $this->assertEquals($logFile->getContent(), $information->getLogContent());
