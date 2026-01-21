@@ -21,8 +21,9 @@ class PatternParser extends Parser
     /**
      * Match constants, see setMatches()
      */
-    const string TIME = "time";
-    const string LEVEL = "level";
+    public const string TIME = "time";
+    public const string LEVEL = "level";
+    public const string PREFIX = "prefix";
 
     /**
      * @var class-string<EntryInterface>
@@ -171,6 +172,9 @@ class PatternParser extends Parser
                 break;
             case static::LEVEL:
                 $entry->setLevel($this->levelClass::fromString($matchString));
+                break;
+            case static::PREFIX:
+                $entry->setPrefix($matchString);
                 break;
             default:
                 throw new InvalidArgumentException("Match type '" . $matchType . "' is not defined.");

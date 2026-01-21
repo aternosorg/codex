@@ -15,6 +15,7 @@ class Entry implements EntryInterface
     protected array $lines = [];
     protected ?LevelInterface $level = null;
     protected ?int $time = null;
+    protected ?string $prefix = null;
     protected int $iterator = 0;
 
     /**
@@ -93,6 +94,28 @@ class Entry implements EntryInterface
     public function getTime(): ?int
     {
         return $this->time;
+    }
+
+    /**
+     * Set the prefix
+     *
+     * @param string $prefix
+     * @return $this
+     */
+    public function setPrefix(string $prefix): static
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    /**
+     * Get the prefix
+     *
+     * @return string|null
+     */
+    public function getPrefix(): ?string
+    {
+        return $this->prefix;
     }
 
     /**
@@ -214,6 +237,7 @@ class Entry implements EntryInterface
         return [
             'level' => $this->getLevel(),
             'time' => $this->getTime(),
+            'prefix' => $this->getPrefix(),
             'lines' => $this->getLines()
         ];
     }

@@ -42,6 +42,14 @@ class EntryTest extends TestCase
         $this->assertEquals($time, $entry->getTime());
     }
 
+    public function testSetGetPrefix(): void
+    {
+        $entry = new Entry();
+        $prefix = uniqid();
+        $this->assertSame($entry, $entry->setPrefix($prefix));
+        $this->assertEquals($prefix, $entry->getPrefix());
+    }
+
     public function testKey(): void
     {
         $entry = new Entry();

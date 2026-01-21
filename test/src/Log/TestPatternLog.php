@@ -21,8 +21,8 @@ class TestPatternLog extends AnalysableLog
     public static function getDefaultParser(): PatternParser
     {
         return (new PatternParser())
-            ->setPattern('/\[([^\]]+)\] \[[^\/]+\/([^\]]+)\].*/')
-            ->setMatches([PatternParser::TIME, PatternParser::LEVEL])
+            ->setPattern('/(\[([^\]]+)\] \[[^\/]+\/([^\]]+)\]).*/')
+            ->setMatches([PatternParser::PREFIX, PatternParser::TIME, PatternParser::LEVEL])
             ->setTimeFormat('d.m.Y H:i:s');
     }
 
