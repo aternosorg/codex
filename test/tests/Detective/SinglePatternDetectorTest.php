@@ -1,6 +1,6 @@
 <?php
 
-namespace Aternos\Codex\Test\Tests\Detector;
+namespace Aternos\Codex\Test\Tests\Detective;
 
 use Aternos\Codex\Detective\SinglePatternDetector;
 use Aternos\Codex\Log\File\StringLogFile;
