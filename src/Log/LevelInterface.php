@@ -21,4 +21,11 @@ interface LevelInterface extends JsonSerializable
      * @return int
      */
     public function asInt(): int;
+
+    /**
+     * Returns true if the log level should be considered an error level.
+     *
+     * @return bool
+     */
+    public function isError(): bool;
 }
