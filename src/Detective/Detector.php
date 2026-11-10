@@ -4,11 +4,6 @@ namespace Aternos\Codex\Detective;
 
 use Aternos\Codex\Log\File\LogFileInterface;
 
-/**
- * Class Detector
- *
- * @package Aternos\Codex\Detective
- */
 abstract class Detector implements DetectorInterface
 {
     protected ?LogFileInterface $logFile = null;

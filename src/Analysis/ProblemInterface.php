@@ -6,11 +6,6 @@ use ArrayAccess;
 use Countable;
 use Iterator;
 
-/**
- * Interface ProblemInterface
- *
- * @package Aternos\Codex\Analysis
- */
 interface ProblemInterface extends Iterator, Countable, ArrayAccess, InsightInterface
 {
     /**

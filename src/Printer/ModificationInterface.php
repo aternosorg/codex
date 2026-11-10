@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Printer;
 
-/**
- * Interface ModificationInterface
- *
- * @package Aternos\Codex\Printer
- */
 interface ModificationInterface
 {
     /**

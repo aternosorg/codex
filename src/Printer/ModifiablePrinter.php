@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Printer;
 
-/**
- * Class ModifiablePrinter
- *
- * @package Aternos\Codex\Printer
- */
 abstract class ModifiablePrinter extends Printer implements ModifiablePrinterInterface
 {
     /**

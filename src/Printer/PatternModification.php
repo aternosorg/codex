@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Printer;
 
-/**
- * Class PatternModification
- *
- * @package Aternos\Codex\Printer
- */
 class PatternModification extends Modification
 {
     /**

@@ -11,11 +11,6 @@ use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
 
-/**
- * Class PatternParser
- *
- * @package Aternos\Codex\Parser
- */
 class PatternParser extends Parser
 {
     /**

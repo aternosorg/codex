@@ -4,9 +4,6 @@ namespace Aternos\Codex\Test\Src\Analysis;
 
 use Aternos\Codex\Analysis\Solution;
 
-/**
- * Class TestSolution
- */
 class TestSolution extends Solution
 {
     /**

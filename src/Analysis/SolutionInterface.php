@@ -4,11 +4,6 @@ namespace Aternos\Codex\Analysis;
 
 use JsonSerializable;
 
-/**
- * Interface SolutionInterface
- *
- * @package Aternos\Codex\Analysis
- */
 interface SolutionInterface extends JsonSerializable
 {
     /**

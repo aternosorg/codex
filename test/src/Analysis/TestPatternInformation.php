@@ -5,9 +5,6 @@ namespace Aternos\Codex\Test\Src\Analysis;
 use Aternos\Codex\Analysis\Information;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 
-/**
- * Class TestPatternInformation
- */
 class TestPatternInformation extends Information implements PatternInsightInterface
 {
     protected ?string $label = "Software version";

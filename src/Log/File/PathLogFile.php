@@ -4,11 +4,6 @@ namespace Aternos\Codex\Log\File;
 
 use InvalidArgumentException;
 
-/**
- * Class PathLogFile
- *
- * @package Aternos\Codex\Log\File
- */
 class PathLogFile extends LogFile
 {
     /**

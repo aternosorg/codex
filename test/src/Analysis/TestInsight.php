@@ -5,9 +5,6 @@ namespace Aternos\Codex\Test\Src\Analysis;
 use Aternos\Codex\Analysis\Insight;
 use Aternos\Codex\Analysis\InsightInterface;
 
-/**
- * Class TestInsight
- */
 class TestInsight extends Insight
 {
     /**

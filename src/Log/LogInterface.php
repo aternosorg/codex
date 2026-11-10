@@ -9,11 +9,6 @@ use Countable;
 use Iterator;
 use JsonSerializable;
 
-/**
- * Interface LogInterface
- *
- * @package Aternos\Codex\Log
- */
 interface LogInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**

@@ -8,9 +8,6 @@ use Aternos\Codex\Parser\PatternParser;
 use Aternos\Codex\Test\Src\Analysis\TestPatternInformation;
 use Aternos\Codex\Test\Src\Analysis\TestPatternProblem;
 
-/**
- * Class TestLog
- */
 class TestPatternLog extends AnalysableLog
 {
     /**

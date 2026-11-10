@@ -4,11 +4,6 @@ namespace Aternos\Codex\Printer;
 
 use Aternos\Codex\Log\LineInterface;
 
-/**
- * Class ModifiableDefaultPrinter
- *
- * @package Aternos\Codex\Printer
- */
 class ModifiableDefaultPrinter extends ModifiablePrinter
 {
     /**

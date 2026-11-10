@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Log\File;
 
-/**
- * Class LogFile
- *
- * @package Aternos\Codex\Log\File
- */
 abstract class LogFile implements LogFileInterface
 {
     protected ?string $content = null;

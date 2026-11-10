@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Detective;
 
-/**
- * Class WeightedSinglePatternDetector
- *
- * @package Aternos\Codex\Detective
- */
 class WeightedSinglePatternDetector extends SinglePatternDetector
 {
     protected ?float $weight = null;

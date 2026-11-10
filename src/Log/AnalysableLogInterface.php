@@ -5,11 +5,6 @@ namespace Aternos\Codex\Log;
 use Aternos\Codex\Analyser\AnalyserInterface;
 use Aternos\Codex\Analysis\AnalysisInterface;
 
-/**
- * Interface AnalysableLogInterface
- *
- * @package Aternos\Codex\Log
- */
 interface AnalysableLogInterface
 {
     /**

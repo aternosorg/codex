@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Analysis;
 
-/**
- * Class Problem
- *
- * @package Aternos\Codex\Analysis
- */
 abstract class Problem extends Insight implements ProblemInterface
 {
     /**

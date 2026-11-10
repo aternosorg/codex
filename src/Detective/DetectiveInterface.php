@@ -5,11 +5,6 @@ namespace Aternos\Codex\Detective;
 use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Interface DetectiveInterface
- *
- * @package Aternos\Codex\Detective
- */
 interface DetectiveInterface
 {
     /**

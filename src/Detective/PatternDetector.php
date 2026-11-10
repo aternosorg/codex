@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Detective;
 
-/**
- * Class PatternDetector
- *
- * @package Aternos\Codex\Detective
- */
 abstract class PatternDetector extends Detector
 {
     protected ?string $pattern = null;

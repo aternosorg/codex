@@ -8,11 +8,6 @@ use Countable;
 use Iterator;
 use JsonSerializable;
 
-/**
- * Interface AnalysisInterface
- *
- * @package Aternos\Codex\Analysis
- */
 interface AnalysisInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**

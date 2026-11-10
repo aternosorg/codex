@@ -7,9 +7,6 @@ use Aternos\Codex\Detective\LinePatternDetector;
 use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\Log;
 
-/**
- * Class TestMoreDetectableLog
- */
 class TestMoreDetectableLog extends Log implements DetectableLogInterface
 {
     /**
