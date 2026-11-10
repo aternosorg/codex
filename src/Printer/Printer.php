@@ -6,11 +6,6 @@ use Aternos\Codex\Log\EntryInterface;
 use Aternos\Codex\Log\LineInterface;
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Class Printer
- *
- * @package Aternos\Codex\Printer
- */
 abstract class Printer implements PrinterInterface
 {
     protected ?LogInterface $log = null;

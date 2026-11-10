@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Analysis;
 
-/**
- * Interface PatternInsightInterface
- *
- * @package Aternos\Codex\Analysis
- */
 interface PatternInsightInterface extends InsightInterface
 {
     /**

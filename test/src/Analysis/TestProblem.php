@@ -5,9 +5,6 @@ namespace Aternos\Codex\Test\Src\Analysis;
 use Aternos\Codex\Analysis\InsightInterface;
 use Aternos\Codex\Analysis\Problem;
 
-/**
- * Class TestProblem
- */
 class TestProblem extends Problem
 {
     /**

@@ -5,11 +5,6 @@ namespace Aternos\Codex\Analysis;
 use Aternos\Codex\Log\EntryInterface;
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Class Insight
- *
- * @package Aternos\Codex\Analysis
- */
 abstract class Insight implements InsightInterface
 {
     protected ?AnalysisInterface $analysis = null;

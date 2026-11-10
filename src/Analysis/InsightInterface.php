@@ -5,11 +5,6 @@ namespace Aternos\Codex\Analysis;
 use Aternos\Codex\Log\EntryInterface;
 use JsonSerializable;
 
-/**
- * Interface InsightInterface
- *
- * @package Aternos\Codex\Analysis
- */
 interface InsightInterface extends JsonSerializable
 {
     /**

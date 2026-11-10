@@ -4,11 +4,6 @@ namespace Aternos\Codex\Log\File;
 
 use InvalidArgumentException;
 
-/**
- * Class StreamLogFile
- *
- * @package Aternos\Codex\Log\File
- */
 class StreamLogFile extends LogFile
 {
     /**

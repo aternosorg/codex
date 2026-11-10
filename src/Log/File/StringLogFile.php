@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Log\File;
 
-/**
- * Class StringLogFile
- *
- * @package Aternos\Codex\Log\File
- */
 class StringLogFile extends LogFile
 {
     /**

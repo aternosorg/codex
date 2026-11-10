@@ -4,11 +4,6 @@ namespace Aternos\Codex\Parser;
 
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Interface ParserInterface
- *
- * @package Aternos\Codex\Parser
- */
 interface ParserInterface
 {
     /**

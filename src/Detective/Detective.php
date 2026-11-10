@@ -8,11 +8,6 @@ use Aternos\Codex\Log\Log;
 use Aternos\Codex\Log\LogInterface;
 use InvalidArgumentException;
 
-/**
- * Class Detective
- *
- * @package Aternos\Codex\Detective
- */
 class Detective implements DetectiveInterface
 {
     /**

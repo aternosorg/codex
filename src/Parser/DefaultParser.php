@@ -5,11 +5,6 @@ namespace Aternos\Codex\Parser;
 use Aternos\Codex\Log\Entry;
 use Aternos\Codex\Log\Line;
 
-/**
- * Class DefaultParser
- *
- * @package Aternos\Codex\Parser
- */
 class DefaultParser extends Parser
 {
     /**

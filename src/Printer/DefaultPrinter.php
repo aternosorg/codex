@@ -4,11 +4,6 @@ namespace Aternos\Codex\Printer;
 
 use Aternos\Codex\Log\LineInterface;
 
-/**
- * Class DefaultPrinter
- *
- * @package Aternos\Codex\Printer
- */
 class DefaultPrinter extends Printer
 {
     /**

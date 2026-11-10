@@ -7,11 +7,6 @@ use Countable;
 use Iterator;
 use JsonSerializable;
 
-/**
- * Interface EntryInterface
- *
- * @package Aternos\Codex\Log
- */
 interface EntryInterface extends Iterator, Countable, ArrayAccess, JsonSerializable
 {
     /**

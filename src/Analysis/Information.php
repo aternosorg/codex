@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Analysis;
 
-/**
- * Class Information
- *
- * @package Aternos\Codex\Analysis
- */
 abstract class Information extends Insight implements InformationInterface
 {
     protected ?string $label = null;

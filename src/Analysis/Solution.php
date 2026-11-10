@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Analysis;
 
-/**
- * Class Solution
- *
- * @package Aternos\Codex\Analysis
- */
 abstract class Solution implements SolutionInterface
 {
     /**

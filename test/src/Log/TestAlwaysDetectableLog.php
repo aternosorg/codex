@@ -7,9 +7,6 @@ use Aternos\Codex\Detective\SinglePatternDetector;
 use Aternos\Codex\Log\DetectableLogInterface;
 use Aternos\Codex\Log\Log;
 
-/**
- * Class TestAlwaysDetectableLog
- */
 class TestAlwaysDetectableLog extends Log implements DetectableLogInterface
 {
     /**

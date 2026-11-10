@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Detective;
 
-/**
- * Class SinglePatternDetector
- *
- * @package Aternos\Codex\Detective
- */
 class SinglePatternDetector extends PatternDetector
 {
     /**

@@ -4,11 +4,6 @@ namespace Aternos\Codex\Log;
 
 use Aternos\Codex\Detective\DetectorInterface;
 
-/**
- * Interface DetectableLogInterface
- *
- * @package Aternos\Codex\Log
- */
 interface DetectableLogInterface extends LogInterface
 {
     /**

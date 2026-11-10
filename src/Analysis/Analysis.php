@@ -4,11 +4,6 @@ namespace Aternos\Codex\Analysis;
 
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Class Analysis
- *
- * @package Aternos\Codex\Analysis
- */
 class Analysis implements AnalysisInterface
 {
     /**

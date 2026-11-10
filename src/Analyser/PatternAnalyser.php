@@ -8,11 +8,6 @@ use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Log\EntryInterface;
 use InvalidArgumentException;
 
-/**
- * Class PatternAnalyser
- *
- * @package Aternos\Codex\Analyser
- */
 class PatternAnalyser extends Analyser
 {
     /**

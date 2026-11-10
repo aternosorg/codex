@@ -4,11 +4,6 @@ namespace Aternos\Codex\Log;
 
 use JsonSerializable;
 
-/**
- * Interface LineInterface
- *
- * @package Aternos\Codex\Log
- */
 interface LineInterface extends JsonSerializable
 {
     /**

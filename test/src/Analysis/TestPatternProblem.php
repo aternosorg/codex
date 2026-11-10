@@ -6,9 +6,6 @@ use Aternos\Codex\Analysis\InsightInterface;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Analysis\Problem;
 
-/**
- * Class TestPatternProblem
- */
 class TestPatternProblem extends Problem implements PatternInsightInterface
 {
     protected ?string $cause = null;

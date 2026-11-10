@@ -6,11 +6,6 @@ use Aternos\Codex\Log\File\LogFileInterface;
 use Aternos\Codex\Parser\DefaultParser;
 use Aternos\Codex\Parser\ParserInterface;
 
-/**
- * Class Log
- *
- * @package Aternos\Codex\Log
- */
 class Log implements LogInterface
 {
     /**

@@ -2,11 +2,6 @@
 
 namespace Aternos\Codex\Log\File;
 
-/**
- * Interface LogFileInterface
- *
- * @package Aternos\Codex\Log\File
- */
 interface LogFileInterface
 {
     /**

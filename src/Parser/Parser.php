@@ -4,11 +4,6 @@ namespace Aternos\Codex\Parser;
 
 use Aternos\Codex\Log\LogInterface;
 
-/**
- * Class Parser
- *
- * @package Aternos\Codex\Parser
- */
 abstract class Parser implements ParserInterface
 {
     protected ?LogInterface $log = null;

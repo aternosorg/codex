@@ -5,11 +5,6 @@ namespace Aternos\Codex\Log;
 use Aternos\Codex\Analyser\AnalyserInterface;
 use Aternos\Codex\Analysis\AnalysisInterface;
 
-/**
- * Class AnalysableLog
- *
- * @package Aternos\Codex\Log
- */
 abstract class AnalysableLog extends Log implements AnalysableLogInterface
 {
     protected ?AnalysisInterface $analysis = null;
