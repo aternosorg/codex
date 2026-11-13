@@ -1,0 +1,84 @@
+name: Benchmarks
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'test/benchmarks/**'
+      - 'test/src/**'
+      - 'composer.json'
+      - 'composer.lock'
+      - 'phpbench.json'
+      - '.github/workflows/benchmarks.yaml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: benchmarks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+
+    name: Compare benchmarks against the base branch
+
+    steps:
+      # For pull requests this checks out the merge commit, so HEAD is the pull request
+      # merged into the base branch and HEAD^1 is the current base branch
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+
+      - name: Set composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore composer from cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      # Both runs use the benchmarks of the pull request and only swap the library code,
+      # so benchmarks added or changed in the pull request are compared as well.
+      # Running both on the same runner matters, runners differ too much to compare against stored results.
+      - name: Run benchmarks on the base branch
+        run: |
+          git restore --source=HEAD^1 --worktree -- src/
+          vendor/bin/phpbench run --iterations=10 --progress=none --tag=base
+
+      - name: Run benchmarks on the pull request
+        run: |
+          set -o pipefail
+          git restore --source=HEAD --worktree -- src/
+          # The comparison report of phpbench 1.x triggers its own deprecation notice,
+          # which would otherwise end up in the job summary
+          php -d display_errors=stderr vendor/bin/phpbench run --iterations=10 --progress=none --ref=base --report=default --no-ansi | tee benchmark-results.txt
+
+      # Shown on the summary page of the run. A pull request comment would need write access,
+      # which pull requests from forks do not get without running their code with a privileged token.
+      - name: Write comparison to the job summary
+        run: |
+          {
+            echo "## Benchmarks compared to the base branch"
+            echo
+            echo "Percentages compare the pull request to the base branch, positive means slower or more memory."
+            echo "Both ran on the same runner, but differences below about 10% are usually noise."
+            echo
+            echo '```'
+            cat benchmark-results.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
