@@ -113,3 +113,23 @@ $modification->setReplacement('bar');
 $printer->addModification($modification);
 $printer->print();
 ```
+
+## Benchmarks
+
+The [benchmarks](test/benchmarks) measure parsing and analysing of generated logs with [phpbench](https://github.com/phpbench/phpbench).
+They are meant to compare a change against `master` locally, CI only checks that they still run.
+
+```
+composer bench
+```
+
+To compare a branch against `master`, store a baseline on `master` and reference it on the branch:
+
+```
+git switch master
+composer bench -- --tag=master
+git switch my-branch
+composer bench -- --ref=master
+```
+
+Disable Xdebug (`XDEBUG_MODE=off`) and keep the same PHP and opcache settings for both runs, otherwise the numbers are not comparable.

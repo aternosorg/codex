@@ -13,7 +13,8 @@
     "php": ">=8.4"
   },
   "require-dev": {
-    "phpunit/phpunit": "^12"
+    "phpunit/phpunit": "^12",
+    "phpbench/phpbench": "^1.7"
   },
   "autoload": {
     "psr-4": {
@@ -23,10 +24,15 @@
   "autoload-dev": {
     "psr-4": {
       "Aternos\\Codex\\Test\\Src\\": "test/src/",
-      "Aternos\\Codex\\Test\\Tests\\": "test/tests/"
-    }
+      "Aternos\\Codex\\Test\\Tests\\": "test/tests/",
+      "Aternos\\Codex\\Test\\Benchmarks\\": "test/benchmarks/"
+    },
+    "classmap": [
+      "test/benchmarks/Insight/KeywordProblems.php"
+    ]
   },
   "scripts": {
-    "test": "phpunit test/tests"
+    "test": "phpunit test/tests",
+    "bench": "phpbench run --report=default"
   }
 }
