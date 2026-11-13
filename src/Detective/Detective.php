@@ -139,6 +139,7 @@ class Detective implements DetectiveInterface
             return 0;
         });
 
-        return (new $detectionResults[0]["class"]())->setLogFile($this->logFile);
+        $bestDetectionResult = array_first($detectionResults);
+        return new $bestDetectionResult["class"]()->setLogFile($this->logFile);
     }
 }
