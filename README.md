@@ -117,7 +117,9 @@ $printer->print();
 ## Benchmarks
 
 The [benchmarks](test/benchmarks) measure parsing and analysing of generated logs with [phpbench](https://github.com/phpbench/phpbench).
-They are meant to compare a change against `master` locally, CI only checks that they still run.
+Pull requests that touch the library or the benchmarks run them on the base branch and on the pull request, one after the other on the same runner.
+The comparison is shown in the summary of the "Benchmarks" workflow run.
+Differences below about 10% are usually noise of the shared runners.
 
 ```
 composer bench

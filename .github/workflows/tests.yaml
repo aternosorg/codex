@@ -41,6 +41,3 @@ jobs:
 
       - name: Run phpunit tests
         run: vendor/bin/phpunit --testsuite tests --colors=always --testdox
-
-      - name: Check that benchmarks run
-        run: vendor/bin/phpbench run --revs=1 --iterations=1 --stop-on-error --progress=none
