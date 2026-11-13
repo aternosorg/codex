@@ -4,6 +4,7 @@ namespace Aternos\Codex\Test\Tests\Analyser;
 
 use Aternos\Codex\Analyser\PatternAnalyser;
 use Aternos\Codex\Analysis\Analysis;
+use Aternos\Codex\Analysis\AnalysisInterface;
 use Aternos\Codex\Analysis\InsightInterface;
 use Aternos\Codex\Analysis\PatternInsightInterface;
 use Aternos\Codex\Log\Entry;
@@ -215,7 +216,29 @@ class PatternAnalyserTest extends TestCase
         $this->assertCount(1, $analysis->getInformation());
     }
 
-    public function testAnalyseSkipsFailingPattern(): void
+    /**
+     * Analyse a log and collect the messages of the warnings triggered by the analyser
+     *
+     * @param TestPatternLog $log
+     * @param PatternAnalyser $analyser
+     * @param string[] $warnings
+     * @return AnalysisInterface
+     */
+    protected function analyseAndCollectWarnings(TestPatternLog $log, PatternAnalyser $analyser, array &$warnings): AnalysisInterface
+    {
+        set_error_handler(function (int $level, string $message) use (&$warnings): bool {
+            $warnings[] = $message;
+            return true;
+        }, E_USER_WARNING);
+
+        try {
+            return $log->analyse($analyser);
+        } finally {
+            restore_error_handler();
+        }
+    }
+
+    public function testAnalyseReportsFailingPatternAndContinues(): void
     {
         $insightClass = new class extends TestPatternProblem {
             /**
@@ -234,16 +257,56 @@ class PatternAnalyserTest extends TestCase
         $entry = (new Entry())
             ->addLine(new Line(1, "I have a problem with ABC \xFF"))
             ->addLine(new Line(2, "I have an issue with DEF"));
-        $this->assertFalse(preg_match_all($insightClass::getPatterns()[0], (string)$entry));
-
-        $log = (new TestPatternLog())->addEntry($entry);
+        $log = (new TestPatternLog())
+            ->addEntry($entry)
+            ->addEntry((new Entry())->addLine(new Line(3, "I have a problem with GHI")));
         $analyser = (new PatternAnalyser())->addPossibleInsightClass($insightClass::class);
-        $analysis = $log->analyse($analyser);
+
+        $warnings = [];
+        $analysis = $this->analyseAndCollectWarnings($log, $analyser, $warnings);
 
         $this->assertSame(
-            ["There is a problem with DEF"],
+            ['preg_match_all() failed for pattern /I have a problem with (\w+)/u: Malformed UTF-8 characters, possibly incorrectly encoded'],
+            $warnings
+        );
+        $this->assertSame(
+            ["There is a problem with DEF", "There is a problem with GHI"],
             array_map(fn(InsightInterface $insight) => $insight->getMessage(), $analysis->getInsights())
         );
+    }
+
+    public function testAnalyseDiscardsMatchesFoundBeforePatternFailed(): void
+    {
+        $insightClass = new class extends TestPatternProblem {
+            /**
+             * @inheritDoc
+             */
+            public static function getPatterns(): array
+            {
+                return ['/I have a problem with (\w+)|(?:a+)+b/'];
+            }
+        };
+
+        // The pattern matches in the first line and then exceeds the backtrack limit in the second line
+        $entry = (new Entry())
+            ->addLine(new Line(1, "I have a problem with ABC"))
+            ->addLine(new Line(2, str_repeat("a", 40)));
+        $log = (new TestPatternLog())->addEntry($entry);
+        $analyser = (new PatternAnalyser())->addPossibleInsightClass($insightClass::class);
+
+        $warnings = [];
+        $backtrackLimit = ini_set('pcre.backtrack_limit', '1000');
+        try {
+            $analysis = $this->analyseAndCollectWarnings($log, $analyser, $warnings);
+        } finally {
+            ini_set('pcre.backtrack_limit', $backtrackLimit);
+        }
+
+        $this->assertSame(
+            ['preg_match_all() failed for pattern /I have a problem with (\w+)|(?:a+)+b/: Backtrack limit exhausted'],
+            $warnings
+        );
+        $this->assertSame([], $analysis->getInsights());
     }
 
     public function testAddPossibleInsightClassThrowsExceptionIfPossibleInsightClassDoesNotImplementPatternInsightInterface(): void

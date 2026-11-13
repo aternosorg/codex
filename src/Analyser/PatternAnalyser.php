@@ -162,6 +162,10 @@ class PatternAnalyser extends Analyser
     /**
      * Find all matches of a pattern in a text
      *
+     * A pattern that fails, for example because it exceeds the backtrack limit,
+     * triggers a warning and is treated as not matching, so the rest of the log is still analysed.
+     * Without the warning, such a pattern would silently never find its problem.
+     *
      * @param string $pattern
      * @param string $text
      * @return array<array<array-key, string>> One array of groups for every match, empty if the pattern does not match
@@ -170,6 +174,8 @@ class PatternAnalyser extends Analyser
     {
         $result = preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
         if ($result === false) {
+            // $matches can contain the matches found before the error, they are discarded
+            trigger_error("preg_match_all() failed for pattern " . $pattern . ": " . preg_last_error_msg(), E_USER_WARNING);
             return [];
         }
 
