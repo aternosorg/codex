@@ -59,7 +59,7 @@ class PatternAnalyser extends Analyser
      */
     protected function findPossibleInsightClass(string $insightClass): int
     {
-        $index = array_search($insightClass, $this->possibleInsightClasses);
+        $index = array_search($insightClass, $this->possibleInsightClasses, true);
         if ($index === false) {
             throw new InvalidArgumentException("Class " . $insightClass . " not found in possible insight classes.");
         }
@@ -96,7 +96,25 @@ class PatternAnalyser extends Analyser
     }
 
     /**
-     * Analyse a log and return an Analysis
+     * Get the patterns of all possible insight classes
+     *
+     * getPatterns() often builds its patterns from string fragments, so calling it
+     * for every entry of a log adds up. The result is only reused within one analysis,
+     * so changes to the possible insight classes or their patterns still take effect.
+     *
+     * @return array<class-string<PatternInsightInterface>, string[]> The patterns of each insight class, keyed by class name
+     */
+    protected function resolvePatterns(): array
+    {
+        $patternsByClass = [];
+        foreach ($this->possibleInsightClasses as $possibleInsightClass) {
+            $patternsByClass[$possibleInsightClass] = $possibleInsightClass::getPatterns();
+        }
+        return $patternsByClass;
+    }
+
+    /**
+     * Analyze a log and return an Analysis
      *
      * @return AnalysisInterface
      */
@@ -105,18 +123,11 @@ class PatternAnalyser extends Analyser
         $analysis = new Analysis();
         $analysis->setLog($this->log);
 
+        $patternsByClass = $this->resolvePatterns();
+
         foreach ($this->log as $entry) {
-            foreach ($this->possibleInsightClasses as $possibleInsightClass) {
-                /** @var PatternInsightInterface $possibleInsightClass */
-                $patterns = $possibleInsightClass::getPatterns();
-                foreach ($patterns as $patternKey => $pattern) {
-                    $insights = $this->analyseEntry($entry, $possibleInsightClass, $patternKey, $pattern);
-                    if ($insights) {
-                        foreach ($insights as $insight) {
-                            $analysis->addInsight($insight);
-                        }
-                    }
-                }
+            foreach ($this->analyseEntry($entry, $patternsByClass) as $insight) {
+                $analysis->addInsight($insight);
             }
         }
 
@@ -124,31 +135,62 @@ class PatternAnalyser extends Analyser
     }
 
     /**
-     * Compare the entry against the given pattern and create an insight object if it matches
+     * Compare an entry against all patterns and create an insight for every match
      *
      * @param EntryInterface $entry
-     * @param string $possibleInsightClass
-     * @param mixed $patternKey
-     * @param string $pattern
-     * @return null|PatternInsightInterface[]
+     * @param array<class-string<PatternInsightInterface>, string[]> $patternsByClass The patterns from resolvePatterns()
+     * @return PatternInsightInterface[]
      */
-    protected function analyseEntry(EntryInterface $entry, string $possibleInsightClass, mixed $patternKey, string $pattern): ?array
+    protected function analyseEntry(EntryInterface $entry, array $patternsByClass): array
     {
-        $result = preg_match_all($pattern, $entry, $matches, PREG_SET_ORDER);
-        if ($result === false || $result === 0) {
-            return null;
+        // Converting an entry to a string joins all of its lines, so it is done once here
+        // and not for every pattern, which used to be most of the time spent analysing a log.
+        $text = (string)$entry;
+
+        $insights = [];
+        foreach ($patternsByClass as $insightClass => $patterns) {
+            foreach ($patterns as $patternKey => $pattern) {
+                foreach ($this->findMatches($pattern, $text) as $matches) {
+                    $insights[] = $this->createInsight($insightClass, $entry, $matches, $patternKey);
+                }
+            }
         }
 
-        $return = [];
-        foreach ($matches as $match) {
-            /** @var PatternInsightInterface $insight */
-            $insight = new $possibleInsightClass();
-            $insight->setMatches($match, $patternKey);
-            $insight->setEntry($entry);
+        return $insights;
+    }
 
-            $return[] = $insight;
+    /**
+     * Find all matches of a pattern in a text
+     *
+     * @param string $pattern
+     * @param string $text
+     * @return array<array<array-key, string>> One array of groups for every match, empty if the pattern does not match
+     */
+    protected function findMatches(string $pattern, string $text): array
+    {
+        $result = preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+        if ($result === false) {
+            return [];
         }
 
-        return $return;
+        return $matches;
+    }
+
+    /**
+     * Create an insight for a match of one of its patterns in an entry
+     *
+     * @param class-string<PatternInsightInterface> $insightClass
+     * @param EntryInterface $entry The entry the pattern matched in
+     * @param array<array-key, string> $matches The groups of the match
+     * @param mixed $patternKey The key of the matching pattern in getPatterns()
+     * @return PatternInsightInterface
+     */
+    protected function createInsight(string $insightClass, EntryInterface $entry, array $matches, mixed $patternKey): PatternInsightInterface
+    {
+        $insight = new $insightClass();
+        $insight->setMatches($matches, $patternKey);
+        $insight->setEntry($entry);
+
+        return $insight;
     }
 }
