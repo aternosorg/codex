@@ -63,4 +63,15 @@ enum Level: int implements LevelInterface
     {
         return $this->value;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function isError(): bool
+    {
+        return $this === Level::EMERGENCY
+            || $this === Level::ALERT
+            || $this === Level::CRITICAL
+            || $this === Level::ERROR;
+    }
 }
